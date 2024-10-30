@@ -1,7 +1,4 @@
-import type { Config } from "tailwindcss";
-
-
-const config: Config = {
+const config = {
   content: [
     "./pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
@@ -10,14 +7,18 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
+        primary: { "50": "#eff6ff", "100": "#dbeafe", "200": "#bfdbfe", "300": "#93c5fd", "400": "#60a5fa", "500": "#3b82f6", "600": "#2563eb", "700": "#1d4ed8", "800": "#1e40af", "900": "#1e3a8a", "950": "#172554" },
         background: "var(--background)",
         foreground: "var(--foreground)",
+        // Dark mode specific colors
+        darkBackground: "#121212",
+        darkForeground: "#ffffff",
       },
     },
   },
-  plugins: [],
-  darkMode: ['selector'],
 
+  plugins: [],
+  darkMode: 'class', // Enable dark mode by adding 'class' instead of ['selector']
 };
 
 export default config;

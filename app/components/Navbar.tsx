@@ -1,23 +1,17 @@
 "use client"
 
 import Image from "next/image"
-import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
-import ButtonGroup from '@mui/material/ButtonGroup';
-import sociaMedia from "../lib/Data";
+import { socialMedia } from '../lib/Data'
+import DarkModeToggle from "./DarkModeToggle";
+import Link from "next/link";
+import DesktopMenu from "./DesktopMenu";
 
-const buttons = [
-    <Button key="one">Home</Button>,
-    <Button key="two">About</Button>,
-    <Button key="three">Contact</Button>,
-    <Button key="three">Social Media</Button>,
-    <Button key="three">Membership Database</Button>,
-];
 
 
 export const Navbar = () => {
     return (
-        <div className="flex gap-4 p-3 px-8 bg-gray-100  items-center justify-between">
+        <div className="flex gap-4 p-3 px-8 bg-gray-100 dark:bg-slate-800  items-center justify-between">
             <div className="flex items-center gap-4">
                 <Image
                     src="/anp-logo.png"
@@ -27,7 +21,7 @@ export const Navbar = () => {
                 />
                 <div className="text-center">
                     <h4 className="text-2xl font-extrabold uppercase text-red-500">Awami National Party</h4>
-                    <span className="text-gray-400 font-light">PEACE - DEMOCRACY - DEVELOPMENT</span>
+                    <span className="text-gray-400 dark:text-red-800 font-light">PEACE - DEMOCRACY - DEVELOPMENT</span>
                 </div>
             </div>
             <div>
@@ -41,20 +35,25 @@ export const Navbar = () => {
                         },
                     }}
                 >
-                    <ButtonGroup color="error" aria-label="Large button group">
-                        {buttons}
-                    </ButtonGroup>
+                    <DesktopMenu />
                 </Box>
             </div>
-            <div className="flex">
 
+            <div>
+                <ul className="flex gap-2 text-3xl text-red-600">
+                    {socialMedia.map((item, index) => (
+                        <li className="flex" key={index}>
+                            <Link href={item.link} target="_blank" >
+                                {<item.icon />}
+                            </Link>
+                        </li>))}
+                </ul>
+            </div>
+            <div className="flex">
+                <DarkModeToggle />
             </div>
         </div>
 
     )
 }
-
-
-
-
 
