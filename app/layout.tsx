@@ -3,7 +3,6 @@ import localFont from "next/font/local";
 import "./globals.css";
 import { Navbar } from "./components/Navbar";
 import Footer from "./components/Footer";
-import { hydrateRoot } from 'react-dom/client';
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",

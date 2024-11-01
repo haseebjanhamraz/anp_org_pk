@@ -12,7 +12,7 @@ export default function DesktopMenu() {
                 {menu.map((item, index) => (
                     <li key={index}>
                         <Link className={`text-red-500 ${pathname === item.link ? 'active' :
-                            'text-red-300 hover:text-red-500 dark:text-red-800'}`}
+                            'text-red-800 dark:hover:text-red-500 dark:text-red-800'}`}
                             href={item.link}>
                             {item.name}
                         </Link>

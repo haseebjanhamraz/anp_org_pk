@@ -14,6 +14,10 @@ export const menu = [{
     link: "/about"
 },
 {
+    name: "History",
+    link: "/history"
+},
+{
     name: "Contact",
     link: "/contact"
 }
