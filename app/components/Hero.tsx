@@ -24,7 +24,7 @@ export default function Hero() {
                     </Link>
                 </div>
                 <div className="w-full max-h-96 items-center gap-2 flex-col lg:mt-0 lg:col-span-5 lg:flex">
-                    <div className="w-fit ">
+                    <div className="w-fit p-10">
                         <Image src="/yawa-lara.png"
                             alt="mockup"
                             width={100}
@@ -32,15 +32,14 @@ export default function Hero() {
                             className="object-contain w-full h-full rounded-lg hidden sm:block"
                         />
                     </div>
-
                     <Image src="/leadership.png"
                         alt="mockup"
                         width={500}
                         height={500}
-                        className="object-contain w-full h-full rounded-lg"
+                        className="object-contain w-full h-full z-100 rounded-lg"
                     />
 
-                    <div className="w-fit ">
+                    <div className="w-fit p-10">
                         <Image src="/yaw-manzal.png"
                             alt="mockup"
                             width={100}
