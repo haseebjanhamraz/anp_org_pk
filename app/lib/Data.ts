@@ -27,27 +27,24 @@ export const menu = [{
 }
 ]
 export const leadership = [{
-    name: "Aimal Wali Khan",
+    name: "Aimal Wali Khan ",
     position: "President",
     intro: "Aimal Wali Khan is grandson of Khan Abdul Wali Khan and currently president of Awami National Party.",
     image: "",
     social: {
         facebook: {
             link: "https://www.facebook.com/",
-            icon: FaFacebookSquare,
             name: "Facebook"
         },
         twitter: {
             link: "https://www.twitter.com/",
-            icon: FaSquareXTwitter,
             name: "Twitter"
         },
         instagram: {
             link: "https://www.instagram.com/",
-            icon: "FaInstagram",
             name: "Instagram"
         },
-        email: "email@gmail.com",
+        email: "awk@anp.org.pk",
         residence: "Charsadda"
     }
 }, {
@@ -58,21 +55,14 @@ export const leadership = [{
     social: {
         facebook: {
             link: "https://www.facebook.com/",
-            icon: FaFacebookSquare,
-            name: "Facebook"
         },
         twitter: {
             link: "https://www.twitter.com/",
-            icon: FaSquareXTwitter,
-            name: "Twitter"
         },
         instagram: {
             link: "https://www.instagram.com/",
-            icon: "FaInstagram",
-            name: "Instagram"
         },
         email: "email@gmail.com",
-        residence: "Mardan"
     }
 }
 

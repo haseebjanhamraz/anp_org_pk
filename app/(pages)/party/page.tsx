@@ -1,16 +1,14 @@
 import * as React from 'react';
 import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
-import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import LeaderCard from '@/app/components/LeaderCard';
 
 export default function MediaCard() {
     return (
         <>
-            <div>
+            <div className='flex justify-center'>
                 <Card sx={{ maxWidth: 345 }} className='dark:bg-slate-200 p-4'>
                     <CardMedia
                         sx={{ height: 140, objectFit: "contain" }}
@@ -37,6 +35,7 @@ export default function MediaCard() {
                             <span>
                                 Founded: <strong>1986</strong>
                             </span>
+
                         </Typography>
                         <Typography variant="body2" sx={{ color: 'text.secondary' }}>
                             <span>
@@ -46,7 +45,9 @@ export default function MediaCard() {
                     </CardContent>
                 </Card>
             </div>
-            <div className="grid grid-cols-4 gap-4 m-10">
+
+            <h1 className='mt-10 text-center text-2xl font-bold'>ANP Leadership</h1>
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 m-10">
                 <LeaderCard />
             </div>
         </>
