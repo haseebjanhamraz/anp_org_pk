@@ -73,10 +73,10 @@ export default function LeadershipTable() {
     }, []);
 
     return (
-        <Paper sx={{ height: 400, width: '100%' }}>
+        <Paper sx={{ height: 'auto', width: '100%' }}>
             <DataGrid
-                rows={rows}
-                columns={columns}
+                rows={rows || []}
+                columns={columns || []}
                 getRowId={(row) => row.id}
                 initialState={{
                     pagination: {
@@ -85,7 +85,7 @@ export default function LeadershipTable() {
                 }}
                 pageSizeOptions={[5, 10]}
                 checkboxSelection
-                sx={{ border: 0 }}
+                sx={{ boxShadow: '3px 3px 10px 0px rgba(0, 0, 0, 0.1)' }}
                 disableRowSelectionOnClick
                 loading={loading}
             />
