@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server';
 import jwt from 'jsonwebtoken';
 import { connectToDatabase } from '@/app/lib/mongodb';
 import Leadership from '@/app/models/Leadership';
+import { verifyAuth } from '@/app/middleware/auth';
 
 if (!process.env.JWT_SECRET) {
     throw new Error('Please add your JWT_SECRET to .env.local');
@@ -21,25 +22,26 @@ interface CreateLeadershipRequest {
     socialMedia?: SocialMediaLink[];
 }
 
+// Example role permissions
+const ROLE_PERMISSIONS = {
+    // Admin can do everything
+    admin: ['create', 'read', 'update', 'delete'],
+
+    // Editor can create and edit content
+    editor: ['create', 'read', 'update'],
+
+    // Subscriber can only read content and edit their own profile
+    subscriber: ['read']
+};
+
 export async function POST(req: Request) {
     try {
-        // Verify authorization
-        const authHeader = req.headers.get('authorization');
-        if (!authHeader || !authHeader.startsWith('Bearer ')) {
+        // Use the verifyAuth middleware instead of manual token check
+        const authResult = await verifyAuth(req, ['admin', 'editor']);
+        if ('error' in authResult) {
             return NextResponse.json(
-                { error: 'Unauthorized - No token provided' },
-                { status: 401 }
-            );
-        }
-
-        // Verify JWT token
-        const token = authHeader.split(' ')[1];
-        try {
-            jwt.verify(token, process.env.JWT_SECRET as string);
-        } catch (error) {
-            return NextResponse.json(
-                { error: 'Unauthorized - Invalid token' },
-                { status: 401 }
+                { error: authResult.error },
+                { status: authResult.status }
             );
         }
 
@@ -89,9 +91,9 @@ export async function POST(req: Request) {
         );
 
     } catch (error: any) {
-        console.error('Leadership creation error:', error);
+        console.error('Create leadership error:', error);
         return NextResponse.json(
-            { error: 'Internal server error', details: error.message },
+            { error: 'Internal server error' },
             { status: 500 }
         );
     }
