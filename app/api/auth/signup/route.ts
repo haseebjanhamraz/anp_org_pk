@@ -2,10 +2,12 @@ import { NextResponse } from 'next/server';
 import bcrypt from 'bcryptjs';
 import { connectToDatabase } from '@/app/lib/mongodb';
 import User from '@/app/models/User';
+import { verifyAuth } from '@/app/middleware/auth';
+import jwt from 'jsonwebtoken';
 
 export async function POST(req: Request) {
     try {
-        const { name, email, password } = await req.json();
+        const { name, email, password, role } = await req.json();
 
         // Validate input
         if (!name || !email || !password) {
@@ -17,6 +19,7 @@ export async function POST(req: Request) {
 
         // Connect to database
         await connectToDatabase();
+
         // Check if user already exists
         const existingUser = await User.findOne({ email });
         if (existingUser) {
@@ -29,23 +32,39 @@ export async function POST(req: Request) {
         // Hash password
         const hashedPassword = await bcrypt.hash(password, 12);
 
-        // Create user
-        const user = await User.create({
+        // Create user with explicit role
+        const userData = {
             name,
             email,
             password: hashedPassword,
-        });
+            role: role || 'subscriber' // Explicitly set role
+        };
 
-        return NextResponse.json(
+        console.log('Creating user with data:', userData); // Debug log
+
+        const user = await User.create(userData);
+
+        console.log('Created user:', user); // Debug log
+
+        // Generate JWT token
+        const token = jwt.sign(
             {
-                user: {
-                    id: user._id,
-                    name: user.name,
-                    email: user.email,
-                },
+                userId: user._id,
+                role: user.role
             },
-            { status: 201 }
+            process.env.JWT_SECRET as string,
+            { expiresIn: '1d' }
         );
+
+        return NextResponse.json({
+            user: {
+                id: user._id,
+                name: user.name,
+                email: user.email,
+                role: user.role // Include role in response
+            },
+            token
+        });
     } catch (error) {
         console.error('Signup error:', error);
         return NextResponse.json(

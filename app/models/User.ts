@@ -14,10 +14,22 @@ const UserSchema = new mongoose.Schema({
         type: String,
         required: [true, 'Please provide a name'],
     },
+    role: {
+        type: String,
+        enum: ['admin', 'editor', 'subscriber'],
+        default: 'subscriber'
+    },
     createdAt: {
         type: Date,
         default: Date.now,
     },
 });
 
-export default mongoose.models.User || mongoose.model('User', UserSchema);
+// Delete any existing model before creating a new one
+if (mongoose.models.User) {
+    delete mongoose.models.User;
+}
+
+const User = mongoose.model('User', UserSchema);
+
+export default User;

@@ -1,41 +1,25 @@
 import { NextResponse } from 'next/server';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
-import { connectToDatabase } from '../../../lib/mongodb';
-import User from '../../../models/User';
-import { verifyAuth } from '../../../middleware/auth';
-
-if (!process.env.JWT_SECRET) {
-    throw new Error('Please add your JWT_SECRET to .env.local');
-}
+import { connectToDatabase } from '@/app/lib/mongodb';
+import User from '@/app/models/User';
 
 export async function POST(req: Request) {
     try {
-        const authResult = await verifyAuth(req, ['admin', 'editor']);
-        if ('error' in authResult) {
-            return NextResponse.json(
-                { error: authResult.error },
-                { status: authResult.status }
-            );
-        }
-
         const { email, password } = await req.json();
 
         // Validate input
         if (!email || !password) {
             return NextResponse.json(
-                { error: 'Missing required fields' },
+                { error: 'Email and password are required' },
                 { status: 400 }
             );
         }
 
-        // Connect to database
         await connectToDatabase();
 
-        // Find user
+        // Find user by email
         const user = await User.findOne({ email });
-        console.log('Found user:', user); // Debug log
-
         if (!user) {
             return NextResponse.json(
                 { error: 'Invalid credentials' },
@@ -43,7 +27,7 @@ export async function POST(req: Request) {
             );
         }
 
-        // Check password
+        // Verify password
         const isPasswordValid = await bcrypt.compare(password, user.password);
         if (!isPasswordValid) {
             return NextResponse.json(
@@ -52,27 +36,27 @@ export async function POST(req: Request) {
             );
         }
 
-        // Generate JWT token
+        // Create JWT token
         const token = jwt.sign(
             {
                 userId: user._id,
                 role: user.role
             },
-            process.env.JWT_SECRET as string,
-            { expiresIn: '1d' }
+            process.env.JWT_SECRET!,
+            { expiresIn: '24h' }
         );
 
         return NextResponse.json({
+            token,
             user: {
                 id: user._id,
                 name: user.name,
                 email: user.email,
-                role: user.role // Include role in response
-            },
-            token
+                role: user.role
+            }
         });
     } catch (error) {
-        console.error('Signin error:', error);
+        console.error('Login error:', error);
         return NextResponse.json(
             { error: 'Internal server error' },
             { status: 500 }
