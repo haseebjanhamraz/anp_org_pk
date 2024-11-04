@@ -26,6 +26,125 @@ export const menu = [{
     link: "/contact"
 }
 ]
+
+export const dashboardMenu = [
+    {
+        name: "Dashboard",
+        link: "/dashboard"
+    },
+    {
+        name: "Settings",
+        link: "/dashboard/settings"
+    },
+    {
+        name: "Leadership",
+        link: "/dashboard/leadership"
+    }]
+
+export const documents = {
+    manifesto: [
+        {
+            year: "2024",
+            languages: {
+                en: "/docs/manifesto-2024-en.pdf",
+                ur: "/docs/manifesto-2024-ur.pdf",
+            }
+        },
+        {
+            year: "2020",
+            languages: {
+                en: "/docs/manifesto-2020-en.pdf",
+                ur: "/docs/manifesto-2020-ur.pdf",
+            }
+        },
+        {
+            year: "2016",
+            languages: {
+                en: "/docs/manifesto-2016-en.pdf",
+                ur: "/docs/manifesto-2016-ur.pdf",
+            }
+        },
+        {
+            year: "2012",
+            languages: {
+                en: "/docs/manifesto-2012-en.pdf",
+                ur: "/docs/manifesto-2012-ur.pdf",
+            }
+        },
+        {
+            year: "2008",
+            languages: {
+                en: "/docs/manifesto-2008-en.pdf",
+                ur: "/docs/manifesto-2008-ur.pdf",
+            }
+        }
+    ],
+    constitution: [
+        {
+            year: "2024",
+            languages: {
+                en: "/docs/constitution-2024-en.pdf",
+                ur: "/docs/constitution-2024-ur.pdf",
+            }
+        },
+        {
+            year: "2016",
+            languages: {
+                en: "/docs/constitution-2016-en.pdf",
+                ur: "/docs/constitution-2016-ur.pdf",
+            }
+        },
+        {
+            year: "2012",
+            languages: {
+                en: "/docs/constitution-2012-en.pdf",
+                ur: "/docs/constitution-2012-ur.pdf",
+            }
+        }
+    ],
+    publications: [
+        {
+            year: "2024",
+            languages: {
+                en: "/docs/publication-2024-en.pdf",
+                ur: "/docs/publication-2024-ur.pdf",
+            }
+        },
+        {
+            year: "2020",
+            languages: {
+                en: "/docs/publication-2020-en.pdf",
+                ur: "/docs/publication-2020-ur.pdf",
+            }
+        },
+        {
+            year: "2016",
+            languages: {
+                en: "/docs/publication-2016-en.pdf",
+                ur: "/docs/publication-2016-ur.pdf",
+            }
+        },
+        {
+            year: "2012",
+            languages: {
+                en: "/docs/publication-2012-en.pdf",
+                ur: "/docs/publication-2012-ur.pdf",
+            }
+        },
+        {
+            year: "2008",
+            languages: {
+                en: "/docs/publication-2008-en.pdf",
+                ur: "/docs/publication-2008-ur.pdf",
+            }
+        }
+
+
+    ]
+}
+
+
+
 export const leadership = [{
     name: "Aimal Wali Khan ",
     position: "President",
