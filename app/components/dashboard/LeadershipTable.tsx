@@ -22,7 +22,6 @@ const columns: GridColDef[] = [
     {
         field: 'fullName',
         headerName: 'Full name',
-        description: 'This column has a value getter and is not sortable.',
         width: 160,
         valueGetter: (value, row) => `${row.name || ''}`,
     },
@@ -58,9 +57,9 @@ export default function LeadershipTable() {
                     throw new Error('Failed to fetch data');
                 }
                 const data = await response.json();
-                const transformedData = data.map((row: LeadershipData) => ({
+                const transformedData = data.map((row: LeadershipData, index: number) => ({
                     ...row,
-                    id: row._id
+                    id: index + 1
                 }));
                 setRows(transformedData);
             } catch (error) {
@@ -76,9 +75,9 @@ export default function LeadershipTable() {
     return (
         <Paper sx={{ height: 400, width: '100%' }}>
             <DataGrid
-                rows={rows || []}
+                rows={rows}
                 columns={columns}
-                getRowId={(row) => row._id}
+                getRowId={(row) => row.id}
                 initialState={{
                     pagination: {
                         paginationModel: { pageSize: 5, page: 0 }
@@ -87,8 +86,10 @@ export default function LeadershipTable() {
                 pageSizeOptions={[5, 10]}
                 checkboxSelection
                 sx={{ border: 0 }}
+                disableRowSelectionOnClick
                 loading={loading}
             />
+
         </Paper>
     );
 }
