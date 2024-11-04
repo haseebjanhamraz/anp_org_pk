@@ -39,7 +39,12 @@ export const dashboardMenu = [
     {
         name: "Leadership",
         link: "/dashboard/leadership"
-    }]
+    },
+    {
+        name: "Documents",
+        link: "/dashboard/documents"
+    }
+]
 
 export const documents = {
     manifesto: [

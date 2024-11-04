@@ -9,7 +9,7 @@ export default function Sidebar() {
         <ul className="flex flex-col gap-4">
             {dashboardMenu.map((item) => (
                 <li key={item.link} className="text-gray-600 dark:text-gray-300 hover:text-gray-800 dark:hover:text-gray-100 transition-colors cursor-pointer bg-gray-200 dark:bg-gray-800 p-2 rounded-md">
-                    <Link href={item.link}>
+                    <Link href={item.link || ""}>
                         {item.name}
                     </Link>
                 </li>
