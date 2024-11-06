@@ -43,17 +43,18 @@ export async function POST(req: Request) {
                 role: user.role,
             },
             message: 'Login successful',
-            status: 200
+            status: 200,
+            sessionId: user._id.toString()
         });
 
         // Set session cookie instead of JWT
-        response.cookies.set('sessionId', user._id.toString(), {
+        const cookie = response.cookies.set('sessionId', user._id.toString(), {
             httpOnly: true,
             secure: process.env.NODE_ENV === 'production',
             sameSite: 'strict',
             maxAge: 24 * 60 * 60 // 24 hours
         });
-
+        console.log(response.cookies.get('sessionId'))
         return response;
     } catch (error) {
         console.error('Login error:', error);
@@ -62,4 +63,4 @@ export async function POST(req: Request) {
             { status: 500 }
         );
     }
-} 
+}

@@ -33,17 +33,25 @@ export const dashboardMenu = [
         link: "/dashboard"
     },
     {
-        name: "Settings",
-        link: "/dashboard/settings"
-    },
-    {
         name: "Leadership",
         link: "/dashboard/leadership"
     },
     {
         name: "Documents",
         link: "/dashboard/documents"
-    }
+    },
+    {
+        name: "Users",
+        link: "/dashboard/users"
+    },
+    {
+        name: "Profile",
+        link: "/dashboard/profile"
+    },
+    {
+        name: "Settings",
+        link: "/dashboard/settings"
+    },
 ]
 
 export const subscriberDashboardMenu = [

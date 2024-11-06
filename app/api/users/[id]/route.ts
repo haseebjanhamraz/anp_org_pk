@@ -4,12 +4,73 @@ import { connectToDatabase } from '@/app/lib/mongodb';
 import User from '@/app/models/User';
 import { verifyAuth } from '@/app/middleware/auth';
 
+
+
+// Get Individual User
+export async function GET(
+    req: Request,
+    { params }: { params: { id: string } }
+) {
+    try {
+        const authResult = await verifyAuth(req, ['admin', 'editor', 'subscriber']);
+        if ('error' in authResult) {
+            return NextResponse.json(
+                { error: authResult.error },
+                { status: authResult.status }
+            );
+        }
+
+        const { user: authenticatedUser } = authResult;
+        const userId = params.id;
+
+        // Only allow users to view their own profile unless they're an admin
+        if (authenticatedUser.role !== 'admin' && authenticatedUser._id.toString() !== userId) {
+            return NextResponse.json(
+                { error: 'Unauthorized - Cannot view other users\' profiles' },
+                { status: 403 }
+            );
+        }
+
+        await connectToDatabase();
+
+        const user = await User.findById(userId, {
+            password: 0 // Exclude password field
+        });
+
+        if (!user) {
+            return NextResponse.json(
+                { error: 'User not found' },
+                { status: 404 }
+            );
+        }
+
+        return NextResponse.json({
+            user: {
+                id: user._id,
+                name: user.name,
+                email: user.email,
+                role: user.role,
+                createdAt: user.createdAt
+            }
+        });
+
+    } catch (error) {
+        console.error('Get user error:', error);
+        return NextResponse.json(
+            { error: 'Internal server error' },
+            { status: 500 }
+        );
+    }
+}
+
+
 // Update user profile
 export async function PUT(
     req: Request,
     { params }: { params: { id: string } }
 ) {
     try {
+
         const authResult = await verifyAuth(req, ['admin', 'editor', 'subscriber']);
         if ('error' in authResult) {
             return NextResponse.json(
