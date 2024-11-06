@@ -6,6 +6,7 @@ import { IconButton } from "@mui/material"
 import { Delete, Edit } from "@mui/icons-material"
 import Link from "next/link"
 
+
 export default function DocumentsList() {
     const [documents, setDocuments] = useState([])
     const [loading, setLoading] = useState(true)
@@ -16,6 +17,7 @@ export default function DocumentsList() {
             .then(data => {
                 setDocuments(data)
                 setLoading(false)
+                console.log(data)
             })
             .catch(err => {
                 console.error(err)

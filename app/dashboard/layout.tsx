@@ -15,8 +15,8 @@ export default function DashboardLayout({
     const router = useRouter()
 
     useEffect(() => {
-        // Get user data from localStorage on component mount
-        const userData = localStorage.getItem('user')
+        // Get user data from sessionStorage on component mount
+        const userData = sessionStorage.getItem('user')
         if (userData) {
             setUser(JSON.parse(userData))
         } else {
@@ -30,16 +30,16 @@ export default function DashboardLayout({
         })
             .then(res => res.json())
             .then(() => {
-                // Clear localStorage and redirect to login
-                localStorage.removeItem('token')
-                localStorage.removeItem('user')
+                // Clear sessionStorage and redirect to login
+                sessionStorage.removeItem('token')
+                sessionStorage.removeItem('user')
                 router.push('/login')
             })
             .catch(err => {
                 console.error('Logout error:', err)
-                // Still clear localStorage and redirect on error
-                localStorage.removeItem('token')
-                localStorage.removeItem('user')
+                // Still clear sessionStorage and redirect on error
+                sessionStorage.removeItem('token')
+                sessionStorage.removeItem('user')
                 router.push('/login')
             });
     }

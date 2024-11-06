@@ -1,6 +1,5 @@
 import { NextResponse } from 'next/server';
 import bcrypt from 'bcryptjs';
-import jwt from 'jsonwebtoken';
 import { connectToDatabase } from '@/app/lib/mongodb';
 import User from '@/app/models/User';
 
@@ -36,25 +35,26 @@ export async function POST(req: Request) {
             );
         }
 
-        // Create JWT token
-        const token = jwt.sign(
-            {
-                userId: user._id,
-                role: user.role
-            },
-            process.env.JWT_SECRET!,
-            { expiresIn: '24h' }
-        );
-
-        return NextResponse.json({
-            token,
+        const response = NextResponse.json({
             user: {
                 id: user._id,
                 name: user.name,
                 email: user.email,
-                role: user.role
-            }
+                role: user.role,
+            },
+            message: 'Login successful',
+            status: 200
         });
+
+        // Set session cookie instead of JWT
+        response.cookies.set('sessionId', user._id.toString(), {
+            httpOnly: true,
+            secure: process.env.NODE_ENV === 'production',
+            sameSite: 'strict',
+            maxAge: 24 * 60 * 60 // 24 hours
+        });
+
+        return response;
     } catch (error) {
         console.error('Login error:', error);
         return NextResponse.json(

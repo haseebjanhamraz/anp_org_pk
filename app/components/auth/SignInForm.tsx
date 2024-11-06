@@ -29,9 +29,9 @@ export default function SignInForm() {
                 throw new Error(data.error || 'Something went wrong');
             }
 
-            // Store token in localStorage
-            localStorage.setItem('token', data.token);
-            localStorage.setItem('user', JSON.stringify(data.user));
+            // Store user data in sessionStorage instead of localStorage
+            sessionStorage.setItem('token', data.token);
+            sessionStorage.setItem('user', JSON.stringify(data.user));
 
             // Redirect to dashboard
             router.push('/dashboard');

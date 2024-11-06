@@ -1,14 +1,9 @@
 import { NextResponse } from 'next/server'
 import { connectToDatabase } from '@/app/lib/mongodb'
 import { Document } from '@/app/models/Downloads'
-import { verifyAuth } from '@/app/middleware/auth'
+
 
 export async function GET(req: Request, res: Response) {
-    const { error, status } = await verifyAuth(req, ['admin'])
-    console.log(error, status)
-    if (error) {
-        return NextResponse.json({ error }, { status })
-    }
     try {
         await connectToDatabase()
         const documents = await Document.find({})

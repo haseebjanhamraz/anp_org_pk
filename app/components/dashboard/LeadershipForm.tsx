@@ -25,7 +25,7 @@ export default function LeadershipForm() {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${localStorage.getItem('token')}`
+                    'Authorization': `Bearer ${sessionStorage.getItem('token')}`
                 },
                 credentials: 'include',
                 body: JSON.stringify(data),

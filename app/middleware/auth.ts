@@ -1,4 +1,3 @@
-import { NextResponse } from 'next/server';
 import jwt from 'jsonwebtoken';
 import { connectToDatabase } from '@/app/lib/mongodb';
 import User from '@/app/models/User';

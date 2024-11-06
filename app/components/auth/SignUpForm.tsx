@@ -31,9 +31,9 @@ export default function SignUpForm() {
                 throw new Error(data.error || 'Something went wrong');
             }
 
-            // Store token and user data in localStorage
-            localStorage.setItem('token', data.token);
-            localStorage.setItem('user', JSON.stringify(data.user));
+            // Store token and user data in sessionStorage
+            sessionStorage.setItem('token', data.token);
+            sessionStorage.setItem('user', JSON.stringify(data.user));
 
             // Redirect to dashboard
             router.push('/dashboard');

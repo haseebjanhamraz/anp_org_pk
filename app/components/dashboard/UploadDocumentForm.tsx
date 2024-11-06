@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
+import { z } from 'zod';
 
 
 export default function UploadDocumentForm() {
@@ -22,14 +22,17 @@ export default function UploadDocumentForm() {
             body: formData
         });
         setIsLoading(false);
+
         if (response.ok) {
             setError(null);
             setSuccess('Document uploaded successfully');
             toast.success('Document uploaded successfully');
+
             router.push('/dashboard/documents/create');
         } else {
             setError('Failed to upload document');
             toast.error('Failed to upload document');
+
         }
     }
 
