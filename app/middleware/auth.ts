@@ -35,7 +35,6 @@ export async function verifyAuth(req: Request, allowedRoles: string[]) {
                 status: 403
             };
         }
-
         return { user };
     } catch (error) {
         return {

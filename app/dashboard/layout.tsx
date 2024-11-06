@@ -5,13 +5,16 @@ import Sidebar from "../components/dashboard/Sidebar";
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import DarkModeToggle from "../components/DarkModeToggle";
+import AnimatedLoader from "../components/Animated-Loader";
+import SubscriberSidebar from "../components/subscriber/SubscriberSidebar";
 
-export default function DashboardLayout({
-    children,
-}: {
-    children: React.ReactNode;
-}) {
-    const [user, setUser] = useState<{ name: string, email: string } | null>(null)
+export default function DashboardLayout(
+    {
+        children,
+    }: {
+        children: React.ReactNode;
+    }) {
+    const [user, setUser] = useState<{ name: string, email: string, role: string } | null>(null)
     const router = useRouter()
 
     useEffect(() => {
@@ -45,7 +48,7 @@ export default function DashboardLayout({
     }
 
     if (!user) {
-        return <div>Loading...</div>
+        return <AnimatedLoader />
     }
     return (
         <>
@@ -53,7 +56,7 @@ export default function DashboardLayout({
                 <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6">
                     <div>
                         <h1 className="text-2xl font-bold dark:text-white">Dashboard</h1>
-                        <p className="text-gray-600 dark:text-gray-300">Welcome, {user.name}</p>
+                        <p className="text-gray-600 dark:text-gray-300">Welcome, {user.name} ({user.role})</p>
                     </div>
                     <button
                         onClick={handleLogout}
@@ -65,7 +68,7 @@ export default function DashboardLayout({
                 <DarkModeToggle />
             </div>
             <div className="flex min-h-screen dark:text-white">
-                <Sidebar />
+                {user.role === "admin" || user.role === "editor" ? <Sidebar /> : <SubscriberSidebar />}
                 <div className="flex-1">
                     {children}
                 </div>

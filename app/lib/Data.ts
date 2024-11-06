@@ -46,6 +46,23 @@ export const dashboardMenu = [
     }
 ]
 
+export const subscriberDashboardMenu = [
+    {
+        name: "Dashboard",
+        link: "/dashboard"
+    },
+    {
+        name: "Profile",
+        link: "/dashboard/profile"
+    },
+    {
+        name: "Settings",
+        link: "/dashboard/settings"
+    }
+]
+
+
+
 export const documents = {
     manifesto: [
         {
