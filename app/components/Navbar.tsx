@@ -8,10 +8,13 @@ import DarkModeToggle from "./DarkModeToggle";
 import Link from "next/link";
 import DesktopMenu from "./DesktopMenu";
 import MobileMenu from "./MobileMenu";
+import { MdDashboard } from "react-icons/md";
+import useUser from "../hooks/useUser";
 
 export const Navbar = () => {
     const [isMobile, setIsMobile] = useState(false);
     const [showMobileMenu, setShowMobileMenu] = useState(false);
+    const user = useUser()
 
     // Update the screen size state on resize
     useEffect(() => {
@@ -80,6 +83,15 @@ export const Navbar = () => {
             <div className="md:hidden">
                 {isMobile && showMobileMenu && <MobileMenu />}
             </div>
+
+            {/* Dashboard */}
+            {user?.role === "admin" && (
+                <Link href="/dashboard" className="flex items-center gap-2">
+                    <MdDashboard className="text-2xl text-red-500 dark:text-red-800" />
+                    <span className="text-sm font-bold text-red-500 dark:text-red-800">Dashboard</span>
+                </Link>
+            )}
+
         </div>
     );
 };

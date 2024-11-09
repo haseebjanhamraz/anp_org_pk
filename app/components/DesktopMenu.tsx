@@ -3,9 +3,10 @@ import { menu } from "../lib/Data"
 import { usePathname } from 'next/navigation'
 
 
+
+
 export default function DesktopMenu() {
     const pathname = usePathname()
-
     return (
         <div>
             <ul className="flex gap-2 uppercase text-lg font-bold text-red-600">

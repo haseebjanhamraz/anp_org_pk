@@ -7,6 +7,7 @@ export async function GET() {
         await connectToDatabase();
 
         const leadership = await Leadership.find({});
+        console.log(leadership);
 
         return NextResponse.json(leadership, { status: 200 });
     } catch (error) {

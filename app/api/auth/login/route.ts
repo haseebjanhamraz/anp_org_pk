@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import bcrypt from 'bcryptjs';
+import jwt from 'jsonwebtoken';
 import { connectToDatabase } from '@/app/lib/mongodb';
 import User from '@/app/models/User';
 
@@ -35,6 +36,17 @@ export async function POST(req: Request) {
             );
         }
 
+        // Generate JWT token
+        const token = jwt.sign(
+            {
+                userId: user._id,
+                email: user.email,
+                role: user.role
+            },
+            process.env.JWT_SECRET || 'your-secret-key',
+            { expiresIn: '24h' }
+        );
+
         const response = NextResponse.json({
             user: {
                 id: user._id,
@@ -44,18 +56,19 @@ export async function POST(req: Request) {
             },
             message: 'Login successful',
             status: 200,
-            sessionId: user._id.toString()
+            token: token
         });
 
-        // Set session cookie instead of JWT
-        const cookie = response.cookies.set('sessionId', user._id.toString(), {
+        // Set JWT token in cookie
+        response.cookies.set('sessionId', token, {
             httpOnly: true,
             secure: process.env.NODE_ENV === 'production',
             sameSite: 'strict',
             maxAge: 24 * 60 * 60 // 24 hours
         });
-        console.log(response.cookies.get('sessionId'))
+
         return response;
+
     } catch (error) {
         console.error('Login error:', error);
         return NextResponse.json(

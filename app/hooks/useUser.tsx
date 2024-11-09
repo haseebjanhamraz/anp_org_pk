@@ -14,6 +14,5 @@ export default function useUser() {
             return
         }
     }, [])
-
     return user
 }

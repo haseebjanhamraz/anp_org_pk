@@ -3,6 +3,21 @@ import { connectToDatabase } from '@/app/lib/mongodb';
 import Leadership from '@/app/models/Leadership';
 import { verifyAuth } from '@/app/middleware/auth';
 
+
+export async function GET(
+    req: Request,
+    { params }: { params: { id: string } }
+) {
+    try {
+        await connectToDatabase();
+        const leadership = await Leadership.findById(params.id);
+        return NextResponse.json(leadership, { status: 200 });
+    } catch (error) {
+        console.error('Error fetching leadership:', error);
+        return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
+    }
+}
+
 // Update leadership entry
 export async function PUT(
     req: Request,
