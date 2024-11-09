@@ -94,7 +94,7 @@ const LeadershipTable = () => {
                     <Link href={`/dashboard/leadership/${params.row._id}/edit`}>
                         <EditIcon />
                     </Link>
-                    <Link href={`/dashboard/leadership/${params.row._id}`}>
+                    <Link href={`/dashboard/leadership/${params.row._id}/view`}>
                         <VisibilityIcon />
                     </Link>
                     <DeleteIcon onClick={() => handleDeleteClick(params.row._id)} />

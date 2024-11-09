@@ -3,8 +3,10 @@
 import { useEffect, useState } from "react"
 import { DataGrid, GridColDef } from "@mui/x-data-grid"
 import { IconButton } from "@mui/material"
-import { Delete, Edit } from "@mui/icons-material"
+import { Delete, Edit, Visibility } from "@mui/icons-material"
+
 import Link from "next/link"
+
 
 
 export default function DocumentsList() {
@@ -31,6 +33,7 @@ export default function DocumentsList() {
         { field: 'id', headerName: 'ID', width: 90 },
         { field: 'name', headerName: 'Title', width: 200 },
         { field: 'category', headerName: 'Category', width: 300 },
+        { field: 'filepath', headerName: 'File', width: 300 },
         { field: 'publishYear', headerName: 'Publish Year', width: 150 },
         {
             field: 'actions',
@@ -53,6 +56,11 @@ export default function DocumentsList() {
                     >
                         <Delete />
                     </IconButton>
+                    <Link href={`/dashboard/documents/${params.row._id}/view`}>
+                        <IconButton size="small">
+                            <Visibility />
+                        </IconButton>
+                    </Link>
                 </div>
             )
         }

@@ -281,6 +281,66 @@ export default function LeadershipEditForm() {
                             </div>
                         )}
                     />
+                    // Update social media links
+                    <Controller
+                        name="socialMedia"
+                        control={control}
+                        render={({ field }) => (
+                            <div>
+                                <label className="block text-sm font-medium text-gray-700">Social Media Links</label>
+                                {field.value.map((social: { platform: string; url: string }, index: number) => (
+                                    <div key={index} className="flex gap-4 mt-2">
+                                        <input
+                                            type="text"
+                                            placeholder="Platform (e.g. Twitter, LinkedIn)"
+                                            value={social.platform}
+                                            onChange={(e) => {
+                                                const newSocialMedia = [...field.value];
+                                                newSocialMedia[index].platform = e.target.value;
+                                                field.onChange(newSocialMedia);
+                                                setIsDirty(true);
+                                            }}
+                                            className="mt-1 text-black block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                                        />
+                                        <input
+                                            type="url"
+                                            placeholder="URL"
+                                            value={social.url}
+                                            onChange={(e) => {
+                                                const newSocialMedia = [...field.value];
+                                                newSocialMedia[index].url = e.target.value;
+                                                field.onChange(newSocialMedia);
+                                                setIsDirty(true);
+                                            }}
+                                            className="mt-1 text-black block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                                        />
+                                        <button
+                                            type="button"
+                                            onClick={() => {
+                                                const newSocialMedia = field.value.filter((_, i) => i !== index);
+                                                field.onChange(newSocialMedia);
+                                                setIsDirty(true);
+                                            }}
+                                            className="mt-1 px-3 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
+                                        >
+                                            Remove
+                                        </button>
+                                    </div>
+                                ))}
+                                <button
+                                    type="button"
+                                    onClick={() => {
+                                        field.onChange([...field.value, { platform: '', url: '' }]);
+                                        setIsDirty(true);
+                                    }}
+                                    className="mt-2 px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
+                                >
+                                    Add Social Media Link
+                                </button>
+                            </div>
+                        )}
+                    />
+
                 </div>
 
                 <div className="flex justify-end space-x-4">
