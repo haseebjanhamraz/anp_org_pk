@@ -4,14 +4,16 @@ import { useEffect, useState } from "react"
 import { DataGrid, GridColDef } from "@mui/x-data-grid"
 import { IconButton } from "@mui/material"
 import { Delete, Edit, Visibility } from "@mui/icons-material"
-
 import Link from "next/link"
+import useDeleteDocument from "@/app/hooks/useDeleteDocument"
+
 
 
 
 export default function DocumentsList() {
     const [documents, setDocuments] = useState([])
     const [loading, setLoading] = useState(true)
+    const { deleteDocument, loading: deleteLoading, error } = useDeleteDocument();
 
     useEffect(() => {
         fetch("/api/documents")
@@ -49,9 +51,7 @@ export default function DocumentsList() {
                     <IconButton
                         size="small"
                         onClick={() => {
-                            // TODO: Implement delete functionality
-
-                            console.log('Delete document:', params.row._id)
+                            deleteDocument(params.row._id)
                         }}
                     >
                         <Delete />

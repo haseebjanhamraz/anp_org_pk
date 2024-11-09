@@ -26,3 +26,17 @@ export async function GET(
         )
     }
 }
+
+export async function DELETE(
+    req: Request,
+    { params }: { params: { id: string } }
+) {
+    try {
+        await connectToDatabase()
+        await Document.findByIdAndDelete(params.id)
+        return NextResponse.json({ message: 'Document deleted' }, { status: 200 })
+    } catch (error) {
+        console.error('Error deleting document:', error)
+        return NextResponse.json({ error: 'Failed to delete document' }, { status: 500 })
+    }
+}

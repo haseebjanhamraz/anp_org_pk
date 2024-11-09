@@ -4,6 +4,7 @@ import { useParams } from "next/navigation";
 import useDocument from "@/app/hooks/useDocument";
 import AnimatedLoader from "@/app/components/Animated-Loader";
 
+
 const ViewDocument = () => {
     const params = useParams();
     const { document, loading } = useDocument(params.id as string);
