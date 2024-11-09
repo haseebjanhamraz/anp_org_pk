@@ -66,9 +66,6 @@ export default function DocumentsList() {
         }
     ]
 
-    if (loading) {
-        return <div>Loading...</div>
-    }
 
     return (
         <div style={{ height: 400, width: '100%' }}>
@@ -81,6 +78,7 @@ export default function DocumentsList() {
                         paginationModel: { page: 0, pageSize: 5 },
                     },
                 }}
+                loading={loading}
                 pageSizeOptions={[5, 10]}
                 checkboxSelection
                 disableRowSelectionOnClick

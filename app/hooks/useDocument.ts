@@ -11,6 +11,7 @@ interface Document {
 }
 
 const useDocument = (id: string) => {
+    const [loading, setLoading] = useState(true);
     const [document, setDocument] = useState<Document>({
         name: '',
         publishYear: 0,
@@ -22,12 +23,15 @@ const useDocument = (id: string) => {
     });
 
     useEffect(() => {
+
+        setLoading(true);
         const fetchDocument = async () => {
             try {
                 console.log(id)
                 const response = await fetch(`/api/documents/${id}`);
                 const data = await response.json();
                 setDocument(data);
+                setLoading(false);
             } catch (error) {
                 console.error(error);
             }
@@ -36,7 +40,7 @@ const useDocument = (id: string) => {
     }, [id])
 
 
-    return document;
+    return { document, loading };
 };
 
 export default useDocument; 

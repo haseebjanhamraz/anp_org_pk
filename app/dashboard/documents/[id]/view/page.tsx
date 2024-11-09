@@ -2,14 +2,18 @@
 
 import { useParams } from "next/navigation";
 import useDocument from "@/app/hooks/useDocument";
-
+import AnimatedLoader from "@/app/components/Animated-Loader";
 
 const ViewDocument = () => {
     const params = useParams();
-    const document = useDocument(params.id as string);
+    const { document, loading } = useDocument(params.id as string);
+
+    if (loading) {
+        return <AnimatedLoader />;
+    }
 
     return (
-        <div className='flex h-screen'>
+        <div className='flex flex-col h-screen'>
             <ul className='flex flex-col gap-2'>
                 <li className='dark:text-white'>Title
                     <span className='dark:text-white font-bold ml-2 rounded-md'>{document.name}</span>
@@ -29,7 +33,10 @@ const ViewDocument = () => {
                     </span>
                 </li>
             </ul>
-
+            <div className='flex-1 p-4 flex flex-col gap-4'>
+                <h1 className='text-2xl font-bold'>{document.name} - Preview</h1>
+                <iframe src={document.filepath} className='w-full h-full rounded-md' />
+            </div>
         </div>
     );
 };
