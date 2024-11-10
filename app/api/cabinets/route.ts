@@ -5,19 +5,11 @@ import { verifyAuth } from "@/app/middleware/auth";
 
 
 export async function GET(request: Request) {
-    const { error, status } = await verifyAuth(request, ['admin']);
-    if (error) {
-        return NextResponse.json({ error }, { status });
-    }
-
     const cabinets: CabinetType[] = await Cabinet.find();
     console.log(cabinets);
     return NextResponse.json(
-        {
-            cabinets
-        },
+        { cabinets },
         { status: 200 }
-
     );
 }
 

@@ -1,5 +1,5 @@
 export interface LeadershipData {
-    id: string;
+    _id: string;
     name: string;
     position: string;
     cabinet: string;

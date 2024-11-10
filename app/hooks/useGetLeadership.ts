@@ -1,24 +1,10 @@
 'use client'
 import { useState, useEffect } from 'react';
+import { LeadershipData } from '@/app/types/leadership';
 
-export interface Leader {
-    _id: string;
-    name: string;
-    position: string;
-    imageUrl: string;
-    period: string;
-    socialMedia: {
-        platform: string;
-        url: string;
-    }[];
-    email: string;
-    createdAt: Date;
-    updatedAt: Date;
-}
-
-const useGetLeadership = (): { leaders: Leader[]; loading: boolean } => {
+const useGetLeadership = (): { leaders: LeadershipData[]; loading: boolean } => {
     const [loading, setLoading] = useState(true);
-    const [leaders, setLeaders] = useState<Leader[]>([]);
+    const [leaders, setLeaders] = useState<LeadershipData[]>([]);
 
     useEffect(() => {
         const fetchLeaders = async () => {

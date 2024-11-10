@@ -55,7 +55,7 @@ export default function MediaCard() {
                     <Downloads />
                 </div>
                 <div>
-                    <h1 className='text-center text-2xl font-bold dark:text-white '>ANP Leadership</h1>
+                    <h1 className='text-2xl font-bold dark:text-white '>ANP Leadership</h1>
                     <LeaderCard />
                 </div>
             </div>

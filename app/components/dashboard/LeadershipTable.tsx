@@ -9,6 +9,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import Link from 'next/link';
 import ConfirmDeleteAlert from './ConfirmDeleteAlert';
+import { useCabinet } from '@/app/hooks/useCabinet';
 
 
 // Define the interface for your leadership data
@@ -27,6 +28,7 @@ interface LeadershipData {
 
 
 const LeadershipTable = () => {
+    const { cabinets } = useCabinet();
     const [open, setOpen] = React.useState(false);
     const [selectedId, setSelectedId] = React.useState<string | null>(null);
 
@@ -66,6 +68,17 @@ const LeadershipTable = () => {
             headerName: 'Full name',
             width: 160,
             valueGetter: (value, row) => `${row.name || ''}`,
+            flex: 1
+        },
+        {
+            field: 'cabinet',
+            headerName: 'Cabinet',
+            width: 160,
+            // Get the cabinet name from the cabinet id
+            valueGetter: (value, row) => {
+                const cabinet = cabinets.find((cabinet) => cabinet._id === row.cabinet);
+                return cabinet?.cabinetType ? cabinet.cabinetType.charAt(0).toUpperCase() + cabinet.cabinetType.slice(1) : '';
+            },
         },
         {
             field: 'position',

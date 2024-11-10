@@ -17,7 +17,7 @@ export default function BachaKhanQuotes() {
 
     return (
         <div>
-            <div className="min-h-screen flex items-center justify-center bg-gray-100">
+            <div className="min-h-screen flex items-center justify-center bg-gray-100 dark:bg-slate-800">
                 <div className="max-w-4xl w-full mx-4">
                     <div className="bg-white rounded-lg shadow-xl p-8">
                         <div className="relative overflow-hidden">

@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { CabinetType } from '../types/Cabinets';
 
+
 export const useCabinet = () => {
     const [cabinets, setCabinets] = useState<CabinetType[]>([]);
     const [loading, setLoading] = useState(true);
@@ -10,11 +11,7 @@ export const useCabinet = () => {
         try {
             setLoading(true);
             const token = sessionStorage.getItem('token');
-            const response = await fetch('/api/cabinets', {
-                headers: {
-                    'Authorization': `Bearer ${token}`
-                }
-            });
+            const response = await fetch('/api/cabinets')
 
             if (!response.ok) {
                 throw new Error('Failed to fetch cabinets');
