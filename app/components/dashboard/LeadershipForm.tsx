@@ -3,11 +3,13 @@
 import * as React from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import { TextField, Button, Paper, Stack, Alert } from '@mui/material';
+import { CabinetDropdown } from './CabinetDropdown';
 
 
 interface LeadershipFormData {
     name: string;
     position: string;
+    cabinet: string;
     period: string;
     description: string;
     imageUrl: string;
@@ -15,11 +17,16 @@ interface LeadershipFormData {
 }
 
 export default function LeadershipForm() {
-    const { control, handleSubmit, formState: { errors }, reset } = useForm<LeadershipFormData>();
+    const { control, handleSubmit, formState: { errors }, reset } = useForm<LeadershipFormData>({
+        defaultValues: {
+            socialMedia: []
+        }
+    });
     const [submitError, setSubmitError] = React.useState<string | null>(null);
-
     const onSubmit = async (data: LeadershipFormData) => {
+        console.log('Form errors:', errors);
         try {
+            console.log('Submitting data:', data);
             setSubmitError(null);
             const response = await fetch('/api/leadership/create', {
                 method: 'POST',
@@ -30,6 +37,8 @@ export default function LeadershipForm() {
                 credentials: 'include',
                 body: JSON.stringify(data),
             });
+
+            console.log('Response status:', response.status);
 
             if (!response.ok) {
                 if (response.status === 401) {
@@ -46,6 +55,7 @@ export default function LeadershipForm() {
                 {
                     name: '',
                     position: '',
+                    cabinet: '',
                     period: '',
                     description: '',
                     imageUrl: '',
@@ -102,6 +112,15 @@ export default function LeadershipForm() {
                     />
 
                     <Controller
+                        name="cabinet"
+                        control={control}
+                        rules={{ required: 'Cabinet is required' }}
+                        render={({ field }) => (
+                            <CabinetDropdown  {...field} />
+                        )}
+                    />
+
+                    <Controller
                         name="period"
                         control={control}
                         rules={{ required: 'Period is required' }}
@@ -148,7 +167,7 @@ export default function LeadershipForm() {
                         )}
                     />
 
-                    // Select social media accounts from dropdown, add link and add them to the form data. Use tailwind css for styling.
+
                     <Controller
                         name="socialMedia"
                         control={control}
@@ -177,7 +196,7 @@ export default function LeadershipForm() {
 
                                 {field.value && field.value.map((social, index) => (
                                     <div key={index} className="flex gap-4 items-center">
-                                        <div className="font-medium w-24">{social.platform}</div>
+                                        <div className="font-medium w-24">{social.platform.charAt(0).toUpperCase() + social.platform.slice(1)}</div>
                                         <TextField
                                             value={social.url}
                                             onChange={(e) => {

@@ -2,11 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #000000;
-}
-
 .dark {
   --background: #121212;
   --foreground: #ffffff;
@@ -14,4 +9,10 @@
 
 .MuiListItemText-secondary {
   color: gray !important;
+}
+
+@layer base {
+  :root {
+    --radius: 0.5rem;
+  }
 }

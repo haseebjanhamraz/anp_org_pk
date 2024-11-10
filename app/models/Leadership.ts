@@ -1,4 +1,5 @@
 import mongoose, { Schema } from 'mongoose';
+import { Cabinet } from './Cabinet';
 
 // First, create the social media schema
 const socialMediaSchema = new Schema({
@@ -13,6 +14,8 @@ const socialMediaSchema = new Schema({
     }
 }, { _id: false }); // _id: false is important here
 
+
+
 // Then use it in the leadership schema
 const leadershipSchema = new Schema({
     name: {
@@ -22,6 +25,11 @@ const leadershipSchema = new Schema({
     position: {
         type: String,
         required: true,
+    },
+    cabinet: {
+        type: Schema.Types.ObjectId,
+        ref: 'Cabinet',
+        required: true
     },
     period: {
         type: String,
@@ -46,6 +54,8 @@ if (mongoose.models.Leadership) {
     delete mongoose.models.Leadership;
 }
 
-const Leadership = mongoose.model('Leadership', leadershipSchema);
+const Leadership = mongoose.model('Leadership',
+    leadershipSchema
+);
 
 export default Leadership; 

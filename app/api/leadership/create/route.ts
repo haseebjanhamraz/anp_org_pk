@@ -16,23 +16,13 @@ interface SocialMediaLink {
 interface CreateLeadershipRequest {
     name: string;
     position: string;
+    cabinet?: string;
     period: string;
     description?: string;
     imageUrl?: string;
     socialMedia?: SocialMediaLink[];
 }
 
-// Example role permissions
-const ROLE_PERMISSIONS = {
-    // Admin can do everything
-    admin: ['create', 'read', 'update', 'delete'],
-
-    // Editor can create and edit content
-    editor: ['create', 'read', 'update'],
-
-    // Subscriber can only read content and edit their own profile
-    subscriber: ['read']
-};
 
 export async function POST(req: Request) {
     try {
@@ -64,6 +54,7 @@ export async function POST(req: Request) {
         const leadershipData = {
             name: body.name,
             position: body.position,
+            cabinet: body.cabinet || '',
             period: body.period,
             description: body.description || '',
             imageUrl: body.imageUrl || '',
