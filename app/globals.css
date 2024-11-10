@@ -11,3 +11,7 @@
   --background: #121212;
   --foreground: #ffffff;
 }
+
+.MuiListItemText-secondary {
+  color: gray !important;
+}

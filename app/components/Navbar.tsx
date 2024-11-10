@@ -25,7 +25,7 @@ export const Navbar = () => {
     }, []);
 
     return (
-        <div className="flex sticky top-0 flex-wrap gap-4 p-3 px-8 bg-gray-100 dark:bg-slate-800 items-center justify-between">
+        <div className="flex sticky z-50 top-0 flex-wrap gap-4 p-3 px-8 bg-gray-100 dark:bg-slate-800 items-center justify-between">
             <div className="flex items-center gap-4">
                 <Image
                     src="/anp-logo.png"
