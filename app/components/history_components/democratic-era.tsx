@@ -2,7 +2,7 @@
 
 export default function DemocraticEraAndANPsRole() {
     return (
-        <div className='flex flex-col gap-8'>
+        <div className='flex flex-col gap-8' id="democratic-era">
             <h4 className="border-r-8 w-fit px-10 py-2 text-3xl font-extrabold dark:bg-red-800  dark:text-gray-300">
                 Democratic Era and ANP’s Role in the 1990s
             </h4>

@@ -8,10 +8,13 @@ import PoliticalRepressionAndChallenges from "@/app/components/history_component
 import DemocraticEraAndANPsRole from "@/app/components/history_components/democratic-era"
 import ANPStanceOnTerrorism from "@/app/components/history_components/anp-stance-on-terrorism"
 import ANPInRecentDecades from "@/app/components/history_components/anp-in-recent-decades"
+import HistoryNavigator from "@/app/components/history_components/HistoryNavigator"
 export default function page() {
 
     return (
+
         <div className="space-y-10">
+            <HistoryNavigator />
             <OverviewPashtunNationalism />
             <BachaKhanAndResistence />
             <PartitionOfIndia />

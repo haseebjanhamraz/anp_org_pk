@@ -11,13 +11,13 @@ export default function Home() {
       <BachaKhanQuotes />
       <div className="flex flex-col md:flex-row mt-10 gap-10 justify-center">
         <div className="px-4 md:px-0">
-          <h1 className="text-2xl font-bold text-center md:text-left">Downloads</h1>
-          <Divider className="my-2" />
+          <h1 className="text-2xl font-bold text-center md:text-left dark:text-white">Downloads</h1>
+          <Divider className="my-2 dark:border-gray-500" />
           <Downloads />
         </div>
         <div className="px-4 md:px-0">
-          <h1 className="text-2xl ml-10 font-bold text-center md:text-left">Leadership</h1>
-          <Divider className="my-2" />
+          <h1 className="text-2xl ml-10 font-bold text-center md:text-left dark:text-white">Leadership</h1>
+          <Divider className="my-2 dark:border-gray-500" />
           <LeaderCard />
         </div>
       </div>

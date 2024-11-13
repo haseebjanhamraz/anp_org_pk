@@ -2,7 +2,7 @@
 
 export default function ANPInRecentDecades() {
     return (
-        <div className='flex flex-col gap-8'>
+        <div className='flex flex-col gap-8' id="recent">
             <h4 className="border-r-8 w-fit px-10 py-2 text-3xl font-extrabold dark:bg-red-800  dark:text-gray-300">
                 ANP in Recent Decades
             </h4>
