@@ -13,7 +13,7 @@ import useUser from "../hooks/useUser";
 
 export const Navbar = () => {
     const [isMobile, setIsMobile] = useState(false);
-    const [showMobileMenu, setShowMobileMenu] = useState(false);
+    const [showMobileMenu] = useState(false);
     const user = useUser()
 
     // Update the screen size state on resize

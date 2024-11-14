@@ -1,6 +1,8 @@
 import localFont from "next/font/local";
 import "./globals.css";
 import ClientLayout from "./ClientLayout";
+import { generateMetadata } from './MetaData';
+import { Metadata } from 'next';
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -13,26 +15,7 @@ const geistMono = localFont({
   weight: "100 900",
 });
 
-export const metadata = {
-  title: "Awami National Party",
-  description: "Awami National Party",
-  keywords: ["Awami National Party", "ANP", "Pakistan", "Politics", "Leadership"],
-  authors: [{ name: "Awami National Party" }],
-  openGraph: {
-    type: "website",
-    locale: "en_US",
-    siteName: `Awami National Party `,
-    url: "https://anp.org.pk",
-    images: [
-      {
-        url: "/anp-logo.png",
-        width: 1200,
-        height: 630,
-        alt: "Awami National Party",
-      },
-    ],
-  }
-};
+export const metadata: Metadata = generateMetadata('/');
 
 export default function RootLayout({
   children,

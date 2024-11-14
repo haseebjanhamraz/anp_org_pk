@@ -89,12 +89,11 @@ export async function PUT(
     }
 }
 
-
-
 // Get Cabinet
 export async function GET(
     request: Request,
-    { params }: { params: { id: string } }
+    { params }: { params: { id: string } },
+    type: { type: string }
 ) {
     try {
         const { error, status } = await verifyAuth(request, ['admin']);

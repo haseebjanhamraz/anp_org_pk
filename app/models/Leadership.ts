@@ -1,5 +1,4 @@
 import mongoose, { Schema } from 'mongoose';
-import { Cabinet } from './Cabinet';
 
 // First, create the social media schema
 const socialMediaSchema = new Schema({

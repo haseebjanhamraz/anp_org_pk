@@ -2,7 +2,6 @@ import { NextResponse } from 'next/server';
 import bcrypt from 'bcryptjs';
 import { connectToDatabase } from '@/app/lib/mongodb';
 import User from '@/app/models/User';
-import { verifyAuth } from '@/app/middleware/auth';
 import jwt from 'jsonwebtoken';
 
 export async function POST(req: Request) {

@@ -3,6 +3,7 @@
 import * as React from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import { useParams, useRouter } from 'next/navigation';
+import Image from 'next/image';
 
 interface LeadershipFormData {
     name: string;
@@ -266,13 +267,15 @@ export default function LeadershipEditForm() {
                                     }}
                                 />
                                 {field.value && (
-                                    <img
+                                    <Image
                                         src={field.value}
                                         alt="Preview"
                                         className="mt-2 h-32 w-32 object-cover rounded-lg"
                                         onError={(e) => {
                                             (e.target as HTMLImageElement).style.display = 'none';
                                         }}
+                                        height={100}
+                                        width={100}
                                     />
                                 )}
                                 {errors.imageUrl && (
@@ -281,7 +284,6 @@ export default function LeadershipEditForm() {
                             </div>
                         )}
                     />
-                    // Update social media links
                     <Controller
                         name="socialMedia"
                         control={control}
