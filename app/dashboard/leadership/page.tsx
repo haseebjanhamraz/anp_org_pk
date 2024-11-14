@@ -1,13 +1,13 @@
 "use client"
 
-import LeadershipTable from "@/app/components/dashboard/LeadershipTable"
+import LeadershipTable from '../../components/dashboard/LeadershipTable'
 import Link from "next/link"
 import { Button } from "@mui/material"
 import { Add } from "@mui/icons-material"
 
+import React from 'react'
 
 export default function Leadership() {
-
 
     return (
         <div className="min-h-screen flex">

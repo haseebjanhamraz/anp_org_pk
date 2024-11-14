@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import Box from '@mui/material/Box';
 import { socialMedia } from '../lib/Data';

@@ -7,6 +7,7 @@ import { useRouter } from 'next/navigation'
 import DarkModeToggle from "../components/DarkModeToggle";
 import AnimatedLoader from "../components/Animated-Loader";
 import SubscriberSidebar from "../components/subscriber/SubscriberSidebar";
+import BackButton from "../components/dashboard/BackButton";
 
 export default function DashboardLayout(
     {
@@ -53,10 +54,14 @@ export default function DashboardLayout(
     return (
         <>
             <div className="flex justify-between items-center ">
+
                 <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6">
                     <div>
                         <h1 className="text-2xl font-bold dark:text-white">Dashboard</h1>
-                        <p className="text-gray-600 dark:text-gray-300">Welcome, {user.name} ({user.role})</p>
+                        <p className="text-gray-600 dark:text-gray-300">
+                            Welcome,
+                            <span className="font-bold"> {user.name} ({user.role})</span>
+                        </p>
                     </div>
                     <button
                         onClick={handleLogout}

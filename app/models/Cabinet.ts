@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
-import { CabinetType } from '@/app/types/Cabinets';
+import { CabinetType } from '../types/Cabinets';
 
 // Define Document Schema
 const CabinetSchema = new mongoose.Schema<CabinetType>({

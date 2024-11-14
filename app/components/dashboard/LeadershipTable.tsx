@@ -9,8 +9,8 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import Link from 'next/link';
 import ConfirmDeleteAlert from './ConfirmDeleteAlert';
-import { useCabinet } from '@/app/hooks/useCabinet';
-import { toast } from '@/app/hooks/use-toast';
+import { useCabinet } from '../../hooks/useCabinet';
+import { toast } from '../../hooks/use-toast';
 
 
 // Define the interface for your leadership data
@@ -53,24 +53,15 @@ const LeadershipTable = () => {
             if (!response.ok) {
                 throw new Error('Failed to delete leadership entry');
             }
-
+            toast({
+                title: 'Leadership entry deleted successfully',
+                description: 'The leadership entry has been deleted successfully'
+            });
             // Update the table by filtering out the deleted row
             setRows(rows.filter(row => row._id !== selectedId));
             setOpen(false);
-
-            toast({
-                title: "Success",
-                description: "Leadership entry deleted successfully",
-                variant: "default",
-            });
-
         } catch (error) {
             console.error("Error deleting leadership:", error);
-            toast({
-                title: "Error",
-                description: "Failed to delete leadership entry",
-                variant: "destructive",
-            });
         }
     };
 

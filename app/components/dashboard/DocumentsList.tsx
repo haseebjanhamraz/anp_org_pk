@@ -1,13 +1,12 @@
 "use client"
 
-import { useEffect, useState } from "react"
+import React, { useEffect, useState } from "react"
 import { DataGrid, GridColDef } from "@mui/x-data-grid"
 import { IconButton } from "@mui/material"
 import { Delete, Edit, Visibility } from "@mui/icons-material"
 import Link from "next/link"
-import useDeleteDocument from "@/app/hooks/useDeleteDocument"
 import ConfirmDeleteAlert from "./ConfirmDeleteAlert"
-
+import useDeleteDocument from "../../hooks/useDeleteDocument"
 interface Document {
     _id: string;
     name: string;

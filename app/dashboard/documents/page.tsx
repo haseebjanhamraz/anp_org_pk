@@ -1,6 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
-import DocumentsList from '@/app/components/dashboard/DocumentsList';
+import DocumentsList from '../../components/dashboard/DocumentsList';
 import { Add } from '@mui/icons-material';
 import { Button } from '@mui/material';
 export default function Documents() {

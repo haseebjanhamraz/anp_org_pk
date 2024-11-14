@@ -1,6 +1,6 @@
-import { Cabinet } from "@/app/models/Cabinet";
+import { Cabinet } from '../../../models/Cabinet'
 import { NextResponse } from "next/server";
-import { verifyAuth } from "@/app/middleware/auth";
+import { verifyAuth } from '../../../middleware/auth';
 
 export async function DELETE(
     request: Request,
