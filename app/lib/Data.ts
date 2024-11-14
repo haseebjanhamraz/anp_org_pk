@@ -71,152 +71,6 @@ export const subscriberDashboardMenu = [
 
 
 
-export const documents = {
-    manifesto: [
-        {
-            year: "2024",
-            languages: {
-                en: "/docs/manifesto-2024-en.pdf",
-                ur: "/docs/manifesto-2024-ur.pdf",
-            }
-        },
-        {
-            year: "2020",
-            languages: {
-                en: "/docs/manifesto-2020-en.pdf",
-                ur: "/docs/manifesto-2020-ur.pdf",
-            }
-        },
-        {
-            year: "2016",
-            languages: {
-                en: "/docs/manifesto-2016-en.pdf",
-                ur: "/docs/manifesto-2016-ur.pdf",
-            }
-        },
-        {
-            year: "2012",
-            languages: {
-                en: "/docs/manifesto-2012-en.pdf",
-                ur: "/docs/manifesto-2012-ur.pdf",
-            }
-        },
-        {
-            year: "2008",
-            languages: {
-                en: "/docs/manifesto-2008-en.pdf",
-                ur: "/docs/manifesto-2008-ur.pdf",
-            }
-        }
-    ],
-    constitution: [
-        {
-            year: "2024",
-            languages: {
-                en: "/docs/constitution-2024-en.pdf",
-                ur: "/docs/constitution-2024-ur.pdf",
-            }
-        },
-        {
-            year: "2016",
-            languages: {
-                en: "/docs/constitution-2016-en.pdf",
-                ur: "/docs/constitution-2016-ur.pdf",
-            }
-        },
-        {
-            year: "2012",
-            languages: {
-                en: "/docs/constitution-2012-en.pdf",
-                ur: "/docs/constitution-2012-ur.pdf",
-            }
-        }
-    ],
-    publications: [
-        {
-            year: "2024",
-            languages: {
-                en: "/docs/publication-2024-en.pdf",
-                ur: "/docs/publication-2024-ur.pdf",
-            }
-        },
-        {
-            year: "2020",
-            languages: {
-                en: "/docs/publication-2020-en.pdf",
-                ur: "/docs/publication-2020-ur.pdf",
-            }
-        },
-        {
-            year: "2016",
-            languages: {
-                en: "/docs/publication-2016-en.pdf",
-                ur: "/docs/publication-2016-ur.pdf",
-            }
-        },
-        {
-            year: "2012",
-            languages: {
-                en: "/docs/publication-2012-en.pdf",
-                ur: "/docs/publication-2012-ur.pdf",
-            }
-        },
-        {
-            year: "2008",
-            languages: {
-                en: "/docs/publication-2008-en.pdf",
-                ur: "/docs/publication-2008-ur.pdf",
-            }
-        }
-
-
-    ]
-}
-
-
-
-export const leadership = [{
-    name: "Aimal Wali Khan ",
-    position: "President",
-    intro: "Aimal Wali Khan is grandson of Khan Abdul Wali Khan and currently president of Awami National Party.",
-    image: "",
-    social: {
-        facebook: {
-            link: "https://www.facebook.com/",
-            name: "Facebook"
-        },
-        twitter: {
-            link: "https://www.twitter.com/",
-            name: "Twitter"
-        },
-        instagram: {
-            link: "https://www.instagram.com/",
-            name: "Instagram"
-        },
-        email: "awk@anp.org.pk",
-        residence: "Charsadda"
-    }
-}, {
-    name: "Ihsan Ullah Khan",
-    position: "General Secretary",
-    intro: "Mian Iftikhar Hussain is a renowned journalist and currently General Secretary",
-    image: "",
-    social: {
-        facebook: {
-            link: "https://www.facebook.com/",
-        },
-        twitter: {
-            link: "https://www.twitter.com/",
-        },
-        instagram: {
-            link: "https://www.instagram.com/",
-        },
-        email: "email@gmail.com",
-    }
-}
-
-]
-
 export const socialMedia = [{
     link: "https://facebook.com/ANPMarkaz",
     icon: FaFacebookSquare
@@ -248,3 +102,14 @@ export const introduction = [{
 Part of the PPP-led cabinet of the Pakistani government during 2008−13, ANP’s political position is considered left-wing, advocating for secularism, public sector government, and social egalitarianism
     `
 }]
+
+
+export const positions = [
+    'President',
+    'Vice President',
+    'Secretary General',
+    'Joint Secretary',
+    'Finance Secretary',
+    'Social Media Coordinator',
+    'Salar',
+]

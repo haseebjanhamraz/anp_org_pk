@@ -2,9 +2,10 @@
 
 import * as React from 'react';
 import { useForm, Controller } from 'react-hook-form';
-import { TextField, Button, Paper, Stack, Alert } from '@mui/material';
+import { TextField, Button, Paper, Stack, Alert, MenuItem, Select, FormControl, InputLabel } from '@mui/material';
 import { CabinetDropdown } from './CabinetDropdown';
-
+import { useDropzone } from 'react-dropzone'
+import { positions } from '../../lib/Data';
 
 interface LeadershipFormData {
     name: string;
@@ -17,12 +18,20 @@ interface LeadershipFormData {
 }
 
 export default function LeadershipForm() {
-    const { control, handleSubmit, formState: { errors }, reset } = useForm<LeadershipFormData>({
+    const { control, handleSubmit, formState: { errors }, reset, setValue } = useForm<LeadershipFormData>({
         defaultValues: {
+            name: '',
+            position: '',
+            cabinet: '',
+            period: '',
+            description: '',
+            imageUrl: '',
             socialMedia: []
         }
     });
     const [submitError, setSubmitError] = React.useState<string | null>(null);
+    const [uploadedImage, setUploadedImage] = React.useState<string | null>(null);
+
     const onSubmit = async (data: LeadershipFormData) => {
         console.log('Form errors:', errors);
         try {
@@ -62,14 +71,26 @@ export default function LeadershipForm() {
                     socialMedia: [],
                 }
             );
+            setUploadedImage(null);
             console.log('Leadership entry created successfully');
-
 
         } catch (error) {
             console.error('Error creating leadership entry:', error);
             setSubmitError(error instanceof Error ? error.message : 'An unknown error occurred');
         }
     };
+
+    const { getRootProps, getInputProps } = useDropzone({
+        onDrop: (acceptedFiles) => {
+            console.log('Accepted files:', acceptedFiles);
+            const file = acceptedFiles[0];
+            if (file) {
+                const imageUrl = URL.createObjectURL(file);
+                setUploadedImage(imageUrl);
+                setValue('imageUrl', imageUrl);
+            }
+        }
+    });
 
     return (
         <Paper sx={{ p: 4, maxWidth: 600, margin: '0 auto' }}>
@@ -101,15 +122,22 @@ export default function LeadershipForm() {
                         control={control}
                         rules={{ required: 'Position is required' }}
                         render={({ field }) => (
-                            <TextField
-                                {...field}
-                                label="Position"
-                                error={!!errors.position}
-                                helperText={errors.position?.message}
-                                fullWidth
-                            />
+                            <FormControl fullWidth>
+                                <InputLabel>Position</InputLabel>
+                                <Select
+                                    {...field}
+                                    label="Position"
+                                    fullWidth
+                                    error={!!errors.position}
+                                >
+                                    {positions.map((position) => (
+                                        <MenuItem key={position} value={position}>{position}</MenuItem>
+                                    ))}
+                                </Select>
+                            </FormControl>
                         )}
                     />
+
 
                     <Controller
                         name="cabinet"
@@ -152,6 +180,15 @@ export default function LeadershipForm() {
                         )}
                     />
 
+                    <div {...getRootProps()} style={{
+                        border: '2px dashed #ccc',
+                        padding: '20px',
+                        textAlign: 'center'
+                    }}>
+                        <input {...getInputProps()} />
+                        <p>Drag & drop an image here, or click to select one</p>
+                    </div>
+
                     <Controller
                         name="imageUrl"
                         control={control}
@@ -163,10 +200,11 @@ export default function LeadershipForm() {
                                 error={!!errors.imageUrl}
                                 helperText={errors.imageUrl?.message}
                                 fullWidth
+                                disabled={!!uploadedImage}
+                                placeholder={uploadedImage || ''}
                             />
                         )}
                     />
-
 
                     <Controller
                         name="socialMedia"
@@ -224,8 +262,6 @@ export default function LeadershipForm() {
                             </div>
                         )}
                     />
-
-
 
                     <Button
                         type="submit"

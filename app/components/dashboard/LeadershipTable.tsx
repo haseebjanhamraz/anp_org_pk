@@ -10,6 +10,7 @@ import VisibilityIcon from '@mui/icons-material/Visibility';
 import Link from 'next/link';
 import ConfirmDeleteAlert from './ConfirmDeleteAlert';
 import { useCabinet } from '@/app/hooks/useCabinet';
+import { toast } from '@/app/hooks/use-toast';
 
 
 // Define the interface for your leadership data
@@ -32,6 +33,7 @@ const LeadershipTable = () => {
     const [open, setOpen] = React.useState(false);
     const [selectedId, setSelectedId] = React.useState<string | null>(null);
 
+
     const handleDeleteClick = (id: string) => {
         setSelectedId(id);
         setOpen(true);
@@ -39,7 +41,6 @@ const LeadershipTable = () => {
 
     const handleConfirmDelete = async () => {
         if (!selectedId) return;
-
         try {
             const response = await fetch(`/api/leadership/${selectedId}`, {
                 method: 'DELETE',
@@ -56,8 +57,20 @@ const LeadershipTable = () => {
             // Update the table by filtering out the deleted row
             setRows(rows.filter(row => row._id !== selectedId));
             setOpen(false);
+
+            toast({
+                title: "Success",
+                description: "Leadership entry deleted successfully",
+                variant: "default",
+            });
+
         } catch (error) {
             console.error("Error deleting leadership:", error);
+            toast({
+                title: "Error",
+                description: "Failed to delete leadership entry",
+                variant: "destructive",
+            });
         }
     };
 
@@ -110,7 +123,7 @@ const LeadershipTable = () => {
                     <Link href={`/dashboard/leadership/${params.row._id}/view`}>
                         <VisibilityIcon />
                     </Link>
-                    <DeleteIcon onClick={() => handleDeleteClick(params.row._id)} />
+                    <DeleteIcon style={{ cursor: 'pointer' }} onClick={() => handleDeleteClick(params.row._id)} />
                 </>
         }
     ];

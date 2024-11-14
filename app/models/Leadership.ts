@@ -30,6 +30,10 @@ const leadershipSchema = new Schema({
         ref: 'Cabinet',
         required: true
     },
+    cabinetDescription: {
+        type: String,
+        default: '',
+    },
     period: {
         type: String,
         required: true,

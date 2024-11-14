@@ -31,7 +31,7 @@ export default function ConfirmDeleteAlert({
             </DialogTitle>
             <DialogContent>
                 <DialogContentText id="alert-dialog-description">
-                    Are you sure you want to delete this leadership entry? This action cannot be undone.
+                    Are you sure you want to delete this entry? This action cannot be undone.
                 </DialogContentText>
             </DialogContent>
             <DialogActions>

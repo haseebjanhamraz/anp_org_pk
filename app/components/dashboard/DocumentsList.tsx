@@ -6,14 +6,32 @@ import { IconButton } from "@mui/material"
 import { Delete, Edit, Visibility } from "@mui/icons-material"
 import Link from "next/link"
 import useDeleteDocument from "@/app/hooks/useDeleteDocument"
+import ConfirmDeleteAlert from "./ConfirmDeleteAlert"
 
-
-
+interface Document {
+    _id: string;
+    name: string;
+    category: string;
+    filepath: string;
+    publishYear: number;
+}
 
 export default function DocumentsList() {
-    const [documents, setDocuments] = useState([])
+    const [documents, setDocuments] = useState<Document[]>([])
     const [loading, setLoading] = useState(true)
     const { deleteDocument, loading: deleteLoading, error } = useDeleteDocument();
+    const [open, setOpen] = useState(false);
+    const [selectedDocument, setSelectedDocument] = useState<Document | null>(null);
+
+    const handleDelete = () => {
+        if (selectedDocument) {
+            deleteDocument(selectedDocument._id)
+                .then(() => {
+                    setDocuments(documents.filter(doc => doc._id !== selectedDocument._id))
+                    setOpen(false)
+                })
+        }
+    }
 
     useEffect(() => {
         fetch("/api/documents")
@@ -21,7 +39,6 @@ export default function DocumentsList() {
             .then(data => {
                 setDocuments(data)
                 setLoading(false)
-                console.log(data)
             })
             .catch(err => {
                 console.error(err)
@@ -29,10 +46,8 @@ export default function DocumentsList() {
             })
     }, [])
 
-    // Define columns for the DataGrid
     const columns: GridColDef[] = [
-        // Define columns for the DataGrid
-        { field: 'id', headerName: 'ID', width: 90 },
+        { field: '_id', headerName: 'ID', width: 90 },
         { field: 'name', headerName: 'Title', width: 200 },
         { field: 'category', headerName: 'Category', width: 300 },
         { field: 'filepath', headerName: 'File', width: 300 },
@@ -51,7 +66,8 @@ export default function DocumentsList() {
                     <IconButton
                         size="small"
                         onClick={() => {
-                            deleteDocument(params.row._id)
+                            setSelectedDocument(params.row)
+                            setOpen(true)
                         }}
                     >
                         <Delete />
@@ -66,23 +82,25 @@ export default function DocumentsList() {
         }
     ]
 
-
     return (
-        <div style={{ height: 400, width: '100%' }}>
-            <DataGrid
-                rows={documents}
-                columns={columns}
-                getRowId={(row) => row._id}
-                initialState={{
-                    pagination: {
-                        paginationModel: { page: 0, pageSize: 5 },
-                    },
-                }}
-                loading={loading}
-                pageSizeOptions={[5, 10]}
-                checkboxSelection
-                disableRowSelectionOnClick
-            />
-        </div>
+        <>
+            <ConfirmDeleteAlert open={open} setOpen={setOpen} onConfirm={handleDelete} />
+            <div style={{ height: 400, width: '100%' }}>
+                <DataGrid
+                    rows={documents}
+                    columns={columns}
+                    getRowId={(row) => row._id}
+                    initialState={{
+                        pagination: {
+                            paginationModel: { page: 0, pageSize: 5 },
+                        },
+                    }}
+                    loading={loading}
+                    pageSizeOptions={[5, 10]}
+                    checkboxSelection
+                    disableRowSelectionOnClick
+                />
+            </div>
+        </>
     )
 }

@@ -3,6 +3,7 @@ export interface LeadershipData {
     name: string;
     position: string;
     cabinet: string;
+    cabinetDescription: string;
     period: string;
     description: string;
     imageUrl: string;
