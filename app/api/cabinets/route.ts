@@ -5,12 +5,20 @@ import { verifyAuth } from "@/app/middleware/auth";
 
 
 export async function GET(request: Request) {
-    const cabinets: CabinetType[] = await Cabinet.find();
-    console.log(cabinets);
-    return NextResponse.json(
-        { cabinets },
-        { status: 200 }
-    );
+    try {
+        const cabinets: CabinetType[] = await Cabinet.find();
+
+        return NextResponse.json(
+            { cabinets },
+            { status: 200 }
+        );
+    } catch (error) {
+        console.error("Error fetching cabinets:", error);
+        return NextResponse.json(
+            { error: "Error fetching cabinets" },
+            { status: 500 }
+        );
+    }
 }
 
 // Delete All Cabinets

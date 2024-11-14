@@ -6,11 +6,12 @@ import { verifyAuth } from '@/app/middleware/auth';
 
 export async function GET(
     req: Request,
-    { params }: { params: { id: string } }
+    { params }: { params: Promise<{ id: string }> }
 ) {
+    const { id } = await params;
     try {
         await connectToDatabase();
-        const leadership = await Leadership.findById(params.id);
+        const leadership = await Leadership.findById(id);
         return NextResponse.json(leadership, { status: 200 });
     } catch (error) {
         console.error('Error fetching leadership:', error);
@@ -21,8 +22,9 @@ export async function GET(
 // Update leadership entry
 export async function PUT(
     req: Request,
-    { params }: { params: { id: string } }
+    { params }: { params: Promise<{ id: string }> }
 ) {
+    const { id } = await params;
     try {
         const authResult = await verifyAuth(req, ['admin', 'editor']);
         if ('error' in authResult) {
@@ -36,7 +38,7 @@ export async function PUT(
 
         await connectToDatabase();
         const leadership = await Leadership.findByIdAndUpdate(
-            params.id,
+            id,
             {
                 name,
                 position,
@@ -71,8 +73,9 @@ export async function PUT(
 // Delete leadership entry
 export async function DELETE(
     req: Request,
-    { params }: { params: { id: string } }
+    { params }: { params: Promise<{ id: string }> }
 ) {
+    const { id } = await params;
     try {
         const authResult = await verifyAuth(req, ['admin', 'editor']);
         if ('error' in authResult) {
@@ -83,7 +86,7 @@ export async function DELETE(
         }
 
         await connectToDatabase();
-        const leadership = await Leadership.findByIdAndDelete(params.id);
+        const leadership = await Leadership.findByIdAndDelete(id);
 
         if (!leadership) {
             return NextResponse.json(

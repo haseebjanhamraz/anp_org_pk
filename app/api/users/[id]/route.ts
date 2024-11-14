@@ -9,8 +9,9 @@ import { verifyAuth } from '@/app/middleware/auth';
 // Get Individual User
 export async function GET(
     req: Request,
-    { params }: { params: { id: string } }
+    { params }: { params: Promise<{ id: string }> }
 ) {
+    const { id } = await params;
     try {
         const authResult = await verifyAuth(req, ['admin', 'editor', 'subscriber']);
         if ('error' in authResult) {
@@ -21,10 +22,9 @@ export async function GET(
         }
 
         const { user: authenticatedUser } = authResult;
-        const userId = params.id;
 
         // Only allow users to view their own profile unless they're an admin
-        if (authenticatedUser.role !== 'admin' && authenticatedUser._id.toString() !== userId) {
+        if (authenticatedUser.role !== 'admin' && authenticatedUser._id.toString() !== id) {
             return NextResponse.json(
                 { error: 'Unauthorized - Cannot view other users\' profiles' },
                 { status: 403 }
@@ -33,7 +33,7 @@ export async function GET(
 
         await connectToDatabase();
 
-        const user = await User.findById(userId, {
+        const user = await User.findById(id, {
             password: 0 // Exclude password field
         });
 
@@ -67,8 +67,9 @@ export async function GET(
 // Update user profile
 export async function PUT(
     req: Request,
-    { params }: { params: { id: string } }
+    { params }: { params: Promise<{ id: string }> }
 ) {
+    const { id } = await params;
     try {
 
         const authResult = await verifyAuth(req, ['admin', 'editor', 'subscriber']);
@@ -80,10 +81,8 @@ export async function PUT(
         }
 
         const { user: authenticatedUser } = authResult;
-        const userId = params.id;
-
         // Only allow users to update their own profile unless they're an admin
-        if (authenticatedUser.role !== 'admin' && authenticatedUser._id.toString() !== userId) {
+        if (authenticatedUser.role !== 'admin' && authenticatedUser._id.toString() !== id) {
             return NextResponse.json(
                 { error: 'Unauthorized - Cannot modify other users\' profiles' },
                 { status: 403 }
@@ -93,7 +92,7 @@ export async function PUT(
         const { name, email, currentPassword, newPassword } = await req.json();
 
         await connectToDatabase();
-        const user = await User.findById(userId);
+        const user = await User.findById(id);
 
         if (!user) {
             return NextResponse.json(
@@ -154,8 +153,9 @@ export async function PUT(
 // Delete user account
 export async function DELETE(
     req: Request,
-    { params }: { params: { id: string } }
+    { params }: { params: Promise<{ id: string }> }
 ) {
+    const { id } = await params;
     try {
         const authResult = await verifyAuth(req, ['admin', 'editor', 'subscriber']);
         if ('error' in authResult) {
@@ -166,10 +166,9 @@ export async function DELETE(
         }
 
         const { user: authenticatedUser } = authResult;
-        const userId = params.id;
 
         // Only allow users to delete their own account unless they're an admin
-        if (authenticatedUser.role !== 'admin' && authenticatedUser._id.toString() !== userId) {
+        if (authenticatedUser.role !== 'admin' && authenticatedUser._id.toString() !== id) {
             return NextResponse.json(
                 { error: 'Unauthorized - Cannot delete other users\' accounts' },
                 { status: 403 }
@@ -177,7 +176,7 @@ export async function DELETE(
         }
 
         await connectToDatabase();
-        const user = await User.findByIdAndDelete(userId);
+        const user = await User.findByIdAndDelete(id);
 
         if (!user) {
             return NextResponse.json(

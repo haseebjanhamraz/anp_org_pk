@@ -3,7 +3,16 @@ import { connectToDatabase } from '@/app/lib/mongodb'
 import { Document } from '@/app/models/Downloads'
 
 
-export async function GET(req: Request, res: Response) {
+// export default async function Page({
+//   params,
+// }: {
+//   params: Promise<{ slug: string }>
+// }) {
+//   const slug = (await params).slug
+// }
+
+
+export async function GET(req: Request) {
     try {
         await connectToDatabase()
         const documents = await Document.find({})

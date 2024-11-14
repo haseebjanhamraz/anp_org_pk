@@ -1,20 +1,17 @@
-// Delete Cabinet
 import { Cabinet } from "@/app/models/Cabinet";
 import { NextResponse } from "next/server";
 import { verifyAuth } from "@/app/middleware/auth";
 
 export async function DELETE(
     request: Request,
-    { params }: { params: { id: string } }
+    { params }: { params: Promise<{ id: string }> }
 ) {
+    const { id } = await params;
     try {
         const { error, status } = await verifyAuth(request, ['admin']);
         if (error) {
             return NextResponse.json({ error }, { status });
         }
-
-        const { id } = params;
-
         const deletedCabinet = await Cabinet.findByIdAndDelete(id);
 
         if (!deletedCabinet) {
@@ -39,19 +36,18 @@ export async function DELETE(
 }
 
 
-// Update Cabinet
 
 export async function PUT(
     request: Request,
-    { params }: { params: { id: string } }
+    { params }: { params: Promise<{ id: string }> }
 ) {
+    const { id } = await params;
     try {
         const { error, status } = await verifyAuth(request, ['admin']);
         if (error) {
             return NextResponse.json({ error }, { status });
         }
 
-        const { id } = params;
         const body = await request.json();
         const { cabinetType } = body;
 
@@ -89,19 +85,18 @@ export async function PUT(
     }
 }
 
-// Get Cabinet
+
+
 export async function GET(
     request: Request,
-    { params }: { params: { id: string } },
-    type: { type: string }
+    { params }: { params: Promise<{ id: string }> }
 ) {
+    const { id } = await params;
     try {
         const { error, status } = await verifyAuth(request, ['admin']);
         if (error) {
             return NextResponse.json({ error }, { status });
         }
-
-        const { id } = params;
         const cabinet = await Cabinet.findById(id);
 
         if (!cabinet) {

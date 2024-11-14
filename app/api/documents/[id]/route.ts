@@ -2,13 +2,15 @@ import { NextResponse } from 'next/server'
 import { connectToDatabase } from '@/app/lib/mongodb'
 import { Document } from '@/app/models/Downloads'
 
+
 export async function GET(
     req: Request,
-    { params }: { params: { id: string } }
+    { params }: { params: Promise<{ id: string }> }
 ) {
+    const { id } = await params;
     try {
         await connectToDatabase()
-        const document = await Document.findById(params.id)
+        const document = await Document.findById(id)
 
         if (!document) {
             return NextResponse.json(
@@ -29,11 +31,12 @@ export async function GET(
 
 export async function DELETE(
     req: Request,
-    { params }: { params: { id: string } }
+    { params }: { params: Promise<{ id: string }> }
 ) {
+    const { id } = await params;
     try {
         await connectToDatabase()
-        await Document.findByIdAndDelete(params.id)
+        await Document.findByIdAndDelete(id)
         return NextResponse.json({ message: 'Document deleted' }, { status: 200 })
     } catch (error) {
         console.error('Error deleting document:', error)
