@@ -1,8 +1,8 @@
 "use client"
 
 import { useParams } from "next/navigation";
-import useDocument from "@/app/hooks/useDocument";
-import AnimatedLoader from "@/app/components/Animated-Loader";
+import useDocument from '../../../../hooks/useDocument';
+import AnimatedLoader from '../../../../components/Animated-Loader';
 
 
 const ViewDocument = () => {

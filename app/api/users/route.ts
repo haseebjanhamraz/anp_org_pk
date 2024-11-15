@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
-import { verifyAuth } from '@/app/middleware/auth';
-import { connectToDatabase } from '@/app/lib/mongodb';
-import User from '@/app/models/User';
+import { verifyAuth } from '../../middleware/auth';
+import { connectToDatabase } from '../../lib/mongodb';
+import User from '../../models/User';
 
 export async function GET(req: Request) {
     try {

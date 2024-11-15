@@ -1,6 +1,6 @@
 'use client'
 import { useState, useEffect } from 'react';
-import { LeadershipData } from '@/app/types/leadership';
+import { LeadershipData } from '../types/leadership';
 
 const useGetLeadership = (): { leaders: LeadershipData[]; loading: boolean } => {
     const [loading, setLoading] = useState(true);

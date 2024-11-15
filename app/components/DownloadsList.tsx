@@ -55,44 +55,50 @@ export default function DownloadsList({ documents }: DownloadsListProps) {
 
     return (
         <div>
-            <Box sx={{ width: '100%', zIndex: -1 }}>
-                <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-                    <Tabs value={value} onChange={handleChange} aria-label="document categories">
-                        {categories.map((category, index) => (
-                            <Tab className='text-red-500 dark:text-white' key={category} label={category} {...a11yProps(index)} />
-                        ))}
-                    </Tabs>
+            {documents.length > 0 ? (
+                <Box sx={{ width: '100%', zIndex: -1 }}>
+                    <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+                        <Tabs value={value} onChange={handleChange} aria-label="document categories">
+                            {categories.map((category, index) => (
+                                <Tab className='text-red-500 dark:text-white' key={category} label={category} {...a11yProps(index)} />
+                            ))}
+                        </Tabs>
+                    </Box>
+                    {categories.map((category, index) => (
+                        <CustomTabPanel key={category} value={value} index={index}>
+                            <List className='dark:text-white'>
+                                {documents
+                                    .filter(doc => doc.category === category)
+                                    .map(doc => (
+                                        <div className='flex mb-4' key={doc._id}>
+                                            <ListItem>
+                                                <ListItemAvatar>
+                                                    <Avatar className=' dark:bg-red-800'>
+                                                        <FileIcon className='text-red-500 dark:text-white' />
+                                                    </Avatar>
+                                                </ListItemAvatar>
+                                                <ListItemText
+                                                    className='text-red-500 dark:text-white'
+                                                    primary={doc.name}
+                                                    secondary={`Published in ${doc.publishYear}`}
+                                                />
+                                            </ListItem>
+                                            <Link href={`${doc.filepath}`}>
+                                                <Button variant="contained" color="error">
+                                                    Download
+                                                </Button>
+                                            </Link>
+                                        </div>
+                                    ))}
+                            </List>
+                        </CustomTabPanel>
+                    ))}
                 </Box>
-                {categories.map((category, index) => (
-                    <CustomTabPanel key={category} value={value} index={index}>
-                        <List className='dark:text-white'>
-                            {documents
-                                .filter(doc => doc.category === category)
-                                .map(doc => (
-                                    <div className='flex mb-4' key={doc._id}>
-                                        <ListItem>
-                                            <ListItemAvatar>
-                                                <Avatar className=' dark:bg-red-800'>
-                                                    <FileIcon className='text-red-500 dark:text-white' />
-                                                </Avatar>
-                                            </ListItemAvatar>
-                                            <ListItemText
-                                                className='text-red-500 dark:text-white'
-                                                primary={doc.name}
-                                                secondary={`Published in ${doc.publishYear}`}
-                                            />
-                                        </ListItem>
-                                        <Link href={`${doc.filepath}`}>
-                                            <Button variant="contained" color="error">
-                                                Download
-                                            </Button>
-                                        </Link>
-                                    </div>
-                                ))}
-                        </List>
-                    </CustomTabPanel>
-                ))}
-            </Box>
+            ) : (
+                <div className='flex justify-center items-center'>
+                    <h1 className='text-lg text-red-500'>No documents found!!!</h1>
+                </div>
+            )}
         </div>
     );
 }

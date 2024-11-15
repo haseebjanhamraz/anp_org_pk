@@ -1,8 +1,8 @@
 import { NextResponse } from 'next/server';
 import jwt from 'jsonwebtoken';
-import { connectToDatabase } from '@/app/lib/mongodb';
-import Leadership from '@/app/models/Leadership';
-import { verifyAuth } from '@/app/middleware/auth';
+import { connectToDatabase } from '../../../lib/mongodb';
+import Leadership from '../../../models/Leadership';
+import { verifyAuth } from '../../../middleware/auth';
 
 if (!process.env.JWT_SECRET) {
     throw new Error('Please add your JWT_SECRET to .env.local');

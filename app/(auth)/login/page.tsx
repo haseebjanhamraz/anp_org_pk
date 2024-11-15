@@ -1,5 +1,5 @@
 "use client"
-import SignInForm from "@/app/components/auth/SignInForm"
+import SignInForm from '../../components/auth/SignInForm'
 export default function Login() {
     return (
         <div className="flex flex-col items-center justify-center h-screen">

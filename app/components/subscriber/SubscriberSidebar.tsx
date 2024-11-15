@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { subscriberDashboardMenu } from "@/app/lib/Data";
+import { subscriberDashboardMenu } from '../../lib/Data';
 import Link from "next/link";
 
 export default function Sidebar() {

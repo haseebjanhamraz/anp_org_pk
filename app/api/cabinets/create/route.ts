@@ -1,7 +1,7 @@
-import { Cabinet } from "@/app/models/Cabinet";
-import { NextResponse } from "next/server";
-import { CabinetType } from "@/app/types/Cabinets";
-import { verifyAuth } from "@/app/middleware/auth";
+import { Cabinet } from '../../../models/Cabinet';
+import { NextResponse } from 'next/server';
+import { CabinetType } from '../../../types/Cabinets';
+import { verifyAuth } from '../../../middleware/auth';
 
 export async function POST(request: Request) {
     try {

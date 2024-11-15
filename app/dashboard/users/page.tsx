@@ -1,5 +1,5 @@
 import React from 'react';
-import UsersList from '@/app/components/dashboard/UsersList';
+import UsersList from '../../components/dashboard/UsersList';
 import AddIcon from '@mui/icons-material/Add';
 import Link from 'next/link';
 export default function Users() {

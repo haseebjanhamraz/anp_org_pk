@@ -5,11 +5,11 @@ import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 import ListItemAvatar from '@mui/material/ListItemAvatar';
 import Avatar from '@mui/material/Avatar';
-import useGetLeadership from '@/app/hooks/useGetLeadership';
+import useGetLeadership from '../hooks/useGetLeadership';
 import Image from 'next/image';
 import LeadersListSkeleton from './skeletons/LeadersListSkeleton';
 import Divider from '@mui/material/Divider';
-import { useCabinet } from '@/app/hooks/useCabinet';
+import { useCabinet } from '../hooks/useCabinet';
 
 export default function LeaderCard() {
     const { leaders, loading } = useGetLeadership();

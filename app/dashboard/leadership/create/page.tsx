@@ -3,7 +3,7 @@
 import Link from "next/link"
 import { Button } from "@mui/material"
 import { Add } from "@mui/icons-material"
-import LeadershipForm from "@/app/components/dashboard/LeadershipForm"
+import LeadershipForm from '../../../components/dashboard/LeadershipForm'
 
 export default function Leadership() {
 

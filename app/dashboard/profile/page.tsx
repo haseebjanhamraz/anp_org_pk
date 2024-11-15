@@ -2,7 +2,7 @@
 
 import { Button } from "@mui/material"
 import { useState } from "react"
-import useUser from "@/app/hooks/useUser"
+import useUser from '../../hooks/useUser';
 
 export default function Profile() {
     const [isEditing, setIsEditing] = useState(false)

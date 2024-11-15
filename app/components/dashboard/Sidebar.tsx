@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { dashboardMenu } from "@/app/lib/Data";
+import { dashboardMenu } from '../../lib/Data';
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 

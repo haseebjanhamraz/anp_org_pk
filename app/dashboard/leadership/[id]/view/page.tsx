@@ -8,7 +8,7 @@ import Grid from '@mui/material/Grid';
 import Avatar from '@mui/material/Avatar';
 import Link from '@mui/material/Link';
 import Box from '@mui/material/Box';
-import { LeadershipData } from '@/app/types/leadership';
+import { LeadershipData } from '../../../../types/leadership';
 import { Facebook, Twitter, Instagram, LinkedIn } from '@mui/icons-material';
 
 export default function ViewLeadership() {

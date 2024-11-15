@@ -4,8 +4,8 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
-import LeaderCard from '@/app/components/LeaderCard';
-import Downloads from '@/app/components/Downloads';
+import LeaderCard from '../../components/LeaderCard';
+import Downloads from '../../components/Downloads';
 export default function MediaCard() {
 
     return (

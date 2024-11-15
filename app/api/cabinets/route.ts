@@ -1,7 +1,7 @@
 
 import { CabinetType } from '../../types/Cabinets';
 import { Cabinet } from '../../models/Cabinet';
-import { NextResponse } from "next/server";
+import { NextResponse } from 'next/server';
 import { verifyAuth } from '../../middleware/auth';
 
 

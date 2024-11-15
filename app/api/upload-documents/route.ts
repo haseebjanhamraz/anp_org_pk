@@ -1,8 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { writeFile } from 'fs/promises';
 import { join } from 'path';
-import { connectToDatabase } from '@/app/lib/mongodb';
-import { Document } from '@/app/models/Downloads';
+import { connectToDatabase } from '../../lib/mongodb';
+import { Document } from '../../models/Downloads';
 
 
 export async function POST(request: NextRequest) {

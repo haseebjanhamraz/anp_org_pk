@@ -1,21 +1,21 @@
 'use client'
-import useGetDocuments from '@/app/hooks/useGetDocuments';
+import useGetDocuments from '../hooks/useGetDocuments';
 import DownloadsList from './DownloadsList';
 import DownloadsListSkeleton from './skeletons/DownloadsListSkeleton';
-import { Suspense } from 'react';
+import React from 'react';
 
 const Downloads = () => {
 
     const { documents, loading } = useGetDocuments();
     return (
         <div>
-            <Suspense fallback={<DownloadsListSkeleton />}>
+            <React.Suspense fallback={<DownloadsListSkeleton />}>
                 {loading ? (
                     <DownloadsListSkeleton />
                 ) : (
                     <DownloadsList documents={documents} />
                 )}
-            </Suspense>
+            </React.Suspense>
         </div>
     );
 };

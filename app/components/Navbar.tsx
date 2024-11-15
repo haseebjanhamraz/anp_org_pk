@@ -27,16 +27,18 @@ export const Navbar = () => {
     return (
         <div className="flex sticky z-50 top-0 flex-wrap gap-4 p-3 px-8 bg-gray-100 dark:bg-slate-800 items-center justify-between">
             <div className="flex items-center gap-4">
-                <Image
-                    src="/anp-logo.png"
-                    width={70}
-                    height={70}
-                    alt="ANP Logo"
-                />
-                <div className="text-center">
-                    <h4 className="text-2xl font-extrabold uppercase text-red-500">Awami National Party</h4>
-                    <span className="text-gray-400 dark:text-red-800 font-light">PEACE - DEMOCRACY - DEVELOPMENT</span>
-                </div>
+                <Link href="/" className="flex items-center gap-4">
+                    <Image
+                        src="/anp-logo.png"
+                        width={70}
+                        height={70}
+                        alt="ANP Logo"
+                    />
+                    <div className="text-center">
+                        <h4 className="text-2xl font-extrabold uppercase text-red-500">Awami National Party</h4>
+                        <span className="text-gray-400 dark:text-red-800 font-light">PEACE - DEMOCRACY - DEVELOPMENT</span>
+                    </div>
+                </Link>
             </div>
 
             {/* Conditional Rendering of Desktop and Mobile Menu */}

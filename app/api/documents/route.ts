@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server'
-import { connectToDatabase } from '@/app/lib/mongodb'
-import { Document } from '@/app/models/Downloads'
+import { connectToDatabase } from '../../lib/mongodb'
+import { Document } from '../../models/Downloads'
 
 
 // export default async function Page({

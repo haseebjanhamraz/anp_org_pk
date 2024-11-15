@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { verifyAuth } from '@/app/middleware/auth';
+import { verifyAuth } from '../../../middleware/auth';
 
 export async function GET(req: Request) {
     try {

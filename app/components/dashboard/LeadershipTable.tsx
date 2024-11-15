@@ -1,6 +1,6 @@
 "use client"
 
-
+import Loader from '../Loader';
 import * as React from 'react';
 import { DataGrid, GridColDef } from '@mui/x-data-grid';
 import Paper from '@mui/material/Paper';
@@ -11,7 +11,6 @@ import Link from 'next/link';
 import ConfirmDeleteAlert from './ConfirmDeleteAlert';
 import { useCabinet } from '../../hooks/useCabinet';
 import { toast } from '../../hooks/use-toast';
-
 
 // Define the interface for your leadership data
 interface LeadershipData {
@@ -125,6 +124,7 @@ const LeadershipTable = () => {
     React.useEffect(() => {
         const fetchLeadershipData = async () => {
             try {
+                setLoading(true);
                 const response = await fetch('/api/leadership/');
                 if (!response.ok) {
                     throw new Error('Failed to fetch data');
@@ -147,6 +147,7 @@ const LeadershipTable = () => {
 
     return (
         <>
+            {loading && <Loader />}
             <ConfirmDeleteAlert
                 open={open}
                 setOpen={setOpen}
