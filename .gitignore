@@ -19,7 +19,7 @@
 
 # production
 /build
-/public/downloads
+/public/downloads/*
 
 # misc
 .DS_Store

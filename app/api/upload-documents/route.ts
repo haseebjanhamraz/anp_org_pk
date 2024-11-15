@@ -3,6 +3,7 @@ import { writeFile } from 'fs/promises';
 import { join } from 'path';
 import { connectToDatabase } from '../../lib/mongodb';
 import { Document } from '../../models/Downloads';
+import fs from 'fs';
 
 
 export async function POST(request: NextRequest) {
@@ -39,7 +40,12 @@ export async function POST(request: NextRequest) {
 
         // Create file path
         const filename = `${category}-${publishYear}-${language}.pdf`;
-        const filepath = join(process.cwd(), 'public/downloads', filename);
+        // if downloads folder does not exist, create it
+        const downloadsPath = join(process.cwd(), 'public/downloads');
+        if (!fs.existsSync(downloadsPath)) {
+            fs.mkdirSync(downloadsPath, { recursive: true });
+        }
+        const filepath = join(downloadsPath, filename);
 
         // Write file to disk
         await writeFile(filepath, buffer);

@@ -3,14 +3,6 @@ import { connectToDatabase } from '../../lib/mongodb'
 import { Document } from '../../models/Downloads'
 
 
-// export default async function Page({
-//   params,
-// }: {
-//   params: Promise<{ slug: string }>
-// }) {
-//   const slug = (await params).slug
-// }
-
 
 export async function GET(req: Request) {
     try {
