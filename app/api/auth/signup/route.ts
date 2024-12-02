@@ -39,11 +39,9 @@ export async function POST(req: Request) {
             role: role || 'subscriber' // Explicitly set role
         };
 
-        console.log('Creating user with data:', userData); // Debug log
 
         const user = await User.create(userData);
 
-        console.log('Created user:', user); // Debug log
 
         // Generate JWT token
         const token = jwt.sign(

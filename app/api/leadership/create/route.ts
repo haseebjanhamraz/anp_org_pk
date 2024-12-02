@@ -1,5 +1,4 @@
 import { NextResponse } from 'next/server';
-import jwt from 'jsonwebtoken';
 import { connectToDatabase } from '../../../lib/mongodb';
 import Leadership from '../../../models/Leadership';
 import { verifyAuth } from '../../../middleware/auth';
@@ -18,7 +17,6 @@ interface CreateLeadershipRequest {
     position: string;
     cabinet?: string;
     period: string;
-    description?: string;
     imageUrl?: string;
     socialMedia?: SocialMediaLink[];
 }
@@ -37,7 +35,6 @@ export async function POST(req: Request) {
 
         // Get request body
         const body = await req.json();
-        console.log('Received request body:', body);
 
         // Validate required fields
         if (!body.name || !body.position || !body.period) {
@@ -56,7 +53,6 @@ export async function POST(req: Request) {
             position: body.position,
             cabinet: body.cabinet || '',
             period: body.period,
-            description: body.description || '',
             imageUrl: body.imageUrl || '',
             socialMedia: Array.isArray(body.socialMedia) ? body.socialMedia.map((social: SocialMediaLink) => ({
                 platform: social.platform,
@@ -64,14 +60,13 @@ export async function POST(req: Request) {
             })) : []
         };
 
-        console.log('Creating leadership with data:', leadershipData);
+
 
         // Create leadership record
         const leadership = await Leadership.create(leadershipData);
 
         // Fetch the created record to verify
         const createdLeadership = await Leadership.findById(leadership._id);
-        console.log('Created leadership record:', createdLeadership);
 
         return NextResponse.json(
             {

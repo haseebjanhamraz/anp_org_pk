@@ -12,7 +12,6 @@ interface LeadershipFormData {
     position: string;
     cabinet: string;
     period: string;
-    description: string;
     imageUrl: string;
     socialMedia: { platform: string; url: string }[];
 }
@@ -24,7 +23,6 @@ export default function LeadershipForm() {
             position: '',
             cabinet: '',
             period: '',
-            description: '',
             imageUrl: '',
             socialMedia: []
         }
@@ -33,9 +31,9 @@ export default function LeadershipForm() {
     const [uploadedImage, setUploadedImage] = React.useState<string | null>(null);
 
     const onSubmit = async (data: LeadershipFormData) => {
-        console.log('Form errors:', errors);
+
         try {
-            console.log('Submitting data:', data);
+
             setSubmitError(null);
             const response = await fetch('/api/leadership/create', {
                 method: 'POST',
@@ -47,7 +45,6 @@ export default function LeadershipForm() {
                 body: JSON.stringify(data),
             });
 
-            console.log('Response status:', response.status);
 
             if (!response.ok) {
                 if (response.status === 401) {
@@ -66,13 +63,11 @@ export default function LeadershipForm() {
                     position: '',
                     cabinet: '',
                     period: '',
-                    description: '',
                     imageUrl: '',
                     socialMedia: [],
                 }
             );
             setUploadedImage(null);
-            console.log('Leadership entry created successfully');
 
         } catch (error) {
             console.error('Error creating leadership entry:', error);
@@ -82,7 +77,6 @@ export default function LeadershipForm() {
 
     const { getRootProps, getInputProps } = useDropzone({
         onDrop: (acceptedFiles) => {
-            console.log('Accepted files:', acceptedFiles);
             const file = acceptedFiles[0];
             if (file) {
                 const imageUrl = URL.createObjectURL(file);
@@ -163,22 +157,6 @@ export default function LeadershipForm() {
                         )}
                     />
 
-                    <Controller
-                        name="description"
-                        control={control}
-                        rules={{ required: 'Description is required' }}
-                        render={({ field }) => (
-                            <TextField
-                                {...field}
-                                label="Description"
-                                multiline
-                                rows={4}
-                                error={!!errors.description}
-                                helperText={errors.description?.message}
-                                fullWidth
-                            />
-                        )}
-                    />
 
                     <div {...getRootProps()} style={{
                         border: '2px dashed #ccc',

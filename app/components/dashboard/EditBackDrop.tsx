@@ -7,7 +7,6 @@ export default function SimpleBackdrop() {
     const router = useRouter();
     const [open, setOpen] = React.useState(true);
     const handleClose = (e: React.MouseEvent) => {
-        console.log('clicked');
 
         // prevent backdrop from closing when clicking on the form
         e.stopPropagation();

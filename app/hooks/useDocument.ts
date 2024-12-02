@@ -27,7 +27,6 @@ const useDocument = (id: string) => {
         setLoading(true);
         const fetchDocument = async () => {
             try {
-                console.log(id)
                 const response = await fetch(`/api/documents/${id}`);
                 const data = await response.json();
                 setDocument(data);

@@ -10,7 +10,7 @@ export async function POST(request: NextRequest) {
     try {
         // Connect to MongoDB
         await connectToDatabase();
-        console.log('Connected to MongoDB');
+
 
         const formData = await request.formData();
 
@@ -21,12 +21,7 @@ export async function POST(request: NextRequest) {
         const lastModifiedYear = formData.get('lastModifiedYear') as string;
         const category = formData.get('category') as string; // e.g. manifesto, constitution
         const language = formData.get('language') as string; // e.g. en, ur
-        console.log('File:', file);
-        console.log('Name:', name);
-        console.log('Publish Year:', publishYear);
-        console.log('Last Modified Year:', lastModifiedYear);
-        console.log('Category:', category);
-        console.log('Language:', language);
+
         if (!file || !name || !publishYear || !category || !language) {
             return NextResponse.json(
                 { error: 'Missing required fields' },

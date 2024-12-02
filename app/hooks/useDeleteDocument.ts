@@ -22,14 +22,12 @@ const useDeleteDocument = (): UseDeleteDocumentReturn => {
                 },
                 method: 'DELETE',
             });
-            console.log(response)
 
             if (!response.ok) {
                 const data = await response.json();
                 throw new Error(data.error || 'Failed to delete document');
             }
             setLoading(false);
-            console.log('Document deleted successfully');
         } catch (err) {
             setError(err instanceof Error ? err.message : 'An error occurred');
             setLoading(false);

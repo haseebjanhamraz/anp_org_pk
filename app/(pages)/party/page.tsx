@@ -6,6 +6,7 @@ import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import LeaderCard from '../../components/LeaderCard';
 import Downloads from '../../components/Downloads';
+import LeadershipCarousel from '../../components/LeadershipCorousel';
 export default function MediaCard() {
 
     return (
@@ -56,7 +57,8 @@ export default function MediaCard() {
                 </div>
                 <div>
                     <h1 className='text-2xl font-bold dark:text-white '>ANP Leadership</h1>
-                    <LeaderCard />
+                    {/* <LeaderCard /> */}
+                    <LeadershipCarousel />
                 </div>
             </div>
         </>

@@ -34,7 +34,6 @@ export async function POST(req: Request) {
 
         // Find user
         const user = await User.findOne({ email });
-        console.log('Found user:', user); // Debug log
 
         if (!user) {
             return NextResponse.json(

@@ -8,10 +8,10 @@ import Avatar from '@mui/material/Avatar';
 import useGetLeadership from '../hooks/useGetLeadership';
 import Image from 'next/image';
 import LeadersListSkeleton from './skeletons/LeadersListSkeleton';
-import Divider from '@mui/material/Divider';
 import { useCabinet } from '../hooks/useCabinet';
+import { CabinetBadge } from './CabinetBadge';
 
-export default function LeaderCard() {
+export default function LeaderCard(props) {
     const { leaders, loading } = useGetLeadership();
     const { cabinets } = useCabinet();
 
@@ -27,17 +27,13 @@ export default function LeaderCard() {
     }, [leaders]);
     return (
         <>
-            {leaders.length === 0 ? <p className='text-gray-500 dark:text-white'>No Entries Found</p> : (
-                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 m-10 rounded-md dark:bg-slate-800 bg-slate-100 dark:text-white p-2">
+            {!loading && leaders.length === 0 ? <p className='text-gray-500 dark:text-white'>No Entries Found</p> : (
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4 m-10 rounded-md dark:bg-slate-800 bg-slate-100 dark:text-white p-2">
                     {loading && <LeadersListSkeleton />}
                     {!loading && (
                         <>
                             {cabinets.map((cabinet, index) => (
-                                <div key={cabinet._id} className="justify-center">
-                                    <h1 className="text-2xl font-medium text-red-500 dark:text-red-500 text-center mt-2">
-                                        {cabinet.cabinetType.charAt(0).toUpperCase() + cabinet.cabinetType.slice(1)}
-                                    </h1>
-                                    <Divider className='my-2 bg-red-800' />
+                                <div key={cabinet._id} className="justify-center bg-gray-50 dark:bg-slate-900 rounded-lg p-3">
                                     <List sx={{ width: '100%', maxWidth: 360 }}>
                                         {leadersByCabinet[cabinet._id]?.map((leader, leaderIndex) => (
                                             <ListItem key={leader._id || leaderIndex}>
@@ -52,9 +48,10 @@ export default function LeaderCard() {
                                                     </Avatar>
                                                 </ListItemAvatar>
                                                 <ListItemText
-                                                    primary={leader.name}
+                                                    primary={props.leader}
                                                     secondary={`${leader.position} ${leader.period}`}
                                                 />
+                                                <CabinetBadge cabinetType={cabinet.cabinetType.toUpperCase()} />
                                             </ListItem>
                                         ))}
                                     </List>

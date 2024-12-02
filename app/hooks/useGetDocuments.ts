@@ -26,7 +26,6 @@ const useGetDocuments = (): { documents: Document[]; loading: boolean } => {
                     throw new Error('Failed to fetch documents');
                 }
                 const data = await response.json();
-                console.log(data)
                 setDocuments(data);
             } catch (error) {
                 console.error('Error fetching documents:', error);
