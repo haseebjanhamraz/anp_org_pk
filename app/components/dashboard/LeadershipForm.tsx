@@ -5,10 +5,11 @@ import { useForm, Controller } from 'react-hook-form';
 import { TextField, Button, Paper, Stack, Alert, MenuItem, Select, FormControl, InputLabel } from '@mui/material';
 import { CabinetDropdown } from './CabinetDropdown';
 import { useDropzone } from 'react-dropzone'
-import { positions } from '../../lib/Data';
+import { positions, provinces } from '../../lib/Data';
 
 interface LeadershipFormData {
     name: string;
+    province: string;
     position: string;
     cabinet: string;
     period: string;
@@ -20,6 +21,7 @@ export default function LeadershipForm() {
     const { control, handleSubmit, formState: { errors }, reset, setValue } = useForm<LeadershipFormData>({
         defaultValues: {
             name: '',
+            province: '',
             position: '',
             cabinet: '',
             period: '',
@@ -60,6 +62,7 @@ export default function LeadershipForm() {
             reset(
                 {
                     name: '',
+                    province: '',
                     position: '',
                     cabinet: '',
                     period: '',
@@ -108,6 +111,27 @@ export default function LeadershipForm() {
                                 helperText={errors.name?.message}
                                 fullWidth
                             />
+                        )}
+                    />
+
+                    <Controller
+                        name="province"
+                        control={control}
+                        rules={{ required: 'Province is required' }}
+                        render={({ field }) => (
+                            <FormControl fullWidth>
+                                <InputLabel>Province</InputLabel>
+                                <Select
+                                    {...field}
+                                    label="Province"
+                                    fullWidth
+                                    error={!!errors.position}
+                                >
+                                    {provinces.map((province, index) => (
+                                        <MenuItem key={index} value={province}>{province}</MenuItem>
+                                    ))}
+                                </Select>
+                            </FormControl>
                         )}
                     />
 

@@ -14,6 +14,7 @@ interface SocialMediaLink {
 
 interface CreateLeadershipRequest {
     name: string;
+    province: string;
     position: string;
     cabinet?: string;
     period: string;
@@ -37,7 +38,7 @@ export async function POST(req: Request) {
         const body = await req.json();
 
         // Validate required fields
-        if (!body.name || !body.position || !body.period) {
+        if (!body.name || !body.province || !body.position || !body.cabinet || !body.period) {
             return NextResponse.json(
                 { error: 'Missing required fields' },
                 { status: 400 }
@@ -50,6 +51,7 @@ export async function POST(req: Request) {
         // Prepare the document with explicit social media handling
         const leadershipData = {
             name: body.name,
+            province: body.province,
             position: body.position,
             cabinet: body.cabinet || '',
             period: body.period,

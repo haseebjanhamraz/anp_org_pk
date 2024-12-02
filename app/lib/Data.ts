@@ -134,3 +134,54 @@ export const positions = [
     'Joint Secretary (Female)',
     'Salar',
 ]
+
+export const provinces = [
+    'Khyber Pakhtunkhwa',
+    'Sindh',
+    'Punjab',
+    'Balochistan',
+    'Gilgit-Baltistan',
+    'Azad Jammu and Kashmir',
+]
+
+export const kpDistricts = [
+    'Abbottabad',
+    'Battagram',
+    'Buner',
+    'Charsadda',
+    'Chitral',
+    'Dera Ismail Khan',
+    'Hangu',
+    'Haripur',
+    'Karak',
+    'Kohat',
+    'Kohistan',
+    'Lakki Marwat',
+    'Lower Dir',
+    'Malakand',
+    'Mansehra',
+    'Mardan',
+    'Nowshera',
+    'Peshawar',
+    'Shangla',
+    'Swabi',
+    'Tor Ghar',
+    'Upper Dir',
+    'Bajaur',
+    'Dir',
+    'Khyber',
+    'Kurram',
+    'North Waziristan',
+    'South Waziristan',
+]
+
+export const cabinets = [
+    'Khyber Pakhtunkhwa',
+    'Federal',
+    'Sindh',
+    'Punjab',
+    'Balochistan',
+    'Gilgit-Baltistan',
+    'Azad Jammu and Kashmir',
+    'Siraiki Belt'
+]

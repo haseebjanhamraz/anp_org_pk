@@ -21,6 +21,10 @@ const leadershipSchema = new Schema({
         type: String,
         required: true,
     },
+    province: {
+        type: String,
+        required: true,
+    },
     position: {
         type: String,
         required: true,

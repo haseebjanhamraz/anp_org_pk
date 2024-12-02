@@ -6,13 +6,12 @@ const CabinetSchema = new mongoose.Schema<CabinetType>({
     cabinetType: {
         type: String,
         required: true,
-        unique: true // This ensures uniqueness
+        unique: true
     },
-
-
-}, {
-    timestamps: true
-});
+},
+    {
+        timestamps: true
+    });
 
 // Get or create model
 export const Cabinet = mongoose.models.Cabinet || mongoose.model('Cabinet', CabinetSchema);

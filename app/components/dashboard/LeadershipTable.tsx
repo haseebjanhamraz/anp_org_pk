@@ -18,7 +18,7 @@ interface LeadershipData {
     name: string;
     position: string;
     period: string;
-    description: string;
+
     imageUrl: string;
     socialMedia: any[];
     createdAt: string;
@@ -94,12 +94,6 @@ const LeadershipTable = () => {
             headerName: 'Period',
             width: 160,
             valueGetter: (value, row) => `${row.period || ''}`,
-        },
-        {
-            field: 'description',
-            headerName: 'Description',
-            width: 160,
-            valueGetter: (value, row) => `${row.description || ''}`,
         },
         {
             field: 'actions',

@@ -28,8 +28,8 @@ export default function LeadershipCarousel() {
                         </CarouselItem>
                     ))}
                 </CarouselContent>
-                <CarouselPrevious />
-                <CarouselNext />
+                <CarouselPrevious className="dark:text-white" />
+                <CarouselNext className="dark:text-white" />
             </Carousel>
         </div>
 
