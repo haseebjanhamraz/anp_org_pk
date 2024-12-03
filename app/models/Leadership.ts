@@ -30,8 +30,7 @@ const leadershipSchema = new Schema({
         required: true,
     },
     cabinet: {
-        type: Schema.Types.ObjectId,
-        ref: 'Cabinet',
+        type: String,
         required: true
     },
     period: {

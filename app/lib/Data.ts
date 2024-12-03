@@ -183,5 +183,12 @@ export const cabinets = [
     'Balochistan',
     'Gilgit-Baltistan',
     'Azad Jammu and Kashmir',
-    'Siraiki Belt'
+    'Siraiki Belt',
+    'District'
+]
+
+export const cabinetPeriod = [
+    '2024-2029',
+    '2019-2024',
+    '2014-2019',
 ]

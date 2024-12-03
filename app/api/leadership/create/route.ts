@@ -12,16 +12,6 @@ interface SocialMediaLink {
     url: string;
 }
 
-interface CreateLeadershipRequest {
-    name: string;
-    province: string;
-    position: string;
-    cabinet?: string;
-    period: string;
-    imageUrl?: string;
-    socialMedia?: SocialMediaLink[];
-}
-
 
 export async function POST(req: Request) {
     try {
