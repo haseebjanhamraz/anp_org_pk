@@ -3,13 +3,17 @@
 import * as React from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import { useParams, useRouter } from 'next/navigation';
-import Image from 'next/image';
+import { TextField, Button, Paper, Stack, Alert, MenuItem, Select, FormControl, InputLabel } from '@mui/material';
+import { useDropzone } from 'react-dropzone';
+import { positions, provinces, cabinets, cabinetPeriod, kpDistricts } from '../../lib/Data';
 
 interface LeadershipFormData {
     name: string;
+    province: string;
+    district?: string;
     position: string;
+    cabinet: string;
     period: string;
-    description: string;
     imageUrl: string;
     socialMedia: { platform: string; url: string }[];
 }
@@ -19,19 +23,22 @@ export default function LeadershipEditForm() {
     const router = useRouter();
     const [isSubmitting, setIsSubmitting] = React.useState(false);
     const [isDirty, setIsDirty] = React.useState(false);
-    const { control, handleSubmit, formState: { errors, isDirty: formIsDirty }, reset, setValue } = useForm<LeadershipFormData>({
+    const { control, handleSubmit, formState: { errors, isDirty: formIsDirty }, reset, setValue, watch } = useForm<LeadershipFormData>({
         defaultValues: {
             name: '',
+            province: '',
             position: '',
+            cabinet: '',
+            district: '',
             period: '',
-            description: '',
             imageUrl: '',
             socialMedia: []
-        },
-        mode: 'onBlur',
+        }
     });
     const [submitError, setSubmitError] = React.useState<string | null>(null);
+    const [uploadedImage, setUploadedImage] = React.useState<string | null>(null);
     const [loading, setLoading] = React.useState(true);
+    const selectedCabinet = watch('cabinet');
 
     React.useEffect(() => {
         const handleBeforeUnload = (e: BeforeUnloadEvent) => {
@@ -56,7 +63,16 @@ export default function LeadershipEditForm() {
                     throw new Error('Failed to fetch data');
                 }
                 const data = await response.json();
-                reset(data);
+                
+                const transformedData = {
+                    ...data,
+                    cabinet: cabinets.includes(data.cabinet) ? data.cabinet : '',
+                    period: cabinetPeriod.includes(data.period) 
+                        ? data.period 
+                        : cabinetPeriod.find(p => p.startsWith(data.period)) || '',
+                };
+                
+                reset(transformedData);
                 setIsDirty(false);
             } catch (error) {
                 console.error('Error fetching leadership data:', error);
@@ -73,37 +89,26 @@ export default function LeadershipEditForm() {
         }
     }, [params.id, reset, router]);
 
-    const validateImageUrl = async (url: string): Promise<boolean> => {
-        try {
-            const response = await fetch(url, { method: 'HEAD' });
-            const contentType = response.headers.get('content-type');
-            return contentType?.startsWith('image/') ?? false;
-        } catch {
-            return false;
-        }
-    };
-
     const onSubmit = async (data: LeadershipFormData) => {
         try {
             setIsSubmitting(true);
             setSubmitError(null);
 
-            const imageUrlValid = await validateImageUrl(data.imageUrl);
-            if (!imageUrlValid) {
-                setSubmitError('Please provide a valid image URL');
-                return;
-            }
+            const submissionData = {
+                ...data,
+                cabinet: data.cabinet === 'District' && data.district 
+                    ? `District - ${data.district}` 
+                    : data.cabinet
+            };
 
             const response = await fetch(`/api/leadership/${params.id}`, {
-
                 method: 'PUT',
                 headers: {
-
                     'Content-Type': 'application/json',
                     'Authorization': `Bearer ${sessionStorage.getItem('token')}`
                 },
                 credentials: 'include',
-                body: JSON.stringify(data),
+                body: JSON.stringify(submissionData),
             });
 
             if (!response.ok) {
@@ -129,6 +134,18 @@ export default function LeadershipEditForm() {
         }
     };
 
+    const { getRootProps, getInputProps } = useDropzone({
+        onDrop: (acceptedFiles) => {
+            const file = acceptedFiles[0];
+            if (file) {
+                const imageUrl = URL.createObjectURL(file);
+                setUploadedImage(imageUrl);
+                setValue('imageUrl', imageUrl);
+                setIsDirty(true);
+            }
+        }
+    });
+
     if (loading) {
         return (
             <div className="min-h-screen flex items-center justify-center">
@@ -138,39 +155,56 @@ export default function LeadershipEditForm() {
     }
 
     return (
-        <div className="bg-white p-8 rounded-lg shadow-lg max-w-2xl w-full mx-auto">
-            <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-                {submitError && (
-                    <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded">
-                        {submitError}
-                    </div>
-                )}
+        <Paper sx={{ p: 4, maxWidth: 600, margin: '0 auto' }}>
+            <form onSubmit={handleSubmit(onSubmit)}>
+                <Stack spacing={3}>
+                    {submitError && (
+                        <Alert severity="error" sx={{ mb: 2 }}>
+                            {submitError}
+                        </Alert>
+                    )}
 
-                <div className="space-y-4">
                     <Controller
                         name="name"
                         control={control}
-                        rules={{
-                            required: 'Name is required',
-                            minLength: { value: 2, message: 'Name must be at least 2 characters' },
-                            maxLength: { value: 100, message: 'Name must be less than 100 characters' }
-                        }}
+                        rules={{ required: 'Name is required' }}
                         render={({ field }) => (
-                            <div>
-                                <label className="block text-sm font-medium text-gray-700">Name</label>
-                                <input
+                            <TextField
+                                {...field}
+                                label="Full Name"
+                                error={!!errors.name}
+                                helperText={errors.name?.message}
+                                fullWidth
+                                onChange={(e) => {
+                                    field.onChange(e);
+                                    setIsDirty(true);
+                                }}
+                            />
+                        )}
+                    />
+
+                    <Controller
+                        name="province"
+                        control={control}
+                        rules={{ required: 'Province is required' }}
+                        render={({ field }) => (
+                            <FormControl fullWidth>
+                                <InputLabel>Province</InputLabel>
+                                <Select
                                     {...field}
-                                    type="text"
-                                    className="mt-1 text-black block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                                    label="Province"
+                                    fullWidth
+                                    error={!!errors.province}
                                     onChange={(e) => {
                                         field.onChange(e);
                                         setIsDirty(true);
                                     }}
-                                />
-                                {errors.name && (
-                                    <p className="mt-1 text-sm text-red-600">{errors.name.message}</p>
-                                )}
-                            </div>
+                                >
+                                    {provinces.map((province, index) => (
+                                        <MenuItem key={index} value={province}>{province}</MenuItem>
+                                    ))}
+                                </Select>
+                            </FormControl>
                         )}
                     />
 
@@ -179,198 +213,224 @@ export default function LeadershipEditForm() {
                         control={control}
                         rules={{ required: 'Position is required' }}
                         render={({ field }) => (
-                            <div>
-                                <label className="block text-sm font-medium text-gray-700">Position</label>
-                                <input
+                            <FormControl fullWidth>
+                                <InputLabel>Position</InputLabel>
+                                <Select
                                     {...field}
-                                    type="text"
-                                    placeholder="Enter Party Position"
-                                    className="mt-1 text-black block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                                    label="Position"
+                                    fullWidth
+                                    error={!!errors.position}
                                     onChange={(e) => {
                                         field.onChange(e);
                                         setIsDirty(true);
                                     }}
-                                />
-                                {errors.position && (
-                                    <p className="mt-1 text-sm text-red-600">{errors.position.message}</p>
-                                )}
-                            </div>
+                                >
+                                    {positions.map((position) => (
+                                        <MenuItem key={position} value={position}>{position}</MenuItem>
+                                    ))}
+                                </Select>
+                            </FormControl>
                         )}
                     />
+
+                    <Controller
+                        name="cabinet"
+                        control={control}
+                        rules={{ required: 'Cabinet is required' }}
+                        render={({ field }) => (
+                            <FormControl fullWidth>
+                                <InputLabel>Cabinet</InputLabel>
+                                <Select
+                                    {...field}
+                                    label="Cabinet"
+                                    fullWidth
+                                    error={!!errors.cabinet}
+                                    onChange={(e) => {
+                                        field.onChange(e);
+                                        setIsDirty(true);
+                                    }}
+                                >
+                                    {cabinets.map((cabinet) => (
+                                        <MenuItem key={cabinet} value={cabinet}>{cabinet}</MenuItem>
+                                    ))}
+                                </Select>
+                            </FormControl>
+                        )}
+                    />
+
+                    {selectedCabinet === 'District' && (
+                        <Controller
+                            name="district"
+                            control={control}
+                            defaultValue=""
+                            rules={{ required: 'District is required' }}
+                            render={({ field }) => (
+                                <FormControl fullWidth>
+                                    <InputLabel>District</InputLabel>
+                                    <Select
+                                        {...field}
+                                        value={field.value || ''}
+                                        label="District"
+                                        fullWidth
+                                        error={!!errors.district}
+                                        onChange={(e) => {
+                                            field.onChange(e);
+                                            setIsDirty(true);
+                                        }}
+                                    >
+                                        {kpDistricts.map((district) => (
+                                            <MenuItem key={district} value={district}>{district}</MenuItem>
+                                        ))}
+                                    </Select>
+                                </FormControl>
+                            )}
+                        />
+                    )}
 
                     <Controller
                         name="period"
                         control={control}
                         rules={{ required: 'Period is required' }}
                         render={({ field }) => (
-                            <div>
-                                <label className="block text-sm font-medium text-gray-700">Period</label>
-                                <input
+                            <FormControl fullWidth>
+                                <InputLabel>Period</InputLabel>
+                                <Select
                                     {...field}
-                                    type="text"
-                                    className="mt-1 text-black block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                                    label="Period"
+                                    fullWidth
+                                    error={!!errors.period}
                                     onChange={(e) => {
                                         field.onChange(e);
                                         setIsDirty(true);
                                     }}
-                                />
-                                {errors.period && (
-                                    <p className="mt-1 text-sm text-red-600">{errors.period.message}</p>
-                                )}
-                            </div>
+                                >
+                                    {cabinetPeriod.map((period) => (
+                                        <MenuItem key={period} value={period}>{period}</MenuItem>
+                                    ))}
+                                </Select>
+                            </FormControl>
                         )}
                     />
 
-                    <Controller
-                        name="description"
-                        control={control}
-                        rules={{ required: 'Description is required' }}
-                        render={({ field }) => (
-                            <div>
-                                <label className="block text-sm font-medium text-gray-700">Description</label>
-                                <textarea
-                                    {...field}
-                                    rows={4}
-                                    className="mt-1 text-black block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
-                                    onChange={(e) => {
-                                        field.onChange(e);
-                                        setIsDirty(true);
-                                    }}
-                                />
-                                {errors.description && (
-                                    <p className="mt-1 text-sm text-red-600">{errors.description.message}</p>
-                                )}
-                            </div>
-                        )}
-                    />
+                    <div {...getRootProps()} style={{
+                        border: '2px dashed #ccc',
+                        padding: '20px',
+                        textAlign: 'center'
+                    }}>
+                        <input {...getInputProps()} />
+                        <p>Drag & drop an image here, or click to select one</p>
+                    </div>
+
+                    <h4 className='font-bold text-2xl text-gray-400 text-center'>OR</h4>
 
                     <Controller
                         name="imageUrl"
                         control={control}
-                        rules={{
-                            required: 'Image URL is required',
-                            pattern: {
-                                value: /^https?:\/\/.+\.(jpg|jpeg|png|webp|gif)$/i,
-                                message: 'Please enter a valid image URL'
-                            }
-                        }}
+                        rules={{ required: 'Image URL is required' }}
                         render={({ field }) => (
-                            <div>
-                                <label className="block text-sm font-medium text-gray-700">Image URL</label>
-                                <input
-                                    {...field}
-                                    type="text"
-                                    className="mt-1 text-black block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
-                                    onChange={(e) => {
-                                        field.onChange(e);
-                                        setIsDirty(true);
-                                    }}
-                                />
-                                {field.value && (
-                                    <Image
-                                        src={field.value}
-                                        alt="Preview"
-                                        className="mt-2 h-32 w-32 object-cover rounded-lg"
-                                        onError={(e) => {
-                                            (e.target as HTMLImageElement).style.display = 'none';
-                                        }}
-                                        height={100}
-                                        width={100}
-                                    />
-                                )}
-                                {errors.imageUrl && (
-                                    <p className="mt-1 text-sm text-red-600">{errors.imageUrl.message}</p>
-                                )}
-                            </div>
+                            <TextField
+                                {...field}
+                                label="Image URL"
+                                error={!!errors.imageUrl}
+                                helperText={errors.imageUrl?.message}
+                                fullWidth
+                                disabled={!!uploadedImage}
+                                placeholder={uploadedImage || ''}
+                                onChange={(e) => {
+                                    field.onChange(e);
+                                    setIsDirty(true);
+                                }}
+                            />
                         )}
                     />
+
                     <Controller
                         name="socialMedia"
                         control={control}
                         render={({ field }) => (
-                            <div>
-                                <label className="block text-sm font-medium text-gray-700">Social Media Links</label>
-                                {field.value.map((social: { platform: string; url: string }, index: number) => (
-                                    <div key={index} className="flex gap-4 mt-2">
-                                        <input
-                                            type="text"
-                                            placeholder="Platform (e.g. Twitter, LinkedIn)"
-                                            value={social.platform}
-                                            onChange={(e) => {
-                                                const newSocialMedia = [...field.value];
-                                                newSocialMedia[index].platform = e.target.value;
-                                                field.onChange(newSocialMedia);
+                            <div className="space-y-4">
+                                <div className="flex gap-4">
+                                    <select
+                                        className="px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                        onChange={(e) => {
+                                            const value = e.target.value;
+                                            if (value) {
+                                                const currentValue = field.value || [];
+                                                field.onChange([
+                                                    ...currentValue,
+                                                    { platform: value, url: '' }
+                                                ]);
                                                 setIsDirty(true);
-                                            }}
-                                            className="mt-1 text-black block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
-                                        />
-                                        <input
-                                            type="url"
-                                            placeholder="URL"
+                                            }
+                                        }}
+                                    >
+                                        <option value="">Select Platform</option>
+                                        <option value="facebook">Facebook</option>
+                                        <option value="twitter">Twitter</option>
+                                        <option value="instagram">Instagram</option>
+                                    </select>
+                                </div>
+
+                                {field.value && field.value.map((social, index) => (
+                                    <div key={index} className="flex gap-4 items-center">
+                                        <div className="font-medium w-24">{social.platform.charAt(0).toUpperCase() + social.platform.slice(1)}</div>
+                                        <TextField
                                             value={social.url}
                                             onChange={(e) => {
-                                                const newSocialMedia = [...field.value];
-                                                newSocialMedia[index].url = e.target.value;
-                                                field.onChange(newSocialMedia);
+                                                const currentValue = [...field.value];
+                                                currentValue[index].url = e.target.value;
+                                                field.onChange(currentValue);
                                                 setIsDirty(true);
                                             }}
-                                            className="mt-1 text-black block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                                            placeholder="Enter Username"
+                                            fullWidth
+                                            size="small"
                                         />
-                                        <button
-                                            type="button"
+                                        <Button
                                             onClick={() => {
-                                                const newSocialMedia = field.value.filter((_, i) => i !== index);
-                                                field.onChange(newSocialMedia);
+                                                const currentValue = [...field.value];
+                                                field.onChange(currentValue.filter((_: any, i: number) => i !== index));
                                                 setIsDirty(true);
                                             }}
-                                            className="mt-1 px-3 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
+                                            color="error"
+                                            variant="outlined"
+                                            size="small"
                                         >
                                             Remove
-                                        </button>
+                                        </Button>
                                     </div>
                                 ))}
-                                <button
-                                    type="button"
-                                    onClick={() => {
-                                        field.onChange([...field.value, { platform: '', url: '' }]);
-                                        setIsDirty(true);
-                                    }}
-                                    className="mt-2 px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
-                                >
-                                    Add Social Media Link
-                                </button>
                             </div>
                         )}
                     />
 
-                </div>
-
-                <div className="flex justify-end space-x-4">
-                    <button
-                        type="button"
-                        onClick={() => {
-                            if (isDirty || formIsDirty) {
-                                if (window.confirm('You have unsaved changes. Are you sure you want to leave?')) {
+                    <div className="flex justify-end space-x-4">
+                        <Button
+                            onClick={() => {
+                                if (isDirty || formIsDirty) {
+                                    if (window.confirm('You have unsaved changes. Are you sure you want to leave?')) {
+                                        router.push('/dashboard/leadership');
+                                    }
+                                } else {
                                     router.push('/dashboard/leadership');
                                 }
-                            } else {
-                                router.push('/dashboard/leadership');
-                            }
-                        }}
-                        className="px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
-                        disabled={isSubmitting}
-                    >
-                        Cancel
-                    </button>
-                    <button
-                        type="submit"
-                        className="px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed"
-                        disabled={isSubmitting}
-                    >
-                        {isSubmitting ? 'Updating...' : 'Update'}
-                    </button>
-                </div>
+                            }}
+                            variant="outlined"
+                            disabled={isSubmitting}
+                        >
+                            Cancel
+                        </Button>
+                        <Button
+                            type="submit"
+                            variant="contained"
+                            color="primary"
+                            disabled={isSubmitting}
+                        >
+                            {isSubmitting ? 'Updating...' : 'Update'}
+                        </Button>
+                    </div>
+                </Stack>
             </form>
-        </div>
+        </Paper>
     );
 }

@@ -9,8 +9,9 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import Link from 'next/link';
 import ConfirmDeleteAlert from './ConfirmDeleteAlert';
-import { useCabinet } from '../../hooks/useCabinet';
+import { cabinets } from '../../lib/Data';
 import { toast } from '../../hooks/use-toast';
+import useLeadership from '../../hooks/useLeadership';
 
 // Define the interface for your leadership data
 interface LeadershipData {
@@ -18,7 +19,7 @@ interface LeadershipData {
     name: string;
     position: string;
     period: string;
-
+    cabinet: string;
     imageUrl: string;
     socialMedia: any[];
     createdAt: string;
@@ -28,7 +29,6 @@ interface LeadershipData {
 
 
 const LeadershipTable = () => {
-    const { cabinets } = useCabinet();
     const [open, setOpen] = React.useState(false);
     const [selectedId, setSelectedId] = React.useState<string | null>(null);
 
@@ -64,6 +64,7 @@ const LeadershipTable = () => {
         }
     };
 
+
     const columns: GridColDef[] = [
         { field: 'id', headerName: 'ID', width: 70 },
         {
@@ -79,8 +80,8 @@ const LeadershipTable = () => {
             width: 160,
             // Get the cabinet name from the cabinet id
             valueGetter: (value, row) => {
-                const cabinet = cabinets.find((cabinet) => cabinet._id === row.cabinet);
-                return cabinet?.cabinetType ? cabinet.cabinetType.charAt(0).toUpperCase() + cabinet.cabinetType.slice(1) : '';
+                const cabinet = cabinets.find((cabinet) => cabinet === row.cabinet);
+                return cabinet ? cabinet.charAt(0).toUpperCase() + cabinet.slice(1) : '';
             },
         },
         {

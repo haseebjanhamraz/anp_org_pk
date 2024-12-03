@@ -8,12 +8,11 @@ import Avatar from '@mui/material/Avatar';
 import useGetLeadership from '../hooks/useGetLeadership';
 import Image from 'next/image';
 import LeadersListSkeleton from './skeletons/LeadersListSkeleton';
-import { useCabinet } from '../hooks/useCabinet';
 import { CabinetBadge } from './CabinetBadge';
+import { cabinets } from '../lib/Data';
 
 export default function LeaderCard(props) {
     const { leaders, loading } = useGetLeadership();
-    const { cabinets } = useCabinet();
 
     // Group leaders by cabinet
     const leadersByCabinet = React.useMemo(() => {
@@ -33,9 +32,9 @@ export default function LeaderCard(props) {
                     {!loading && (
                         <>
                             {cabinets.map((cabinet, index) => (
-                                <div key={cabinet._id} className="justify-center bg-gray-50 dark:bg-slate-900 rounded-lg p-3">
+                                <div key={index} className="justify-center bg-gray-50 dark:bg-slate-900 rounded-lg p-3">
                                     <List sx={{ width: '100%', maxWidth: 360 }}>
-                                        {leadersByCabinet[cabinet._id]?.map((leader, leaderIndex) => (
+                                        {leadersByCabinet[cabinet]?.map((leader, leaderIndex) => (
                                             <ListItem key={leader._id || leaderIndex}>
                                                 <ListItemAvatar>
                                                     <Avatar>
@@ -51,7 +50,7 @@ export default function LeaderCard(props) {
                                                     primary={props.leader}
                                                     secondary={`${leader.position} ${leader.period}`}
                                                 />
-                                                <CabinetBadge cabinetType={cabinet.cabinetType.toUpperCase()} />
+                                                <CabinetBadge cabinetType={cabinet.toUpperCase()} />
                                             </ListItem>
                                         ))}
                                     </List>
