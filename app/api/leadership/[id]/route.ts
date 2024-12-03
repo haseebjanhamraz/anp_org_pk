@@ -3,7 +3,6 @@ import { connectToDatabase } from '../../../lib/mongodb';
 import Leadership from '../../../models/Leadership';
 import { verifyAuth } from '../../../middleware/auth';
 
-
 export async function GET(
     req: Request,
     { params }: { params: Promise<{ id: string }> }
@@ -34,16 +33,19 @@ export async function PUT(
             );
         }
 
-        const { name, position, period, description, imageUrl, socialMedia } = await req.json();
+        const { name, email, phone, position, province, cabinet, period, imageUrl, socialMedia } = await req.json();
 
         await connectToDatabase();
         const leadership = await Leadership.findByIdAndUpdate(
             id,
             {
                 name,
+                email,
+                phone,
                 position,
+                province,
+                cabinet,
                 period,
-                description,
                 imageUrl,
                 socialMedia: Array.isArray(socialMedia) ? socialMedia.map(social => ({
                     platform: social.platform,

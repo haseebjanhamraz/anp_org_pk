@@ -22,11 +22,13 @@ export default function LeadershipDatabase() {
         />
       )
     },
-    { field: 'name', headerName: 'Name', width: 250 },
-    { field: 'position', headerName: 'Position', width: 250 },
+    { field: 'name', headerName: 'Name', width: 200 },
+    { field: 'email', headerName: 'Email', width: 200 },
+    { field: 'phone', headerName: 'Phone', width: 200 },
+    { field: 'position', headerName: 'Position', width: 200 },
     { field: 'cabinet', headerName: 'Cabinet', width: 200 },
-    { field: 'province', headerName: 'Province', width: 250 },
-    { field: 'period', headerName: 'Period', width: 130 },
+    { field: 'province', headerName: 'Province', width: 200 },
+    { field: 'period', headerName: 'Period', width: 100 },
   ];
 
   const rows = leaders.map((leader, index) => ({
@@ -51,6 +53,7 @@ export default function LeadershipDatabase() {
           pageSizeOptions={[5, 10, 15, 20]}
           loading={loading}
           sx={{
+            textAlign: 'center',
             border: 0,
             '& .MuiDataGrid-cell': {
               color: 'inherit',

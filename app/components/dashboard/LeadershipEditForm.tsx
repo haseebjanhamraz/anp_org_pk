@@ -146,6 +146,13 @@ export default function LeadershipEditForm() {
         }
     });
 
+    // Update the function signature to match expected type
+    const handleSelectClose = (event: React.SyntheticEvent<Element, Event>) => {
+        if (event.type === 'backdropClick') {
+            event.preventDefault();
+        }
+    };
+
     if (loading) {
         return (
             <div className="min-h-screen flex items-center justify-center">
@@ -245,6 +252,14 @@ export default function LeadershipEditForm() {
                                     label="Cabinet"
                                     fullWidth
                                     error={!!errors.cabinet}
+                                    onClose={handleSelectClose}
+                                    MenuProps={{
+                                        PaperProps: {
+                                            style: {
+                                                pointerEvents: 'auto'
+                                            }
+                                        }
+                                    }}
                                     onChange={(e) => {
                                         field.onChange(e);
                                         setIsDirty(true);
@@ -261,6 +276,7 @@ export default function LeadershipEditForm() {
                     {selectedCabinet === 'District' && (
                         <Controller
                             name="district"
+                            aria-modal="true"
                             control={control}
                             defaultValue=""
                             rules={{ required: 'District is required' }}

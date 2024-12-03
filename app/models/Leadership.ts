@@ -21,6 +21,12 @@ const leadershipSchema = new Schema({
         type: String,
         required: true,
     },
+    email: {
+        type: String,
+    },
+    phone: {
+        type: String,
+    },
     province: {
         type: String,
         required: true,

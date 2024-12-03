@@ -41,6 +41,8 @@ export async function POST(req: Request) {
         // Prepare the document with explicit social media handling
         const leadershipData = {
             name: body.name,
+            email: body.email || '',
+            phone: body.phone || '',
             province: body.province,
             position: body.position,
             cabinet: body.cabinet || '',

@@ -10,6 +10,8 @@ import { useState } from 'react';
 interface LeadershipFormData {
     name: string;
     province: string;
+    email: string;
+    phone: string;
     district?: string;
     position: string;
     cabinet: string;
@@ -24,6 +26,8 @@ export default function LeadershipForm() {
         defaultValues: {
             name: '',
             province: '',
+            email: '',
+            phone: '',
             position: '',
             cabinet: '',
             district: '',
@@ -70,6 +74,8 @@ export default function LeadershipForm() {
             reset({
                 name: '',
                 province: '',
+                email: '',
+                phone: '',
                 position: '',
                 cabinet: '',
                 district: '',
@@ -119,6 +125,22 @@ export default function LeadershipForm() {
                                     helperText={errors.name?.message}
                                     fullWidth
                                 />
+                            )}
+                        />
+
+                        <Controller
+                            name="email"
+                            control={control}
+                            render={({ field }) => (
+                                <TextField {...field} label="Email" error={!!errors.email} helperText={errors.email?.message} fullWidth />
+                            )}
+                        />
+
+                        <Controller
+                            name="phone"
+                            control={control}
+                            render={({ field }) => (
+                                <TextField {...field} label="Phone" error={!!errors.phone} helperText={errors.phone?.message} fullWidth />
                             )}
                         />
 
@@ -256,6 +278,8 @@ export default function LeadershipForm() {
                                 />
                             )}
                         />
+
+                        <h4 className='font-bold text-2xl text-slate-600 text-left'>Social Media</h4>
 
                         <Controller
                             name="socialMedia"
