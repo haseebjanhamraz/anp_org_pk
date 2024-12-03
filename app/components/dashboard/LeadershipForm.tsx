@@ -10,6 +10,7 @@ import { useState } from 'react';
 interface LeadershipFormData {
     name: string;
     province: string;
+    district?: string;
     position: string;
     cabinet: string;
     period: string;
@@ -19,12 +20,13 @@ interface LeadershipFormData {
 
 export default function LeadershipForm() {
 
-    const { control, handleSubmit, formState: { errors }, reset, setValue } = useForm<LeadershipFormData>({
+    const { control, handleSubmit, formState: { errors }, reset, setValue, watch } = useForm<LeadershipFormData>({
         defaultValues: {
             name: '',
             province: '',
             position: '',
             cabinet: '',
+            district: '',
             period: '',
             imageUrl: '',
             socialMedia: []
@@ -32,14 +34,16 @@ export default function LeadershipForm() {
     });
     const [submitError, setSubmitError] = React.useState<string | null>(null);
     const [uploadedImage, setUploadedImage] = React.useState<string | null>(null);
-    const [cabinet, setCabinet] = useState("")
-
-    const handleCabinet = () => {
-        setCabinet(cabinet)
-    }
+    const selectedCabinet = watch('cabinet');
 
     const onSubmit = async (data: LeadershipFormData) => {
         try {
+            const submissionData = {
+                ...data,
+                cabinet: data.cabinet === 'District' && data.district 
+                    ? `District - ${data.district}` 
+                    : data.cabinet
+            };
 
             setSubmitError(null);
             const response = await fetch('/api/leadership/create', {
@@ -49,9 +53,8 @@ export default function LeadershipForm() {
                     'Authorization': `Bearer ${sessionStorage.getItem('token')}`
                 },
                 credentials: 'include',
-                body: JSON.stringify(data),
+                body: JSON.stringify(submissionData),
             });
-
 
             if (!response.ok) {
                 if (response.status === 401) {
@@ -64,17 +67,16 @@ export default function LeadershipForm() {
                 );
             }
 
-            reset(
-                {
-                    name: '',
-                    province: '',
-                    position: '',
-                    cabinet: '',
-                    period: '',
-                    imageUrl: '',
-                    socialMedia: [],
-                }
-            );
+            reset({
+                name: '',
+                province: '',
+                position: '',
+                cabinet: '',
+                district: '',
+                period: '',
+                imageUrl: '',
+                socialMedia: [],
+            });
             setUploadedImage(null);
 
         } catch (error) {
@@ -182,26 +184,25 @@ export default function LeadershipForm() {
                             )}
                         />
 
-                        {/* Display this districts dropdown if selected cabinet === district and add their values as cabinet */}
-
-                        {cabinet === "District" && (
+                        {selectedCabinet === 'District' && (
                             <Controller
-                                name="cabinet"
+                                name="district"
                                 control={control}
+                                defaultValue=""
                                 rules={{ required: 'District is required' }}
                                 render={({ field }) => (
                                     <FormControl fullWidth>
                                         <InputLabel>District</InputLabel>
                                         <Select
                                             {...field}
+                                            value={field.value || ''}
                                             label="District"
                                             fullWidth
-                                            error={!!errors.cabinet}
+                                            error={!!errors.district}
                                         >
-                                            {kpDistricts.map((cabinet) => (
-                                                <MenuItem key={cabinet} value={cabinet}>{cabinet}</MenuItem>
+                                            {kpDistricts.map((district) => (
+                                                <MenuItem key={district} value={district}>{district}</MenuItem>
                                             ))}
-                                            onChange={handleCabinet()}
                                         </Select>
                                     </FormControl>
                                 )}
