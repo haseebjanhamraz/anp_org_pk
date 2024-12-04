@@ -15,10 +15,10 @@ export default function Hero() {
                         The Awami National Party (ANP) has its origins rooted in the socio-political struggles of Khan Abdul Ghaffar Khan, famously known as Bacha Khan. He was a prominent Pashtun leader who, during the British colonial period, advocated for nonviolent resistance and established the Khudai Khidmatgar (Servants of God) movement in 1929. This movement was revolutionary, promoting nonviolence, justice, and unity within the Pashtun community, while challenging the oppressive British colonial system.
                         The Khudai Khidmatgar movement quickly gained popularity, mobilizing thousands of Pashtuns in British India and aligning ideologically with the Indian National Congress.
                     </p>
-                    <a href="#" className="inline-flex items-center justify-center px-5 py-3 mr-3 text-base font-medium text-center text-white rounded-lg bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-primary-300 dark:focus:ring-primary-900">
+                    <Link href="/become-member" className="inline-flex items-center justify-center px-5 py-3 mr-3 text-base font-medium text-center text-white rounded-lg bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-primary-300 dark:focus:ring-primary-900">
                         Get Registered
                         <svg className="w-5 h-5 ml-2 -mr-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd"></path></svg>
-                    </a>
+                    </Link>
                     <Link href="/about" className="inline-flex items-center justify-center px-5 py-3 text-base font-medium text-center text-gray-900 border border-gray-300 rounded-lg hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 dark:text-white dark:border-gray-700 dark:hover:bg-gray-700 dark:focus:ring-gray-800">
                         Learn more
                     </Link>

@@ -58,7 +58,7 @@ export default function DownloadsList({ documents }: DownloadsListProps) {
             {documents.length > 0 ? (
                 <Box sx={{ width: '100%', zIndex: -1 }}>
                     <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-                        <Tabs value={value} onChange={handleChange} aria-label="document categories">
+                        <Tabs value={value} onChange={handleChange} className='dark:text-white text-white' aria-label="document categories">
                             {categories.map((category, index) => (
                                 <Tab className='text-red-500 dark:text-white' key={category} label={category} {...a11yProps(index)} />
                             ))}

@@ -12,6 +12,7 @@ import {
   CarouselItem,
   CarouselNext,
   CarouselPrevious,
+  CarouselApi,
 } from "./ui/carousel";
 import useGetLeadership from "../hooks/useGetLeadership";
 import Image from "next/image";
@@ -20,6 +21,19 @@ import { cabinets, positions } from "../lib/Data";
 
 export default function LeadershipCarousel() {
   const { leaders, loading } = useGetLeadership();
+  const [api, setApi] = React.useState<CarouselApi>();
+
+  React.useEffect(() => {
+    if (!api) return;
+
+    // Start autoplay
+    const interval = setInterval(() => {
+      api.scrollNext();
+    }, 2000); // Change slide every 3 seconds
+
+    // Cleanup interval on unmount
+    return () => clearInterval(interval);
+  }, [api]);
 
   if (loading) {
     return <Loader />;
@@ -50,8 +64,10 @@ export default function LeadershipCarousel() {
       <Carousel
         opts={{
           align: "start",
+          loop: true,
         }}
         className="w-full max-w-6xl mx-auto px-4"
+        setApi={setApi}
       >
         <CarouselContent className="">
           {centralLeaders.map((leader, index) => (
