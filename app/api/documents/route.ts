@@ -4,6 +4,7 @@ import { Document } from '../../models/Downloads'
 
 
 
+
 export async function GET(req: Request) {
     try {
         await connectToDatabase()

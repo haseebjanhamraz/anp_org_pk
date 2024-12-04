@@ -14,7 +14,7 @@ const ViewDocument = () => {
     }
 
     return (
-        <div className='flex flex-col h-screen'>
+        <div className='flex flex-col w-[500px] h-screen overflow-hidden'>
             <ul className='flex flex-col gap-2'>
                 <li className='dark:text-white'>Title
                     <span className='dark:text-white font-bold ml-2 rounded-md'>{document.name}</span>
@@ -26,7 +26,7 @@ const ViewDocument = () => {
                     <span className='dark:text-white font-bold ml-2 rounded-md'>{document.language}</span>
                 </li>
                 <li className='dark:text-white'>File
-                    <span className='dark:text-white font-bold ml-2 rounded-md'>{document.filepath}</span>
+                    <span className='dark:text-white ml-2 rounded-md'>{document.filepath.split('?')[0]}</span>
                 </li>
                 <li className='dark:text-white'>Created At
                     <span className='dark:text-white font-bold ml-2 rounded-md'>

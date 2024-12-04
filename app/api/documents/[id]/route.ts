@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server'
 import { connectToDatabase } from '../../../lib/mongodb'
 import { Document } from '../../../models/Downloads'
 import { getSignedUrl } from '../../../hooks/getBucket'
+import { deleteBucketItem } from '../../../hooks/deleteBucketItem'
 
 
 
@@ -50,7 +51,18 @@ export async function DELETE(
     const { id } = await params;
     try {
         await connectToDatabase()
+        // First fetch the document to get the filepath
+        const document = await Document.findById(id)
+        if (!document) {
+            return NextResponse.json(
+                { error: 'Document not found' },
+                { status: 404 }
+            )
+        }
+        // Delete from database
         await Document.findByIdAndDelete(id)
+        // Delete from bucket using the correct filepath
+        await deleteBucketItem(process.env.BUCKET_NAME || '', document.filepath)
         return NextResponse.json({ message: 'Document deleted' }, { status: 200 })
     } catch (error) {
         console.error('Error deleting document:', error)

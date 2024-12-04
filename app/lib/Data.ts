@@ -24,6 +24,10 @@ export const menu = [{
 {
     name: "Contact",
     link: "/contact"
+},
+{
+    name: "Leadership DB",
+    link: "/leadership-database"
 }
 ]
 
