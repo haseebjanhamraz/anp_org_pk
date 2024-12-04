@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server';
 import { connectToDatabase } from '../../../lib/mongodb';
 import Leadership from '../../../models/Leadership';
 import { verifyAuth } from '../../../middleware/auth';
+import { uploadImageToCloudinary } from '../../../utils/cloudinary';
 
 export async function GET(
     req: Request,
@@ -36,6 +37,20 @@ export async function PUT(
         const { name, email, phone, position, province, cabinet, period, imageUrl, socialMedia } = await req.json();
 
         await connectToDatabase();
+
+        // Handle image upload to Cloudinary
+        let updatedImageUrl = imageUrl;
+        if (imageUrl) {
+            const uploadResult = await uploadImageToCloudinary(imageUrl);
+            if (uploadResult.error) {
+                return NextResponse.json(
+                    { error: 'Image upload failed' },
+                    { status: 500 }
+                );
+            }
+            updatedImageUrl = uploadResult.url;
+        }
+
         const leadership = await Leadership.findByIdAndUpdate(
             id,
             {
@@ -46,7 +61,7 @@ export async function PUT(
                 province,
                 cabinet,
                 period,
-                imageUrl,
+                imageUrl: updatedImageUrl,
                 socialMedia: Array.isArray(socialMedia) ? socialMedia.map(social => ({
                     platform: social.platform,
                     url: social.url

@@ -135,13 +135,50 @@ export default function LeadershipEditForm() {
     };
 
     const { getRootProps, getInputProps } = useDropzone({
-        onDrop: (acceptedFiles) => {
+        accept: {
+            'image/*': ['.jpeg', '.jpg', '.png', '.webp']
+        },
+        maxSize: 5242880, // 5MB
+        onDrop: async (acceptedFiles) => {
             const file = acceptedFiles[0];
             if (file) {
-                const imageUrl = URL.createObjectURL(file);
-                setUploadedImage(imageUrl);
-                setValue('imageUrl', imageUrl);
-                setIsDirty(true);
+                try {
+                    const formData = new FormData();
+                    formData.append('file', file);
+
+                    console.log('Uploading file:', file.name, file.size);
+
+                    const response = await fetch('/api/upload', {
+                        method: 'POST',
+                        headers: {
+                            'Authorization': `Bearer ${sessionStorage.getItem('token')}`
+                        },
+                        body: formData,
+                    });
+
+                    if (!response.ok) {
+                        const errorData = await response.json().catch(() => null);
+                        console.error('Upload error response:', {
+                            status: response.status,
+                            statusText: response.statusText,
+                            errorData
+                        });
+                        throw new Error(
+                            errorData?.message || 
+                            `Upload failed with status ${response.status}: ${response.statusText}`
+                        );
+                    }
+
+                    const data = await response.json();
+                    setUploadedImage(data.url);
+                    setValue('imageUrl', data.url);
+                    setIsDirty(true);
+                } catch (error) {
+                    console.error('Error uploading image:', error);
+                    setSubmitError(error instanceof Error ? error.message : 'Failed to upload image');
+                    setUploadedImage(null);
+                    setValue('imageUrl', '');
+                }
             }
         }
     });

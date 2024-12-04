@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server';
 import { connectToDatabase } from '../../../lib/mongodb';
 import Leadership from '../../../models/Leadership';
 import { verifyAuth } from '../../../middleware/auth';
+import { uploadImageToCloudinary } from '../../../utils/cloudinary';
 
 if (!process.env.JWT_SECRET) {
     throw new Error('Please add your JWT_SECRET to .env.local');
@@ -11,7 +12,6 @@ interface SocialMediaLink {
     platform: string;
     url: string;
 }
-
 
 export async function POST(req: Request) {
     try {
@@ -38,6 +38,19 @@ export async function POST(req: Request) {
         // Connect to database
         await connectToDatabase();
 
+        // Upload image to Cloudinary if imageUrl is provided
+        let imageUrl = body.imageUrl || '';
+        if (body.imageUrl) {
+            const uploadResult = await uploadImageToCloudinary(body.imageUrl);
+            if (uploadResult.error) {
+                return NextResponse.json(
+                    { error: 'Image upload failed' },
+                    { status: 500 }
+                );
+            }
+            imageUrl = uploadResult.url;
+        }
+
         // Prepare the document with explicit social media handling
         const leadershipData = {
             name: body.name,
@@ -47,14 +60,12 @@ export async function POST(req: Request) {
             position: body.position,
             cabinet: body.cabinet || '',
             period: body.period,
-            imageUrl: body.imageUrl || '',
+            imageUrl: imageUrl,
             socialMedia: Array.isArray(body.socialMedia) ? body.socialMedia.map((social: SocialMediaLink) => ({
                 platform: social.platform,
                 url: social.url
             })) : []
         };
-
-
 
         // Create leadership record
         const leadership = await Leadership.create(leadershipData);
