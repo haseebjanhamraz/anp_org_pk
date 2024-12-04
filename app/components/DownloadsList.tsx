@@ -83,9 +83,9 @@ export default function DownloadsList({ documents }: DownloadsListProps) {
                                                     secondary={`Published in ${doc.publishYear}`}
                                                 />
                                             </ListItem>
-                                            <Link href={`${doc.filepath}`}>
+                                            <Link href={`/display-doc/${doc._id}`} target="_blank" rel="noopener noreferrer">
                                                 <Button variant="contained" color="error">
-                                                    Download
+                                                    View
                                                 </Button>
                                             </Link>
                                         </div>

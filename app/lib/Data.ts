@@ -180,6 +180,7 @@ export const kpDistricts = [
 ]
 
 export const cabinets = [
+    'Central',
     'Khyber Pakhtunkhwa',
     'Federal',
     'Sindh',
