@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
-import Loading from '../../(pages)/loading';
+import Loader from '../Loader';
 
 export default function BachaKhanQuotes() {
     const [quote, setQuote] = useState('');
@@ -55,7 +55,7 @@ export default function BachaKhanQuotes() {
                             </div>
                         </div>
                     </div>
-                ) : <Loading />}
+                ) : <Loader />}
             </div>
         </div>
     );
