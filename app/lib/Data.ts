@@ -192,3 +192,11 @@ export const cabinetPeriod = [
     '2019-2024',
     '2014-2019',
 ]
+
+export const docCategories = [
+    'Constitution',
+    'Reports',
+    'Publications',
+    'Manifesto',
+    'Other'
+]

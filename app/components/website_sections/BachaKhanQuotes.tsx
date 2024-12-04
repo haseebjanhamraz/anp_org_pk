@@ -21,8 +21,7 @@ export default function BachaKhanQuotes() {
 
     return (
         <div>
-            <div className="min-h-screen flex flex-col md:flex-row items-center justify-start dark:bg-slate-800 relative">
-                {/* Image container */}
+            <div className="min-h-screen flex flex-col rounded-md md:flex-row items-center shadow-2xl justify-start dark:bg-slate-800 relative">
                 <div className="w-full md:w-1/3 md:min-w-[400px]">
                     <Image
                         src="/baba.png"

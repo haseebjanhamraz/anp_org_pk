@@ -1,16 +1,12 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { writeFile } from 'fs/promises';
-import { join } from 'path';
 import { connectToDatabase } from '../../lib/mongodb';
 import { Document } from '../../models/Downloads';
-import fs from 'fs';
-
+import { uploadToGCS } from '../../hooks/uploadBucket';
 
 export async function POST(request: NextRequest) {
     try {
         // Connect to MongoDB
         await connectToDatabase();
-
 
         const formData = await request.formData();
 
@@ -33,17 +29,11 @@ export async function POST(request: NextRequest) {
         const bytes = await file.arrayBuffer();
         const buffer = Buffer.from(bytes);
 
-        // Create file path
+        // Create filename for GCS
         const filename = `${category}-${publishYear}-${language}.pdf`;
-        // if downloads folder does not exist, create it
-        const downloadsPath = join(process.cwd(), 'public/downloads');
-        if (!fs.existsSync(downloadsPath)) {
-            fs.mkdirSync(downloadsPath, { recursive: true });
-        }
-        const filepath = join(downloadsPath, filename);
 
-        // Write file to disk
-        await writeFile(filepath, buffer);
+        // Upload file to Google Cloud Storage
+        const fileUrl = await uploadToGCS(buffer, filename);
 
         // Save record to MongoDB
         const document = await Document.create({
@@ -52,7 +42,7 @@ export async function POST(request: NextRequest) {
             lastModifiedYear: lastModifiedYear ? parseInt(lastModifiedYear) : null,
             category,
             language,
-            filepath: `/downloads/${filename}`
+            filepath: fileUrl // Store the GCS URL instead of local path
         });
 
         return NextResponse.json(
@@ -68,4 +58,3 @@ export async function POST(request: NextRequest) {
         );
     }
 }
-

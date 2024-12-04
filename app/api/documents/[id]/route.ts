@@ -1,6 +1,9 @@
 import { NextResponse } from 'next/server'
 import { connectToDatabase } from '../../../lib/mongodb'
 import { Document } from '../../../models/Downloads'
+import { getSignedUrl } from '../../../hooks/getBucket'
+
+
 
 
 export async function GET(
@@ -19,7 +22,18 @@ export async function GET(
             )
         }
 
-        return NextResponse.json(document)
+        // Get public URL
+        const publicUrl = await getSignedUrl(
+            process.env.BUCKET_NAME || '', 
+            document.filepath
+        );
+        
+        // Return document with public URL
+        return NextResponse.json({
+            ...document.toObject(),
+            filepath: publicUrl
+        });
+
     } catch (error) {
         console.error('Error fetching document:', error)
         return NextResponse.json(
