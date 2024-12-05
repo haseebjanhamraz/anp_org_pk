@@ -12,12 +12,12 @@ export const generateMetadata = (path: string): Metadata => {
             keywords: ["Awami National Party", "ANP Pakistan", "Pashtun Politics", "Pakistani Politics", "Bacha Khan", "Peace Democracy Development"],
         },
         "/about": {
-            title: "About ANP - History & Ideology | Awami National Party",
+            title: "About Awami National Party - History & Ideology",
             description: "Learn about the Awami National Party's rich history, core ideologies, and commitment to secular democracy, nonviolence, and social justice in Pakistan.",
             keywords: ["ANP History", "Pashtun Nationalism", "Bacha Khan Philosophy", "Pakistani Political Parties", "Secular Democracy"],
         },
         "/party": {
-            title: "Party Structure & Leadership | Awami National Party",
+            title: "ANP Party Structure & Leadership | Awami National Party",
             description: "Explore ANP's party structure, current leadership, and organizational framework. Meet the dedicated leaders working towards peace and progress in Pakistan.",
             keywords: ["ANP Leadership", "Pakistani Political Leadership", "Aimal Wali Khan", "ANP Party Structure"],
         },
@@ -51,7 +51,7 @@ export const generateMetadata = (path: string): Metadata => {
             description: metadata.description ?? '',
             images: [
                 {
-                    url: "/anp-logo.png",
+                    url: "/anp-cover.jpg",
                     width: 1200,
                     height: 630,
                     alt: "Awami National Party",
@@ -62,7 +62,7 @@ export const generateMetadata = (path: string): Metadata => {
             card: "summary_large_image",
             title: metadata.title ?? '',
             description: metadata.description ?? '',
-            images: ["/anp-logo.png"],
+            images: ["/anp-cover.jpg"],
             creator: "@ANPMarkaz",
             site: "@ANPMarkaz",
         },
