@@ -66,8 +66,8 @@ export default function ViewLeadership() {
                             {leadership.period}
                         </span>
                     </Typography>
-                    <Typography paragraph className="dark:text-white rounded-md">
-                        {leadership.description}
+                    <Typography className="dark:text-white rounded-md">
+                        {leadership.email}
                     </Typography>
                     <Box sx={{ mt: 2 }}>
                         <Typography variant="h6" fontWeight="bold" className='dark:text-white p-2 rounded-md' gutterBottom>
