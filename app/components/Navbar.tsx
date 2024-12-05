@@ -61,19 +61,7 @@ export const Navbar = () => {
                 <MobileMenu />
                 : ""}
             {/* Social Media Links */}
-            {!isMobile ?
-                <div>
-                    <ul className="flex gap-2 text-3xl text-red-600">
-                        {socialMedia.map((item, index) => (
-                            <li className="flex" key={index}>
-                                <Link href={item.link} target="_blank">
-                                    {<item.icon />}
-                                </Link>
-                            </li>
-                        ))}
-                    </ul>
-                </div>
-                : ""}
+
 
             {/* Dark Mode Toggle */}
 

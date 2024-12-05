@@ -2,6 +2,9 @@ import { FaFacebookSquare } from "react-icons/fa";
 import { FaSquareXTwitter, FaSquareInstagram } from "react-icons/fa6";
 import { AiFillTikTok } from "react-icons/ai";
 import { IoLogoYoutube } from "react-icons/io5";
+import { FaFax, FaPhoneAlt } from "react-icons/fa";
+import { MdAlternateEmail } from "react-icons/md";
+
 
 
 
@@ -204,4 +207,41 @@ export const docCategories = [
     'Publications',
     'Manifesto',
     'Other'
+]
+
+export const importantLinks = [
+    {
+        name: "Copyright Policy",
+        link: "/copyright"
+    },
+    {
+        name: "Privacy Policy",
+        link: "/privacy"
+    },
+    {
+        name: "Terms of Service",
+        link: "/terms"
+    },
+    {
+        name: "Disclaimer",
+        link: "/disclaimer"
+    }
+]
+
+export const contactDetails = [
+    {
+        icon: FaPhoneAlt,
+        name: "+92912246852",
+        link: "tel:+92912246852"
+    },
+    {
+        icon: FaFax,
+        name: "+92912246851",
+        link: "fax:+92912246851"
+    },
+    {
+        icon: MdAlternateEmail,
+        name: "info@anp.org.pk",
+        link: "mailto:info@anp.org.pk"
+    }
 ]
