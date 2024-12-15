@@ -1,25 +1,65 @@
-import React from 'react';
+import styles from "./style.module.css";
+import GoogleMap from "../../components/GoogleMap";
+import { Divider } from "@mui/material";
+import Link from "next/link";
+import { contactDetails } from "../../lib/Data";
 
 const Contact = () => {
-    return (
-        <div className="h-screen p-6 sm:p-12 md:p-16 lg:p-20">
-            <div className="max-w-4xl mx-auto p-8 shadow-lg rounded-lg">
-                {/* Contact Heading */}
-                <h1 className="text-3xl font-bold text-center text-red-600 mb-8">Contact Us</h1>
-
-                {/* Contact Details Section */}
-                <div className="flex flex-col lg:flex-row justify-between items-center lg:items-start mb-10 space-y-8 lg:space-y-0 lg:space-x-8">
-                    {/* Contact Information */}
-                    <div className="w-full lg:w-1/2 dark:text-white">
-                        <h2 className="text-xl font-semibold mb-4">Our Contact Details</h2>
-                        <p className="text-gray-700 mb-2 dark:text-white"><strong>Phone:</strong> +92 (091) 2246851-2-3</p>
-                        <p className="text-gray-700 mb-2 dark:text-white"><strong>Email:</strong> info@anp.org.pk</p>
-                        <p className="text-gray-700 mb-4 dark:text-white"><strong>Address:</strong> Bacha Khan Markaz, Pajaggi Road, Peshawar, Pakhtunkhwa</p>
-                    </div>
-                </div>
-            </div>
+    const contact = contactDetails.map((item, index) => (
+        <li className="flex items-center gap-2 dark:text-white" key={index}>
+            <item.icon />
+            <Link href={item.link} target="_blank">{item.name}</Link>
+        </li>
+    ))
+  return (
+    <>
+      <div
+        className={`h-96 bg-cover flex flex-col justify-center items-center bg-center ${styles.parallax}  bg-no-repeat bg-[url('/markaz.png')] p-6 sm:p-12 md:p-16 lg:p-20`}
+      >
+        <div className="bg-black/50 h-full w-full absolute top-0 left-0" />
+        <div className="sticky top-40 left-0 ">
+          <h1 className="text-white text-4xl font-bold uppercase text-center hover:animate-bounce">
+            Contact Us
+          </h1>
+          <p className="text-gray-300 font-thin text-sm mt-10 text-center">
+            We value your feedback and inquiries. Whether you want to connect
+            with Awami National Party (ANP) for updates, share your concerns, or
+            collaborate with us, we're here to listen. Reach out to us through
+            the provided contact details or visit our offices to engage
+            directly. Your voice matters, and together, we can work towards a
+            prosperous and united future.
+          </p>
         </div>
-    );
+      </div>
+
+      <div className="flex gap-12 p-10 flex-col md:flex-row">
+        <div className="w-1/2 h-full animate-in fade-in duration-2000">
+          <h1 className="text-4xl p-4 uppercase text-center hover:animate-bounce dark:text-white">
+            Find Us On Map
+          </h1>
+          <Divider className="dark:bg-gray-500" />
+          <div className="flex items-start gap-2 m-4">
+            <h4 className="text-xl text-gray-500 dark:text-gray-300">
+              Secreteriate:
+            </h4>
+            <h5 className="text-xl dark:text-white font-bold">
+              Bacha Khan Markaz, Pajaggi Road, Peshawar, Khyber Pakhtunkhwa,
+              Pakistan. 25000
+            </h5>
+            
+          </div>
+          <ul className="flex p-4 flex-col gap-2">
+                    {contact}
+                </ul>
+          <GoogleMap />
+        </div>
+        <div className="w-1/2 h-full animate-in fade-in duration-2000">
+        <h1 className="text-4xl p-4 uppercase text-center hover:animate-bounce dark:text-white">Contact Form</h1>
+                <Divider className="dark:bg-gray-500"/>
+        </div>
+      </div>
+    </>
+  );
 };
 
 export default Contact;
