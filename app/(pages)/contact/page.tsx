@@ -3,6 +3,7 @@ import GoogleMap from "../../components/GoogleMap";
 import { Divider } from "@mui/material";
 import Link from "next/link";
 import { contactDetails } from "../../lib/Data";
+import ContactForm from "../../components/ContactForm";
 
 const Contact = () => {
     const contact = contactDetails.map((item, index) => (
@@ -56,6 +57,7 @@ const Contact = () => {
         <div className="w-1/2 h-full animate-in fade-in duration-2000">
         <h1 className="text-4xl p-4 uppercase text-center hover:animate-bounce dark:text-white">Contact Form</h1>
                 <Divider className="dark:bg-gray-500"/>
+                <ContactForm />
         </div>
       </div>
     </>

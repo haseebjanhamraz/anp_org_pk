@@ -1,0 +1,87 @@
+"use client"
+import { Button } from "./ui/button"
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "./ui/form"
+import { Input } from "./ui/input"
+import { z } from "zod"
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { contactFormSchema } from "../types/ContactForm";
+import { toast } from "sonner";
+
+export default function ContactForm() {
+    const form = useForm<z.infer<typeof contactFormSchema>>({
+        resolver: zodResolver(contactFormSchema),
+        defaultValues: {
+          name: "",
+          email: "",
+          message: "",
+        },
+      })
+      async function onSubmit(values: z.infer<typeof contactFormSchema>) {
+        console.log(values)
+        try {
+            await fetch("/api/send", {
+                method: "POST",
+                body: JSON.stringify(values),
+            })
+            toast.success("Message sent")
+        } catch (error) {
+            toast.error("Message not sent")
+        }
+      }
+      return (
+        <div className="px-4 py-8">
+          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+        <Form {...form}>
+            <FormField
+              control={form.control}
+              name="name"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Name</FormLabel>
+                  <FormControl>
+                    <Input placeholder="Enter your name" {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="email"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Email</FormLabel>
+                  <FormControl >
+                    <Input placeholder="Enter your email" {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="message"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Message</FormLabel>
+                  <FormControl>
+                    <Input placeholder="Enter your message" {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <Button className="bg-black text-white" type="submit">Submit</Button>
+        </Form>
+          </form>
+          </div>
+      )    
+}
