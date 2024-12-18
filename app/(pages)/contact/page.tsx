@@ -6,12 +6,12 @@ import { contactDetails } from "../../lib/Data";
 import ContactForm from "../../components/ContactForm";
 
 const Contact = () => {
-    const contact = contactDetails.map((item, index) => (
-        <li className="flex items-center gap-2 dark:text-white" key={index}>
-            <item.icon />
-            <Link href={item.link} target="_blank">{item.name}</Link>
-        </li>
-    ))
+  const contact = contactDetails.map((item, index) => (
+    <li className="flex items-center gap-2 dark:text-white" key={index}>
+      <item.icon />
+      <Link href={item.link} target="_blank">{item.name}</Link>
+    </li>
+  ))
   return (
     <>
       <div
@@ -47,17 +47,17 @@ const Contact = () => {
               Bacha Khan Markaz, Pajaggi Road, Peshawar, Khyber Pakhtunkhwa,
               Pakistan. 25000
             </h5>
-            
+
           </div>
           <ul className="flex p-4 flex-col gap-2">
-                    {contact}
-                </ul>
+            {contact}
+          </ul>
           <GoogleMap />
         </div>
         <div className="w-1/2 h-full animate-in fade-in duration-2000">
-        <h1 className="text-4xl p-4 uppercase text-center hover:animate-bounce dark:text-white">Contact Form</h1>
-                <Divider className="dark:bg-gray-500"/>
-                <ContactForm />
+          <h1 className="text-4xl p-4 uppercase text-center hover:animate-bounce dark:text-white">Contact Form</h1>
+          <Divider className="dark:bg-gray-500" />
+          <ContactForm />
         </div>
       </div>
     </>
