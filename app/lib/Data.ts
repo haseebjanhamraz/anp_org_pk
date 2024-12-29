@@ -139,6 +139,8 @@ export const positions = [
     'Secretary (ex) FATA Affairs',
     'Joint Secretary',
     'Joint Secretary (Female)',
+    'Secretary Ulma',
+    'Secretary Teachers',
     'Salar',
 ]
 
@@ -149,6 +151,8 @@ export const provinces = [
     'Balochistan',
     'Gilgit-Baltistan',
     'Azad Jammu and Kashmir',
+    'Islamabad',
+    'Siraiki Unit'
 ]
 
 export const kpDistricts = [

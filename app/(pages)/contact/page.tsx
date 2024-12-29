@@ -4,6 +4,10 @@ import { Divider } from "@mui/material";
 import Link from "next/link";
 import { contactDetails } from "../../lib/Data";
 import ContactForm from "../../components/ContactForm";
+import { Metadata } from 'next'
+import { generateMetadata } from "../../MetaData";
+
+export const metadata: Metadata = generateMetadata("/contact");
 
 const Contact = () => {
   const contact = contactDetails.map((item, index) => (

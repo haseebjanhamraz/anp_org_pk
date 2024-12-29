@@ -14,7 +14,6 @@ export const EmailTemplate: React.FC<Readonly<EmailTemplateProps>> = ({
 }) => (
   <>
     <div className="flex bg-red-700 h-auto justify-between items-center p-4">
-      <img src="/anp-logo.png" alt="anp-logo" width={100} height={100} className="p-2" />
       <div className="flex flex-col">
         <h1 className="text-3xl font-bold text-white">Awami National Party</h1>
         <p className="text-gray-200">PEACE | DEVELOPMENT | DEMOCRACY</p>

@@ -9,6 +9,10 @@ import DemocraticEraAndANPsRole from '../../components/history_components/democr
 import ANPStanceOnTerrorism from '../../components/history_components/anp-stance-on-terrorism'
 import ANPInRecentDecades from '../../components/history_components/anp-in-recent-decades'
 import HistoryNavigator from '../../components/history_components/HistoryNavigator'
+
+import { Metadata } from 'next'
+import { generateMetadata } from "../../MetaData";
+export const metadata: Metadata = generateMetadata("/history");
 export default function page() {
 
     return (

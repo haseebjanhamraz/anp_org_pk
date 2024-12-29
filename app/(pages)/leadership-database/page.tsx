@@ -4,19 +4,20 @@ import Paper from '@mui/material/Paper';
 import useGetLeadership from "../../hooks/useGetLeadership";
 import Image from "next/image";
 
+
 export default function LeadershipDatabase() {
   const { leaders, loading } = useGetLeadership();
 
   const columns: GridColDef[] = [
-    { 
-      field: 'imageUrl', 
-      headerName: 'Image', 
+    {
+      field: 'imageUrl',
+      headerName: 'Image',
       width: 100,
       renderCell: (params) => (
-        <Image 
-          src={params.value} 
-          alt="🚩" 
-          width={50} 
+        <Image
+          src={params.value}
+          alt="🚩"
+          width={50}
           height={50}
           className="rounded-full object-cover w-10 h-10"
         />

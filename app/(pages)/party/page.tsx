@@ -1,10 +1,12 @@
-"use client"
 import * as React from 'react';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import Downloads from '../../components/Downloads';
+import { Metadata } from 'next'
+import { generateMetadata } from "../../MetaData";
+export const metadata: Metadata = generateMetadata("/party");
 export default function MediaCard() {
 
     return (

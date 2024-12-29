@@ -1,4 +1,7 @@
 import React from "react";
+import { Metadata } from "next";
+import { generateMetadata } from "../../MetaData";
+export const metadata: Metadata = generateMetadata("/about");
 
 const About = () => {
     return (

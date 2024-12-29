@@ -3,6 +3,8 @@ import "./globals.css";
 import ClientLayout from "./ClientLayout";
 import { generateMetadata } from './MetaData';
 import { Metadata } from 'next';
+import { ToastProvider } from "./components/ui/toast";
+
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -15,7 +17,9 @@ const geistMono = localFont({
   weight: "100 900",
 });
 
-export const metadata: Metadata = generateMetadata('/');
+
+
+export const metadata: Metadata = generateMetadata("/");
 
 export default function RootLayout({
   children,
@@ -33,7 +37,9 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} min-h-screen antialiased`}
       >
-        <ClientLayout>{children}</ClientLayout>
+        <ToastProvider>
+          <ClientLayout>{children}</ClientLayout>
+        </ToastProvider>
       </body>
     </html>
   );

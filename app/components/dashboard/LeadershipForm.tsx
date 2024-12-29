@@ -5,8 +5,7 @@ import { useForm, Controller } from 'react-hook-form';
 import { TextField, Button, Paper, Stack, Alert, MenuItem, Select, FormControl, InputLabel } from '@mui/material';
 import { useDropzone } from 'react-dropzone'
 import { positions, provinces, cabinets, cabinetPeriod, kpDistricts } from '../../lib/Data';
-import axios from 'axios';
-import cloudinary from '../../utils/cloudinary';
+import { toast } from 'sonner';
 
 interface LeadershipFormData {
     name: string;
@@ -43,11 +42,13 @@ export default function LeadershipForm() {
 
     const onSubmit = async (data: LeadershipFormData) => {
         try {
+            // Ensure the image is not uploaded again if it has already been uploaded
             const submissionData = {
                 ...data,
-                cabinet: data.cabinet === 'District' && data.district 
-                    ? `District - ${data.district}` 
-                    : data.cabinet
+                cabinet: data.cabinet === 'District' && data.district
+                    ? `District - ${data.district}`
+                    : data.cabinet,
+                imageUrl: uploadedImage || data.imageUrl // Use the uploaded image URL if available
             };
 
             setSubmitError(null);
@@ -85,6 +86,7 @@ export default function LeadershipForm() {
                 socialMedia: [],
             });
             setUploadedImage(null);
+            toast.success('Leadership entry created successfully');
 
         } catch (error) {
             console.error('Error creating leadership entry:', error);
@@ -103,9 +105,7 @@ export default function LeadershipForm() {
                 try {
                     const formData = new FormData();
                     formData.append('file', file);
-
                     console.log('Uploading file:', file.name, file.size);
-
                     const response = await fetch('/api/upload', {
                         method: 'POST',
                         headers: {
@@ -122,7 +122,7 @@ export default function LeadershipForm() {
                             errorData
                         });
                         throw new Error(
-                            errorData?.message || 
+                            errorData?.message ||
                             `Upload failed with status ${response.status}: ${response.statusText}`
                         );
                     }
@@ -130,6 +130,7 @@ export default function LeadershipForm() {
                     const data = await response.json();
                     setUploadedImage(data.url);
                     setValue('imageUrl', data.url);
+                    toast.success('Image uploaded successfully');
                 } catch (error) {
                     console.error('Error uploading image:', error);
                     setSubmitError(error instanceof Error ? error.message : 'Failed to upload image');

@@ -30,6 +30,9 @@ export default function ContactForm() {
       await fetch("/api/send", {
         method: "POST",
         body: JSON.stringify(values),
+        headers: {
+          "Content-Type": "application/json",
+        },
       })
       toast.success("Message sent")
     } catch (error) {
@@ -38,6 +41,7 @@ export default function ContactForm() {
   }
   return (
     <div className="px-4 py-8">
+
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
         <Form {...form}>
           <FormField
@@ -73,7 +77,7 @@ export default function ContactForm() {
               <FormItem>
                 <FormLabel className="dark:text-white">Message</FormLabel>
                 <FormControl>
-                  <Input placeholder="Enter your message" {...field} className="dark:text-white" />
+                  <Input placeholder="Enter your message" {...field} className="dark:text-white h-36 text-inherit" />
                 </FormControl>
                 <FormMessage />
               </FormItem>

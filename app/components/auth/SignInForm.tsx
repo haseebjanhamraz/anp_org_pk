@@ -52,7 +52,7 @@ export default function SignInForm() {
             )}
 
             <div>
-                <label htmlFor="email" className="block text-sm font-medium text-gray-700">
+                <label htmlFor="email" className="block text-sm font-medium text-gray-700 dark:text-white">
                     Email
                 </label>
                 <input
@@ -66,7 +66,7 @@ export default function SignInForm() {
             </div>
 
             <div>
-                <label htmlFor="password" className="block text-sm font-medium text-gray-700">
+                <label htmlFor="password" className="block text-sm font-medium text-gray-700 dark:text-white">
                     Password
                 </label>
                 <input
@@ -86,7 +86,7 @@ export default function SignInForm() {
             >
                 {loading ? 'Signing in...' : 'Sign In'}
             </button>
-            <Link href="/signup">
+            <Link href="/signup" className='dark:text-white'>
                 Don&apos;t have an account? Sign up
             </Link>
         </form>

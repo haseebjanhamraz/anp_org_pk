@@ -26,6 +26,11 @@ export const generateMetadata = (path: string): Metadata => {
             description: "Discover the rich history of the Awami National Party, from its roots in the Khudai Khidmatgar movement to its present role in Pakistani politics.",
             keywords: ["ANP History", "Khudai Khidmatgar", "Bacha Khan Movement", "Pakistani Political History"],
         },
+        "/leadership-database": {
+            title: "ANP Leadership Database | Awami National Party",
+            description: "Explore the Awami National Party's leadership database. Discover the dedicated leaders working towards peace, democracy, and development in Pakistan.",
+            keywords: ["ANP Leadership Database", "ANP Leaders", "ANP Cabinet Members", "ANP Provincial Leaders"],
+        },
         "/contact": {
             title: "Contact ANP | Awami National Party",
             description: "Get in touch with the Awami National Party. Find our contact information, office locations, and ways to connect with ANP leadership.",
