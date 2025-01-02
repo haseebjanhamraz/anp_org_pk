@@ -29,7 +29,7 @@ export default function DarkModeToggle(): JSX.Element {
             onClick={() => setIsDark(!isDark)}
             className="p-2  rounded"
         >
-            {isDark ? <MdLightMode className='text-yellow-400 text-2xl' /> : <MdDarkMode className='text-red-500 text-2xl' />}
+            {isDark ? <MdLightMode className='text-red-500 text-2xl' /> : <MdDarkMode className='text-red-500 text-2xl' />}
         </button>
     );
 }

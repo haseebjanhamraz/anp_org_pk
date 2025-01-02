@@ -1,15 +1,16 @@
-'use client'
 import { useState, useEffect } from 'react';
 import { LeadershipData } from '../types/leadership';
+import { usePathname } from 'next/navigation';
 
-const useGetLeadership = (): { leaders: LeadershipData[]; loading: boolean } => {
+const getLeaderData = (): { leader: LeadershipData[]; loading: boolean } => {
+    const id = usePathname().split('/').pop();
     const [loading, setLoading] = useState(true);
-    const [leaders, setLeaders] = useState<LeadershipData[]>([]);
+    const [leader, setLeaders] = useState<LeadershipData[]>([]);
 
     useEffect(() => {
-        const fetchLeaders = async () => {
+        const fetchLeader = async () => {
             try {
-                const response = await fetch('/api/leadership')
+                const response = await fetch(`/api/leadership/${id}`);
                 if (!response.ok) {
                     throw new Error('Failed to fetch leadership');
                 }
@@ -21,12 +22,11 @@ const useGetLeadership = (): { leaders: LeadershipData[]; loading: boolean } => 
                 setLoading(false);
             }
         };
-
-        fetchLeaders();
+        fetchLeader();
     }, []);
 
-    return { leaders, loading };
+    return { leader, loading };
 };
 
 
-export default useGetLeadership;
+export default getLeaderData;

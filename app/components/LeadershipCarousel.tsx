@@ -76,8 +76,9 @@ export default function LeadershipCarousel() {
               className="md:basis-1/2 lg:basis-1/4"
             >
               <div className="p-1">
-                <Card className="dark:bg-slate-700 dark:text-white">
+                <Card className="dark:bg-slate-700 dark:text-white h-72">
                   <CardContent className="flex flex-col aspect-square items-center justify-center p-6">
+                    {loading && <Loader />}
                     {leader.imageUrl && (
                       <div className="relative w-32 h-32 mb-4 rounded-full overflow-hidden">
                         <Image
@@ -88,8 +89,10 @@ export default function LeadershipCarousel() {
                         />
                       </div>
                     )}
-                    <span className="text-2xl font-semibold text-center">
-                      {leader.name}
+                    <span className="text-2xl font-semibold text-center leading-none">
+                      <Link href={`/party/leadership/${leader._id}`}>
+                        {leader.name}
+                      </Link>
                     </span>
                     {leader.position && (
                       <span className="text-sm text-neutral-500 dark:text-neutral-400 mt-2 text-center">
