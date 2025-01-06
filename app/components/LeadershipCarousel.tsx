@@ -3,6 +3,7 @@
 import * as React from "react";
 import Link from "next/link";
 import { Divider } from "@mui/material";
+import LeadershipCarouselSkeleton from "./skeletons/LeadershipSkeleton";
 import { Badge } from "./ui/badge";
 import { Button } from "./ui/button";
 import { Card, CardContent } from "./ui/card";
@@ -36,7 +37,7 @@ export default function LeadershipCarousel() {
   }, [api]);
 
   if (loading) {
-    return <Loader />;
+    return <LeadershipCarouselSkeleton />;
   }
 
   // Filter leaders to only show Central cabinet
@@ -63,7 +64,7 @@ export default function LeadershipCarousel() {
       <Divider className="my-8 w-1/2 mx-auto" sx={{ borderColor: "red" }} />
       <Carousel
         opts={{
-          align: "start",
+          align: "center",
           loop: true,
         }}
         className="w-full max-w-6xl mx-auto px-4"
@@ -76,7 +77,7 @@ export default function LeadershipCarousel() {
               className="md:basis-1/2 lg:basis-1/4"
             >
               <div className="p-1">
-                <Card className="dark:bg-slate-700 dark:text-white h-72">
+                <Card className="dark:bg-slate-700 dark:text-white h-80">
                   <CardContent className="flex flex-col aspect-square items-center justify-center p-6">
                     {loading && <Loader />}
                     {leader.imageUrl && (
@@ -85,13 +86,14 @@ export default function LeadershipCarousel() {
                           src={leader.imageUrl}
                           alt={leader.name}
                           fill
+                          sizes="100px 100px"
                           className="object-cover"
                         />
                       </div>
                     )}
                     <span className="text-2xl font-semibold text-center leading-none">
-                      <Link href={`/party/leadership/${leader._id}`}>
-                        {leader.name}
+                      <Link href={`/party/leadership/${leader._id}`} className="hover:underline">
+                        {leader.name.length > 20 ? leader.name.slice(0, 25) + "..." : leader.name}
                       </Link>
                     </span>
                     {leader.position && (

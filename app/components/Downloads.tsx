@@ -10,8 +10,7 @@ const Downloads = () => {
     const { documents, loading } = useGetDocuments();
     return (
         <div className='my-10'>
-            <h1 className='text-4xl text-red-500 dark:text-red-700 font-semibold mb-4 text-center'>Downloads</h1>
-            <Divider className='w-1/2 mx-auto' sx={{ borderColor: "red" }} />
+            <h1 className='text-4xl text-red-500 dark:text-red-700 font-semibold mb-4 text-center'>Downloads & Documents </h1>
             <React.Suspense fallback={<DownloadsListSkeleton />}>
                 {loading ? (
                     <DownloadsListSkeleton />

@@ -25,12 +25,12 @@ export const menu = [{
     link: "/history"
 },
 {
-    name: "Contact",
-    link: "/contact"
-},
-{
     name: "Leadership DB",
     link: "/leadership-database"
+},
+{
+    name: "Contact",
+    link: "/contact"
 }
 ]
 
@@ -247,5 +247,20 @@ export const contactDetails = [
         icon: MdAlternateEmail,
         name: "info@anp.org.pk",
         link: "mailto:info@anp.org.pk"
+    }
+]
+
+export const leadershipMessages = [
+    {
+        name: "Aimal Wali Khan",
+        position: "President",
+        message: "Aimal Wali Khan is a prominent Pakistani politician and a key leader of the Awami National Party (ANP). Born into the illustrious Wali Bagh family, known for its legacy in Pashtun nationalism and progressive politics, he is the grandson of the revered Bacha Khan and the son of Asfandyar Wali Khan. Aimal Wali Khan has dedicated his political career to advocating for the rights of Pashtuns, promoting democracy, and addressing social injustices. His vision combines modern governance with a deep respect for his cultural heritage, making him a significant figure in shaping the political landscape of Pakistan.",
+        image: "/awk.png"
+    },
+    {
+        name: "Mian Iftikhar Hussain",
+        position: "President Pakhtunkhwa",
+        message: "Mian Iftikhar Hussain is a seasoned Pakistani politician and a senior leader of the Awami National Party (ANP). Known for his resilience and unwavering commitment to democratic values, he has been a strong advocate for peace, human rights, and Pashtun nationalism. Mian Iftikhar has served in various key political roles, including as the Information Minister of Khyber Pakhtunkhwa, where he played a vital role in countering extremism and promoting social harmony. Despite facing personal losses and challenges, his dedication to public service and his courageous stance against militancy have earned him immense respect across Pakistan.",
+        image: "/mian-iftikhar-hussain.png"
     }
 ]

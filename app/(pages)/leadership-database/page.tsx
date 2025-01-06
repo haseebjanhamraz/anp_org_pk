@@ -39,10 +39,11 @@ export default function LeadershipDatabase() {
 
   return (
     <div className="flex flex-col items-center justify-center p-4">
-      <h1 className="text-2xl font-bold mb-10 dark:text-white p-5">
+      <h1 className='text-4xl text-red-500 dark:text-red-700 font-semibold mb-4 text-center'>
         Leadership Database
       </h1>
-      <Paper sx={{ height: 'auto', width: '100%', maxWidth: '100%' }}>
+      <Paper sx={{ height: 'auto', width: '100%', maxWidth: '100%' }}
+      >
         <DataGrid
           rows={rows}
           columns={columns}

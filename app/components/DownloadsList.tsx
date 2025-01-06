@@ -1,5 +1,5 @@
 'use client'
-import { List, ListItem, ListItemAvatar, ListItemText, Avatar } from '@mui/material';
+import { List, ListItem, ListItemAvatar, ListItemText, Avatar, colors } from '@mui/material';
 
 import FileIcon from '@mui/icons-material/FilePresent';
 import { Document } from '../types/Document';
@@ -58,14 +58,14 @@ export default function DownloadsList({ documents }: DownloadsListProps) {
             {documents.length > 0 ? (
                 <Box sx={{ width: '100%', zIndex: -1 }}>
                     <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-                        <Tabs value={value} onChange={handleChange} className='dark:text-white text-white' aria-label="document categories">
+                        <Tabs value={value} onChange={handleChange} className='dark:text-white' aria-label="document categories">
                             {categories.map((category, index) => (
                                 <Tab className='text-red-500 dark:text-white' key={category} label={category} {...a11yProps(index)} />
                             ))}
                         </Tabs>
                     </Box>
                     {categories.map((category, index) => (
-                        <CustomTabPanel key={category} value={value} index={index}>
+                        <CustomTabPanel key={category} value={value} index={index} >
                             <List className='dark:text-white'>
                                 {documents
                                     .filter(doc => doc.category === category)

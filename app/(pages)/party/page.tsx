@@ -1,4 +1,3 @@
-import * as React from 'react';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
@@ -6,9 +5,11 @@ import Typography from '@mui/material/Typography';
 import Downloads from '../../components/Downloads';
 import { Metadata } from 'next'
 import { generateMetadata } from "../../MetaData";
-export const metadata: Metadata = generateMetadata("/party");
-export default function MediaCard() {
+import LeadershipDatabase from '../leadership-database/page';
 
+export const metadata: Metadata = generateMetadata("/party");
+
+export default function MediaCard() {
     return (
         <>
             <div className='flex flex-col items-center m-10 mb-20 justify-center gap-4 flex-wrap'>
@@ -48,13 +49,9 @@ export default function MediaCard() {
                     </CardContent>
                 </Card>
             </div>
-            <div className='flex-2 gap-4 items-top'>
-                <div>
-                    <h2 className='text-2xl font-bold dark:text-white'>
-                        Downloads
-                    </h2>
-                    <Downloads />
-                </div>
+            <div className=''>
+                <LeadershipDatabase />
+                <Downloads />
             </div>
         </>
     );
