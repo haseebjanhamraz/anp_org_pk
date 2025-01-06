@@ -1,3 +1,4 @@
+/*************  ✨ Codeium Command 🌟  *************/
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
@@ -9,6 +10,9 @@ const nextConfig: NextConfig = {
         hostname: '**',
       },
     ],
+  },
+  eslint: {
+    dirs: ['app', 'components', 'lib', 'pages', 'utils'],
   },
 };
 

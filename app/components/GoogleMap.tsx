@@ -18,7 +18,7 @@ interface GoogleMapProps {
   mapId?: string;
 }
 
-const GoogleMap = ({ 
+const GoogleMap = ({
   center = { lat: 34.0316886, lng: 71.5577608 },
   zoom = 20,
   mapId = googleMapId
@@ -39,7 +39,7 @@ const GoogleMap = ({
         .then(async () => {
           const { Map } = await google.maps.importLibrary("maps") as google.maps.MapsLibrary;
           const { AdvancedMarkerElement } = await google.maps.importLibrary("marker") as google.maps.MarkerLibrary;
-          
+
           if (mapRef.current) {
             const mapOptions: google.maps.MapOptions = {
               center,
@@ -75,16 +75,16 @@ const GoogleMap = ({
         // Clean up map instance if needed
       }
     };
-  }, []); // Empty dependency array since we only want to initialize once
+  }); // Empty dependency array since we only want to initialize once
 
   return (
-    <div 
-      ref={mapRef} 
-      style={{ 
-        width: '100%', 
+    <div
+      ref={mapRef}
+      style={{
+        width: '100%',
         height: '300px', // Adjust height as needed
         borderRadius: '8px',
-      }} 
+      }}
     />
   );
 };

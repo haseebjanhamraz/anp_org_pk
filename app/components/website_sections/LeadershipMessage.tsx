@@ -1,9 +1,12 @@
 import Image from "next/image";
 import { leadershipMessages } from "../../lib/Data"
 
+
+// Change message to two columns on smaller screens
+
+
 export default function LeadershipMessage() {
     return (
-
         <div className="flex w-full h-screen mt-10 lg:p-20 sm:p-4">
             {leadershipMessages.map((leader, index) =>
                 <div key={index} className="w-full flex flex-col items-center text-center">
@@ -12,8 +15,8 @@ export default function LeadershipMessage() {
                     </div>
                     <div className="p-3">
                         <h1 className="text-3xl font-bold text-red-600 dark:text-white">{leader.name}</h1>
-                        <p className="mb-3 text-center text-gray-600 px-2 rounded-md md:text-lg">{leader.position}</p>
-                        <p className="text-gray-500 md:text-justify md:text-lg sm:text-sm w-auto">
+                        <p className="text-md mb-3 text-center text-gray-600 px-2 rounded-md md:text-xl">{leader.position}</p>
+                        <p className={`text-gray-500 special text-justify md:text-lg sm:text-xs w-auto col-span-2`}>
                             {leader.message}
                         </p>
                     </div>

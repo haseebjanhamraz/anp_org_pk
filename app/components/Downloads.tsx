@@ -3,7 +3,6 @@ import useGetDocuments from '../hooks/useGetDocuments';
 import DownloadsList from './DownloadsList';
 import DownloadsListSkeleton from './skeletons/DownloadsListSkeleton';
 import React from 'react';
-import { Divider } from '@mui/material';
 
 const Downloads = () => {
 

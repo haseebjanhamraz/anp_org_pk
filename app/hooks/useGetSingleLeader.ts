@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { LeadershipData } from '../types/leadership';
 import { usePathname } from 'next/navigation';
 
-const getLeaderData = (): { leader: LeadershipData[]; loading: boolean } => {
+const useGetLeaderData = (): { leader: LeadershipData[]; loading: boolean } => {
     const id = usePathname().split('/').pop();
     const [loading, setLoading] = useState(true);
     const [leader, setLeaders] = useState<LeadershipData[]>([]);
@@ -23,10 +23,10 @@ const getLeaderData = (): { leader: LeadershipData[]; loading: boolean } => {
             }
         };
         fetchLeader();
-    }, []);
+    }, [id]);
 
     return { leader, loading };
 };
 
 
-export default getLeaderData;
+export default useGetLeaderData;

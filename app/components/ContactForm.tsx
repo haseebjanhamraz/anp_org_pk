@@ -13,7 +13,7 @@ import { z } from "zod"
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { contactFormSchema } from "../types/ContactForm";
-import { toast } from "sonner";
+import { toast, Toaster } from "sonner";
 
 export default function ContactForm() {
   const form = useForm<z.infer<typeof contactFormSchema>>({
@@ -35,13 +35,15 @@ export default function ContactForm() {
         },
       })
       toast.success("Message sent")
+      // Reset form
+      form.reset()
     } catch (error) {
       toast.error("Message not sent")
     }
   }
   return (
     <div className="px-4 py-8">
-
+      <Toaster />
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
         <Form {...form}>
           <FormField

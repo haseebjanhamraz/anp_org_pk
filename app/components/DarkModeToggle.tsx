@@ -2,16 +2,16 @@ import { useEffect, useState } from 'react';
 import { MdDarkMode } from "react-icons/md";
 import { MdLightMode } from "react-icons/md";
 
-
 export default function DarkModeToggle(): JSX.Element {
-    const [isDark, setIsDark] = useState<boolean>(() => {
+    const [isDark, setIsDark] = useState<boolean>(false);
+
+    useEffect(() => {
         // Check localStorage for the saved theme mode on initial load
         if (typeof window !== 'undefined') {
             const savedTheme = localStorage.getItem('theme');
-            return savedTheme === 'dark';
+            setIsDark(savedTheme === 'dark');
         }
-        return false; // Default to light mode if no preference is found
-    });
+    }, []);
 
     useEffect(() => {
         // Add or remove the dark class on the HTML element
@@ -33,3 +33,4 @@ export default function DarkModeToggle(): JSX.Element {
         </button>
     );
 }
+

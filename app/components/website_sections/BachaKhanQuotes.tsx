@@ -21,12 +21,12 @@ export default function BachaKhanQuotes() {
 
     return (
         <div>
-            <div className="min-h-screen flex flex-col rounded-md md:flex-row items-center shadow-2xl justify-start dark:bg-slate-800 relative">
+            <div className="flex flex-col rounded-md md:flex-row items-center shadow-2xl justify-start dark:bg-slate-800 relative">
                 <div className="w-full md:w-1/3 md:min-w-[400px]">
                     <Image
                         src="/baba.png"
                         alt="Bacha Khan"
-                        className="h-screen pt-16"
+                        className="pt-16"
                         width={500}
                         height={500}
                     />
@@ -44,10 +44,10 @@ export default function BachaKhanQuotes() {
                                             transition: 'all 0.5s ease-in-out'
                                         }}
                                     >
-                                        <blockquote className="text-2xl md:text-3xl lg:text-4xl font-serif italic text-gray-800 dark:text-white mb-8">
+                                        <blockquote className="sm:text-xm md:text-3xl lg:text-4xl font-serif italic text-gray-800 dark:text-white mb-8">
                                             "{quote}"
                                         </blockquote>
-                                        <cite className="text-lg md:text-xl text-gray-600 dark:text-white block text-right">
+                                        <cite className="sm:text-sm text-lg md:text-xl text-gray-600 dark:text-white block text-right">
                                             — {source}
                                         </cite>
                                     </div>

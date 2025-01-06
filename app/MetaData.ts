@@ -156,7 +156,7 @@ export const generateMetadata = (path: string): Metadata => {
         publisher: "Awami National Party",
         icons: {
             icon: '/favicon.ico',
-            apple: '/apple-icon.png',
+            apple: '/icon.ico',
         },
         manifest: '/site.webmanifest',
     };

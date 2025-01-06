@@ -42,20 +42,21 @@ export default function NewsletterForm() {
           render={({ field }) => (
             <FormItem>
               <FormControl>
-                <Input 
-                  placeholder="Enter your email" 
+                <Input
+                  placeholder="Enter your email"
                   type="email"
                   className="bg-white dark:bg-slate-700"
-                  {...field} 
+                  {...field}
                 />
               </FormControl>
               <FormMessage className="text-red-500" />
             </FormItem>
           )}
         />
-        <Button 
+        <Button
           type="submit"
           className="w-full bg-red-600 hover:bg-red-700 text-white"
+          disabled
         >
           Subscribe
         </Button>
