@@ -23,7 +23,7 @@ const useGetLeaderData = (): { leader: LeadershipData[]; loading: boolean } => {
             }
         };
         fetchLeader();
-    }, [id]);
+    }, []);
 
     return { leader, loading };
 };
