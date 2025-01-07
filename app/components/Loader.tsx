@@ -3,12 +3,11 @@ import { CircularProgress } from '@mui/material';
 
 interface LoaderProps {
     size?: number;
-    color?: string;
 }
 
-const Loader = ({ size = 40, color = 'primary' }: LoaderProps) => {
+const Loader = ({ size = 40 }: LoaderProps) => {
     return (
-        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', padding: '20px' }}>
+        <div className='flex items-center justify-center h-screen'>
             <CircularProgress size={size} className='text-red-500' />
         </div>
     );

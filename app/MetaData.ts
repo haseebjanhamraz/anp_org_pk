@@ -102,6 +102,11 @@ export const generateMetadata = (path: string): Metadata => {
             title: "ANP Leader Profile | Awami National Party",
             description: "Learn about the Awami National Party's leadership and their contributions to peace, democracy, and development in Pakistan.",
             keywords: ["ANP Leadership", "ANP Cabinet Members", "ANP Provincial Leaders", "ANP President", "ANP Vice President"],
+        },
+        "/not-found": {
+            title: "404 | Page not found",
+            description: "We're sorry this page is not found. But here are links from our website you may want to explore",
+            keywords: ["404 Not Found", "404", "Not found"]
         }
     };
 
