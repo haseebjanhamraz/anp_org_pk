@@ -9,6 +9,8 @@ import { positions, provinces, cabinets, cabinetPeriod, kpDistricts } from '../.
 
 interface LeadershipFormData {
     name: string;
+    email: string;
+    phone: string;
     province: string;
     district?: string;
     position: string;
@@ -26,6 +28,8 @@ export default function LeadershipEditForm() {
     const { control, handleSubmit, formState: { errors, isDirty: formIsDirty }, reset, setValue, watch } = useForm<LeadershipFormData>({
         defaultValues: {
             name: '',
+            email: '',
+            phone: '',
             province: '',
             position: '',
             cabinet: '',
@@ -63,15 +67,15 @@ export default function LeadershipEditForm() {
                     throw new Error('Failed to fetch data');
                 }
                 const data = await response.json();
-                
+
                 const transformedData = {
                     ...data,
                     cabinet: cabinets.includes(data.cabinet) ? data.cabinet : '',
-                    period: cabinetPeriod.includes(data.period) 
-                        ? data.period 
+                    period: cabinetPeriod.includes(data.period)
+                        ? data.period
                         : cabinetPeriod.find(p => p.startsWith(data.period)) || '',
                 };
-                
+
                 reset(transformedData);
                 setIsDirty(false);
             } catch (error) {
@@ -96,8 +100,8 @@ export default function LeadershipEditForm() {
 
             const submissionData = {
                 ...data,
-                cabinet: data.cabinet === 'District' && data.district 
-                    ? `District - ${data.district}` 
+                cabinet: data.cabinet === 'District' && data.district
+                    ? `District - ${data.district}`
                     : data.cabinet
             };
 
@@ -145,9 +149,6 @@ export default function LeadershipEditForm() {
                 try {
                     const formData = new FormData();
                     formData.append('file', file);
-
-                    console.log('Uploading file:', file.name, file.size);
-
                     const response = await fetch('/api/upload', {
                         method: 'POST',
                         headers: {
@@ -164,7 +165,7 @@ export default function LeadershipEditForm() {
                             errorData
                         });
                         throw new Error(
-                            errorData?.message || 
+                            errorData?.message ||
                             `Upload failed with status ${response.status}: ${response.statusText}`
                         );
                     }
@@ -218,6 +219,42 @@ export default function LeadershipEditForm() {
                                 label="Full Name"
                                 error={!!errors.name}
                                 helperText={errors.name?.message}
+                                fullWidth
+                                onChange={(e) => {
+                                    field.onChange(e);
+                                    setIsDirty(true);
+                                }}
+                            />
+                        )}
+                    />
+                    <Controller
+                        name="email"
+                        control={control}
+                        rules={{ required: 'Email is required' }}
+                        render={({ field }) => (
+                            <TextField
+                                {...field}
+                                label="Email"
+                                error={!!errors.email}
+                                helperText={errors.email?.message}
+                                fullWidth
+                                onChange={(e) => {
+                                    field.onChange(e);
+                                    setIsDirty(true);
+                                }}
+                            />
+                        )}
+                    />
+                    <Controller
+                        name="phone"
+                        control={control}
+                        rules={{ required: 'Phone is required' }}
+                        render={({ field }) => (
+                            <TextField
+                                {...field}
+                                label="Phone"
+                                error={!!errors.phone}
+                                helperText={errors.phone?.message}
                                 fullWidth
                                 onChange={(e) => {
                                     field.onChange(e);

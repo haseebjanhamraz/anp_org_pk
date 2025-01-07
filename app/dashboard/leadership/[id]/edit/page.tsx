@@ -1,7 +1,7 @@
 'use client';
 
-import EditBackDrop from '../../../../components/dashboard/EditBackDrop';
+import LeadershipEditForm from "../../../../components/dashboard/LeadershipEditForm";
 
 export default function EditLeadership() {
-    return <EditBackDrop />;
+    return <LeadershipEditForm />
 }

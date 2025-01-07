@@ -1,21 +1,22 @@
 'use client';
 
 import * as React from 'react';
-import { useParams } from 'next/navigation';
-import Paper from '@mui/material/Paper';
+import { useParams, usePathname } from 'next/navigation';
 import Typography from '@mui/material/Typography';
-import Grid from '@mui/material/Grid';
-import Avatar from '@mui/material/Avatar';
-import Link from '@mui/material/Link';
-import Box from '@mui/material/Box';
 import { LeadershipData } from '../../../../types/leadership';
 import { Facebook, Twitter, Instagram, LinkedIn } from '@mui/icons-material';
+import Loading from '../../../../loading';
+import Image from 'next/image';
+import Link from 'next/link';
 
 export default function ViewLeadership() {
     const params = useParams();
+    const pathname = usePathname();
     const [leadership, setLeadership] = React.useState<LeadershipData | null>(null);
     const [loading, setLoading] = React.useState(true);
-
+    const [editLink, setEditLink] = React.useState("");
+    const currentURL = usePathname();
+    const editPath = currentURL.replace("/view", "/edit");
     React.useEffect(() => {
         const fetchLeadership = async () => {
             try {
@@ -36,7 +37,7 @@ export default function ViewLeadership() {
     }, [params.id]);
 
     if (loading) {
-        return <Typography>Loading...</Typography>;
+        return <Loading />;
     }
 
     if (!leadership) {
@@ -44,50 +45,78 @@ export default function ViewLeadership() {
     }
 
     return (
-        <Paper sx={{ p: 4, maxWidth: 800, mx: 'auto', my: 4 }} className="dark:bg-gray-800">
-            <Grid container spacing={4}>
-                <Grid item xs={12} md={4}>
-                    <Avatar
-                        src={leadership.imageUrl}
-                        alt={leadership.name}
-                        sx={{ width: 200, height: 200, mx: 'auto' }}
-                    />
-                </Grid>
-                <Grid item xs={12} md={8}>
-                    <Typography variant="h4" fontWeight="bold" className="dark:text-white rounded-md" gutterBottom>
-                        {leadership.name}
-                    </Typography>
-                    <Typography variant="h6" color="textSecondary" className="dark:text-white rounded-md" gutterBottom>
-                        {leadership.position}
-                    </Typography>
-                    <Typography variant="subtitle1" className="dark:text-white rounded-md" gutterBottom>
-                        Period:
-                        <span className="dark:text-white font-bold ml-2 rounded-md">
-                            {leadership.period}
-                        </span>
-                    </Typography>
-                    <Typography className="dark:text-white rounded-md">
-                        {leadership.email}
-                    </Typography>
-                    <Box sx={{ mt: 2 }}>
-                        <Typography variant="h6" fontWeight="bold" className='dark:text-white p-2 rounded-md' gutterBottom>
-                            Social Media
-                        </Typography>
-                        {leadership.socialMedia.map((social, index) => (
-                            <Link
-                                key={index}
-                                href={social.url}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                sx={{ mr: 2 }}
-                                className="dark:text-white p-2 rounded-md"
-                            >
-                                {social.platform === 'facebook' ? <Facebook /> : social.platform === 'twitter' ? <Twitter /> : social.platform === 'instagram' ? <Instagram /> : ""}
-                            </Link>
-                        ))}
-                    </Box>
-                </Grid>
-            </Grid>
-        </Paper>
-    );
+        <div className="h-screen dark:bg-gray-700 bg-gray-200 pt-12">
+            <div className="max-w-lg mx-auto bg-white dark:bg-gray-900 rounded-lg overflow-hidden shadow-lg">
+                <div className="border-b px-4 pb-6">
+                    <div className="text-center my-4">
+                        <Image width={100} height={100} className="h-32 w-32 rounded-full border-4 border-white dark:border-gray-800 mx-auto my-4"
+                            src={leadership.imageUrl} alt="" />
+                        <div className="py-2">
+                            <h3 className="font-bold text-2xl text-gray-800 dark:text-white mb-1">{leadership.name}</h3>
+                            <div className="inline-flex text-gray-700 dark:text-gray-300 items-center">
+                                Position: {leadership.position} <br />
+                            </div>
+                        </div>
+                    </div>
+                    <div className="flex gap-2 px-2">
+                        <button
+                            className="flex-1 rounded-full bg-red-600 dark:bg-red-800 text-white dark:text-white antialiased font-bold hover:bg-blue-800 dark:hover:bg-blue-900 px-4 py-2">
+                            Delete
+                        </button>
+                        <Link href={editPath}
+                            className="flex-1 rounded-full border-2 border-gray-400 text-center dark:border-gray-700 font-semibold text-black dark:text-white px-4 py-2">
+                            Edit
+                        </Link>
+                    </div>
+                </div>
+                <div className='flex'>
+                    <div className="px-4 py-4 border-b">
+                        <div className="flex gap-2 items-center text-gray-800 dark:text-gray-300 mb-4">
+                            <span><strong className="text-black dark:text-white">Email</strong> {leadership.email} </span>
+                        </div>
+                        <div className="flex gap-2 items-center text-gray-800 dark:text-gray-300 mb-4">
+                            <span><strong className="text-black dark:text-white">Phone</strong> {leadership.phone} </span>
+                        </div>
+                        <div className="flex gap-2 items-center text-gray-800 dark:text-gray-300 mb-4">
+                            <span><strong className="text-black dark:text-white">Province</strong> {leadership.province} </span>
+                        </div>
+                        <div className="flex gap-2 items-center text-gray-800 dark:text-gray-300 mb-4">
+                            <span><strong className="text-black dark:text-white">Position</strong> {leadership.position} </span>
+                        </div>
+                        <div className="flex gap-2 items-center text-gray-800 dark:text-gray-300 mb-4">
+                            <span><strong className="text-black dark:text-white">Cabinet</strong> {leadership.cabinet} </span>
+                        </div>
+                        <div className="flex gap-2 items-center text-gray-800 dark:text-gray-300 mb-4">
+                            <span><strong className="text-black dark:text-white">Period</strong> {leadership.period} </span>
+                        </div>
+                    </div>
+                    <div>
+                        {(leadership.socialMedia.length !== 0) ?
+                            <div className='p-3'>
+                                <h3 className='text-xl text-gray-800 dark:text-white'>Social Media</h3>
+                                <div className='flex gap-2 p-2'>
+                                    <Facebook />
+                                    <p>
+                                        {leadership.socialMedia[0].url}
+                                    </p>
+                                </div>
+                                <div className='flex gap-2 p-2'>
+                                    <Twitter />
+                                    <p>
+                                        {leadership.socialMedia[1].url}
+                                    </p>
+                                </div>
+                                <div className='flex gap-2 p-2'>
+                                    <Instagram />
+                                    <p>
+                                        {leadership.socialMedia[2].url}
+                                    </p>
+                                </div>
+                            </div> : null
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    )
 }
