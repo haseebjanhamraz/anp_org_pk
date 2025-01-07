@@ -1,58 +1,14 @@
-import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
-import Typography from '@mui/material/Typography';
-import Downloads from '../../components/Downloads';
-import { Metadata } from 'next'
-import { generateMetadata } from "../../MetaData";
+import { Card, CardContent, CardMedia, Typography } from '@mui/material';
 import LeadershipDatabase from '../leadership-database/page';
-
-export const metadata: Metadata = generateMetadata("/party");
+import Downloads from '../../components/Downloads';
+import PartyDetailsCard from "../../components/PartyDetailsCard"
 
 export default function MediaCard() {
     return (
-        <>
-            <div className='flex flex-col items-center m-10 mb-20 justify-center gap-4 flex-wrap'>
-                <Card sx={{ maxWidth: 345 }} className='dark:bg-slate-700 dark:text-white p-4'>
-                    <CardMedia
-                        sx={{ height: 140, objectFit: "contain" }}
-                        image="/anp-logo.png"
-                        title="ANP Logo"
-                        component='img'
-                        classes="MuiCardMedia-img"
-                    />
-                    <CardContent>
-                        <Typography gutterBottom variant="h5" component="div">
-                            Party Information
-                        </Typography>
-                        <Typography variant="body2" >
-                            <span>
-                                Party Name : <strong>Awami National Party</strong>
-                            </span>
-                        </Typography>
-                        <Typography variant="body2" >
-                            <span>
-                                Founder : <strong>Khan Abdul Wali Khan</strong>
-                            </span>
-                        </Typography>
-                        <Typography variant="body2" >
-                            <span>
-                                Founded: <strong>1986</strong>
-                            </span>
-
-                        </Typography>
-                        <Typography variant="body2" >
-                            <span>
-                                Election Symbol: <strong>Lantern</strong>
-                            </span>
-                        </Typography>
-                    </CardContent>
-                </Card>
-            </div>
-            <div className=''>
-                <LeadershipDatabase />
-                <Downloads />
-            </div>
-        </>
+        <div>
+            <PartyDetailsCard />
+            <LeadershipDatabase />
+            <Downloads />
+        </div>
     );
 }

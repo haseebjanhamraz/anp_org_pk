@@ -38,28 +38,25 @@ const Contact = () => {
       </div>
 
       <div className="flex gap-12 p-10 flex-col md:flex-row">
-        <div className="w-1/2 h-full animate-in fade-in duration-2000">
-          <h1 className="text-4xl p-4 uppercase text-center hover:animate-bounce dark:text-white">
+        <div className="animate-in fade-in duration-2000">
+          <h1 className="text-4xl p-4 uppercase text-center dark:text-white">
             Find Us On Map
           </h1>
           <Divider className="dark:bg-gray-500" />
           <div className="flex items-start gap-2 m-4">
             <h4 className="text-xl text-gray-500 dark:text-gray-300">
-              Secreteriate:
+              Secreteriate: <span className="text-xl dark:text-white font-bold">
+                Bacha Khan Markaz, Pajaggi Road, Peshawar, Khyber Pakhtunkhwa,
+                Pakistan. 25000
+              </span>
             </h4>
-            <h5 className="text-xl dark:text-white font-bold">
-              Bacha Khan Markaz, Pajaggi Road, Peshawar, Khyber Pakhtunkhwa,
-              Pakistan. 25000
-            </h5>
-
           </div>
           <ul className="flex p-4 flex-col gap-2">
             {contact}
           </ul>
-          <GoogleMap />
         </div>
-        <div className="w-1/2 h-full animate-in fade-in duration-2000">
-          <h1 className="text-4xl p-4 uppercase text-center hover:animate-bounce dark:text-white">Contact Form</h1>
+        <div className="animate-in fade-in duration-2000">
+          <h1 className="text-4xl p-4 uppercase text-center dark:text-white">Contact Form</h1>
           <Divider className="dark:bg-gray-500" />
           <ContactForm />
         </div>

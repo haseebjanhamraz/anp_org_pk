@@ -9,6 +9,7 @@ import {
   FormMessage,
 } from "./ui/form"
 import { Input } from "./ui/input"
+import { Textarea } from "../components/ui/textarea"
 import { z } from "zod"
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -24,6 +25,7 @@ export default function ContactForm() {
       message: "",
     },
   })
+
   async function onSubmit(values: z.infer<typeof contactFormSchema>) {
     console.log(values)
     try {
@@ -41,6 +43,7 @@ export default function ContactForm() {
       toast.error("Message not sent")
     }
   }
+
   return (
     <div className="px-4 py-8">
       <Toaster />
@@ -79,7 +82,11 @@ export default function ContactForm() {
               <FormItem>
                 <FormLabel className="dark:text-white">Message</FormLabel>
                 <FormControl>
-                  <Input placeholder="Enter your message" {...field} className="dark:text-white h-36 text-inherit" />
+                  <Textarea
+                    placeholder="Enter your message"
+                    {...field}
+                    className="dark:text-white"
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>

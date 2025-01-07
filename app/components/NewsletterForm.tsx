@@ -35,6 +35,7 @@ export default function NewsletterForm() {
 
   return (
     <Form {...form}>
+      <h1 className="text-center text-lg font-bold py-4 mb-3 bg-slate-600 rounded-md text-white dark:bg-red-500 p-2">Subscribe to our Newsletter</h1>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
         <FormField
           control={form.control}

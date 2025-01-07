@@ -2,7 +2,6 @@
 
 import * as React from "react";
 import Link from "next/link";
-import { Divider } from "@mui/material";
 import LeadershipCarouselSkeleton from "./skeletons/LeadershipSkeleton";
 import { Badge } from "./ui/badge";
 import { Button } from "./ui/button";
@@ -58,10 +57,9 @@ export default function LeadershipCarousel() {
 
   return (
     <div className="p-10 mt-36">
-      <h1 className="text-4xl text-red-500 dark:text-red-700 font-semibold mb-4 text-center">
+      <h1 className="text-4xl dark:text-white font-semibold mb-4 text-center">
         Party Leadership
       </h1>
-      <Divider className="my-8 w-1/2 mx-auto" sx={{ borderColor: "red" }} />
       <Carousel
         opts={{
           align: "center",
@@ -115,7 +113,7 @@ export default function LeadershipCarousel() {
       </Carousel>
       <div className="flex justify-center">
         <Link href="/leadership-database">
-          <Button variant="destructive" className="mt-10 text-center">
+          <Button variant="destructive" className="mt-10 text-center hover:bg-red-600">
             View Leadership Database
           </Button>
         </Link>

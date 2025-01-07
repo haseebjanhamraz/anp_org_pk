@@ -53,7 +53,6 @@ export default function HistoryNavigator() {
 
     return (
         <div className="relative dark:bg-slate-900 dark:text-white mt-10">
-
             <button
                 id="toc-button"
                 onClick={() => setIsOpen(!isOpen)}
@@ -62,19 +61,17 @@ export default function HistoryNavigator() {
                 <span>Table of Contents</span>
                 {isOpen ? <ExpandLessIcon /> : <ExpandMoreIcon />}
             </button>
-
-
             {isOpen && (
                 <div
                     id="toc-menu"
-                    className="fixed top-30 right-[230px] z-50 bg-white dark:bg-slate-900 p-4 shadow-md rounded-md max-h-[80vh] overflow-y-auto"
+                    className="fixed top-60 z-50 right-0 dark:bg-slate-500 p-4 shadow-md rounded-md max-h-[80vh] overflow-y-auto"
                 >
                     <ul className="flex flex-col gap-2">
                         {sections.map((section) => (
                             <li
                                 key={section.id}
                                 onClick={() => scrollToSection(section.id)}
-                                className="px-4 py-2 text-sm bg-red-900 cursor-pointer text-white rounded-md hover:bg-red-700 transition-colors whitespace-nowrap"
+                                className="px-4 py-2 text-sm bg-red-900 cursor-pointer text-white rounded-md hover:bg-red-500  whitespace-nowrap"
                             >
                                 {section.title}
                             </li>

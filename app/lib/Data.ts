@@ -6,7 +6,13 @@ import { FaFax, FaPhoneAlt } from "react-icons/fa";
 import { MdAlternateEmail } from "react-icons/md";
 
 
-
+export const partyDetails = {
+    "Party Name": "Awami National Party",
+    "Founder": "Khan Abdul Wali Khan",
+    "Founded": "1986",
+    "Location": "Bacha Khan Markaz Pajaggi Road, Peshawar, Pakhtunkhwa. 25000",
+    "Election Symbol": "Lantern * لالٹین * لاټېن"
+}
 
 export const menu = [{
     name: "Home",

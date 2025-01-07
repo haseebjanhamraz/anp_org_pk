@@ -17,7 +17,7 @@ export default function Hero() {
                         The Khudai Khidmatgar movement quickly gained popularity, mobilizing thousands of Pashtuns in British India and aligning ideologically with the Indian National Congress.
                     </p>
                     <div className="flex">
-                        <Link href="/become-member" className="inline-flex items-center justify-center px-5 py-3 mr-3 text-base font-medium text-center text-white rounded-lg bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-primary-300 dark:focus:ring-primary-900">
+                        <Link href="#" className="inline-flex items-center justify-center px-5 py-3 mr-3 text-base font-medium text-center text-white rounded-lg bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-primary-300 dark:focus:ring-primary-900">
                             Get Registered
                             <svg className="w-5 h-5 ml-2 -mr-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd"></path></svg>
                         </Link>
@@ -26,27 +26,27 @@ export default function Hero() {
                         </Link>
                     </div>
                 </div>
-                <div className="w-full max-h-96 items-center gap-2 flex-col lg:mt-0 lg:col-span-5 lg:flex animate-in slide-in-from-right-96 duration-500">
+                <div className="w-full items-center gap-2 flex-col lg:mt-0 lg:col-span-5 lg:flex animate-in slide-in-from-right-96 duration-500">
                     <div className="w-fit p-10">
                         <Image src="/yawa-lara.png"
                             alt="mockup"
-                            width={100}
-                            height={100}
-                            className="object-contain w-full h-full rounded-lg hidden sm:block"
+                            width={120}
+                            height={120}
+                            className="object-contain w-full h-full rounded-lg hidden lg:block"
                         />
                     </div>
                     <Image src="/leadership.png"
                         alt="mockup"
-                        width={500}
-                        height={500}
-                        className="object-contain w-full h-full z-100 rounded-lg"
+                        width={300}
+                        height={300}
+                        className="z-100 rounded-lg hidden lg:block"
                     />
                     <div className="w-fit p-10">
                         <Image src="/yaw-manzal.png"
                             alt="mockup"
-                            width={100}
-                            height={100}
-                            className="object-contain w-full h-full rounded-lg hidden sm:block"
+                            width={120}
+                            height={120}
+                            className="object-contain w-full h-full rounded-lg hidden lg:block"
                         />
                     </div>
                 </div>

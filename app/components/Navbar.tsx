@@ -22,14 +22,13 @@ export const Navbar = () => {
     }, []);
 
     return (
-        <nav className="flex md:sticky z-50 top-0 flex-wrap items-center justify-between p-3 px-8 bg-gray-100 dark:bg-slate-800">
+        <nav className="flex sticky z-50 top-0 flex-wrap items-center justify-between p-3 px-8 bg-gray-100 dark:bg-slate-800">
             {/* Logo Section */}
             <Link href="/" className="flex items-center gap-4">
                 <Image src="/anp-logo.png" width={70} height={70} alt="ANP Logo" />
                 <div className="text-center">
                     {!isMobile ? (
                         <>
-
                             <h4 className="text-xl font-extrabold uppercase text-red-500">
                                 Awami National Party
                             </h4>
