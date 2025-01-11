@@ -21,16 +21,16 @@ const PDFViewer = () => {
   }
 
   return (
-    <div className="flex gap-4 flex-col md:flex-row w-full h-screen overflow-hidden shadow-lg rounded-lg">
+    <div className="flex gap-4 flex-col md:flex-row sm:flex-col w-full overflow-hidden shadow-lg rounded-lg">
       {/* Document Information Section */}
-      <div className="top-30 p-5 md:p-10 md:w-1/3 space-y-3 bg-gray-100 dark:bg-gray-800">
+      <div className="top-30 p-5 md:p-8 md:w-1/3 space-y-3 bg-gray-100 dark:bg-gray-800">
         <div className="flex gap-1">
         <DescriptionIcon className="text-gray-300" fontSize= "large"/>
         <h1 className="text-2xl md:text-5xl font-bold dark:text-white">
           {document.name}
         </h1>
         </div>
-        <div className="flex flex-wrap gap-3 mt-5">
+        <div className="flex flex-wrap gap-3 mt-5 p-4">
           <p className="px-3 py-1 bg-red-400 dark:bg-red-700 w-fit rounded-lg text-sm text-white font-bold">
             Category: {document.category}
           </p>
@@ -69,11 +69,11 @@ const PDFViewer = () => {
       </div>
 
       {/* PDF Viewer Section */}
-      <div className=" flex-grow">
+      <div className="flex-grow transition-all duration-200 mb-10">
         <div className="w-full h-full rounded-md overflow-hidden border dark:border-gray-700">
           <embed
             src={document.filepath || null}
-            className="w-full h-full"
+            className="w-full h-svh"
             type="application/pdf"
           />
         </div>

@@ -9,7 +9,6 @@ export const metadata: Metadata = generateMetadata("/display-doc");
 const DisplayDocument = () => {
     return (
         <>
-
         <PDFViewer />
         </>
     );

@@ -50,7 +50,6 @@ const config = {
 
 	},
 
-	plugins: [require("tailwindcss-animate")],
 	darkMode: ['class'], // Enable dark mode by adding 'class' instead of ['selector']
 };
 

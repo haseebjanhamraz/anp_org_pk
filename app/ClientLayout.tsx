@@ -15,7 +15,7 @@ export default function ClientLayout({
             <main className="p-10 dark:bg-slate-900">
                 {children}
             </main>
-            <Footer />
+            {pathname.startsWith("/dashboard") ? "" : <Footer />}
         </>
     );
 } 
