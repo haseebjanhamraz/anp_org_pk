@@ -219,6 +219,12 @@ export const docCategories = [
     'Other'
 ]
 
+export const languages =[
+    'English',
+    'Urdu',
+    'Pashto'
+]
+
 export const importantLinks = [
     {
         name: "Copyright Policy",

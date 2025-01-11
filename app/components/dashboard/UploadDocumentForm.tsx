@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-import { docCategories } from '../../lib/Data';
+import { docCategories, languages } from '../../lib/Data';
 
 export default function UploadDocumentForm() {
     const router = useRouter();
@@ -120,8 +120,11 @@ export default function UploadDocumentForm() {
                             required
                         >
                             <option value="">Select a language</option>
-                            <option value="en">English</option>
-                            <option value="ur">Urdu</option>
+                            {languages.map((language, index) => (
+                                <option key={index} value={language}>
+                                    {language}
+                                </option>
+                            ))}
                         </select>
                     </div>
                     <div className="flex flex-col gap-2">

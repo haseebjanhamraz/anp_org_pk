@@ -8,6 +8,7 @@ interface Document {
     filepath: string;
     createdAt: Date;
     updatedAt: Date;
+    loading: boolean;
 }
 
 const useDocument = (id: string) => {
@@ -19,7 +20,8 @@ const useDocument = (id: string) => {
         language: '',
         filepath: '',
         createdAt: new Date(),
-        updatedAt: new Date()
+        updatedAt: new Date(),
+        loading: false,
     });
 
     useEffect(() => {

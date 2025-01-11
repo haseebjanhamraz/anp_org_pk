@@ -29,7 +29,7 @@ export default function LeadershipCarousel() {
     // Start autoplay
     const interval = setInterval(() => {
       api.scrollNext();
-    }, 2000); // Change slide every 3 seconds
+    }, 3000); // Change slide every 3 seconds
 
     // Cleanup interval on unmount
     return () => clearInterval(interval);

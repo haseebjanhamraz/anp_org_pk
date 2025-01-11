@@ -5,8 +5,6 @@ import { getSignedUrl } from '../../../hooks/getBucket'
 import { deleteBucketItem } from '../../../hooks/deleteBucketItem'
 
 
-
-
 export async function GET(
     req: Request,
     { params }: { params: Promise<{ id: string }> }

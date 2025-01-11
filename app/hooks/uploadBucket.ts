@@ -1,14 +1,14 @@
 import { Storage } from '@google-cloud/storage';
 
 // Initialize Google Cloud Storage client with credentials
-const storage = new Storage({
+export const storage = new Storage({
   credentials: {
     client_email: process.env.GOOGLE_CLIENT_EMAIL,
     private_key: process.env.GOOGLE_PRIVATE_KEY?.replace(/\\n/g, '\n'), // Convert \n strings to actual newlines
   },
   projectId: process.env.GOOGLE_PROJECT_ID,
 });
-const bucketName = process.env.BUCKET_NAME || 'your-unique-bucket-name';
+const bucketName = process.env.BUCKET_NAME;
 
 /**
  * Uploads a PDF file to Google Cloud Storage

@@ -1,9 +1,9 @@
 import { Metadata } from "next";
 
-
 export const generateMetadata = (path: string): Metadata => {
     const baseUrl = "https://anp.org.pk";
     const siteName = "Awami National Party | ANP";
+
 
     // Define page-specific metadata
     const pageMetadata: { [key: string]: Metadata } = {
@@ -26,6 +26,9 @@ export const generateMetadata = (path: string): Metadata => {
                 "ANP Pakistan",
                 "ANP official website",
                 "ANP manifesto",
+                "ANP constitution",
+                "Awami National Party constitution",
+                "ANP documents",
                 "ANP leadership",
                 "ANP history",
                 "ANP ideology",
@@ -57,7 +60,6 @@ export const generateMetadata = (path: string): Metadata => {
                 "ANP election campaigns",
                 "History of ANP",
                 "ANP manifesto",
-
                 // Long-Tail Keywords
                 "Awami National Party official website",
                 "ANP's stance on provincial autonomy",
@@ -103,6 +105,11 @@ export const generateMetadata = (path: string): Metadata => {
             description: "Learn about the Awami National Party's leadership and their contributions to peace, democracy, and development in Pakistan.",
             keywords: ["ANP Leadership", "ANP Cabinet Members", "ANP Provincial Leaders", "ANP President", "ANP Vice President"],
         },
+        "/display-doc" : {
+            title:"ANP Official Documents | Awami National Party",
+            description:"Here you can view detailed official documents for Awami National Party",
+            keywords:[]
+        },
         "/not-found": {
             title: "404 | Page not found",
             description: "We're sorry this page is not found. But here are links from our website you may want to explore",
@@ -112,7 +119,6 @@ export const generateMetadata = (path: string): Metadata => {
 
     // Get metadata for current path or use default
     const metadata = pageMetadata[path] || pageMetadata["/"];
-
     return {
         ...metadata,
         metadataBase: new URL(baseUrl),
@@ -128,10 +134,10 @@ export const generateMetadata = (path: string): Metadata => {
             description: metadata.description ?? '',
             images: [
                 {
-                    url: "/anp-cover.jpg",
+                    url: "./anp-cover.jpg",
                     width: 1200,
                     height: 630,
-                    alt: "Awami National Party",
+                    alt: "Awami National Party Cover",
                 },
             ],
         },
@@ -139,7 +145,7 @@ export const generateMetadata = (path: string): Metadata => {
             card: "summary_large_image",
             title: metadata.title ?? '',
             description: metadata.description ?? '',
-            images: ["/anp-cover.jpg"],
+            images: ["./anp-cover.jpg"],
             creator: "@ANPMarkaz",
             site: "@ANPMarkaz",
         },
@@ -155,14 +161,14 @@ export const generateMetadata = (path: string): Metadata => {
             },
         },
         verification: {
-            google: "your-google-verification-code",
+            google: "google-site-verification=snn4TkTKvTDGXvvXbgKZpKziiCpLlpBx97pRr1cuOS4",
         },
         authors: [{ name: "Awami National Party" }],
         publisher: "Awami National Party",
         icons: {
-            icon: '/favicon.ico',
-            apple: '/icon.ico',
+            icon: './favicon.ico',
+            apple: './icon.ico',
         },
-        manifest: '/site.webmanifest',
+        manifest: './site.webmanifest',
     };
 };
