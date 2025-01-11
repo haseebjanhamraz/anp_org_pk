@@ -12,7 +12,7 @@ const storage = new Storage({
 
 export const getBucket = async (bucketName: string) => {
   try {
-    const bucket = storage.bucket(bucketName);
+    const bucket = storage.bucket(bucketName).makePublic()
     return bucket;
   } catch (error) {
     console.error('Error getting bucket:', error);
@@ -44,7 +44,7 @@ export const getSignedUrl = async (bucketName: string, fileName: string) => {
 export const listFiles = async (bucketName: string) => {
   try {
     const [files] = await storage.bucket(bucketName).getFiles();
-    console.log('Files:');
+    console.log(`File: ${files}`);
     files.forEach(file => console.log(file.name));
   } catch (error) {
     console.error('Error listing files:', error);

@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server'
 import { connectToDatabase } from '../../../lib/mongodb'
 import { Document } from '../../../models/Downloads'
-import { getSignedUrl } from '../../../hooks/getBucket'
+import { getSignedUrl, listFiles } from '../../../hooks/getBucket'
 import { deleteBucketItem } from '../../../hooks/deleteBucketItem'
 
 
@@ -20,6 +20,11 @@ export async function GET(
                 { status: 404 }
             )
         }
+
+
+        // Get Bucket File
+        const pdfFile = listFiles(process.env.BUCKET_NAME)
+
 
         // Get public URL
         const publicUrl = await getSignedUrl(

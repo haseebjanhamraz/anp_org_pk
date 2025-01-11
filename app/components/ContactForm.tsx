@@ -1,5 +1,5 @@
-"use client"
-import { Button } from "./ui/button"
+"use client";
+import { Button } from "./ui/button";
 import {
   Form,
   FormControl,
@@ -7,10 +7,10 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "./ui/form"
-import { Input } from "./ui/input"
-import { Textarea } from "../components/ui/textarea"
-import { z } from "zod"
+} from "./ui/form";
+import { Input } from "./ui/input";
+import { Textarea } from "../components/ui/textarea";
+import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { contactFormSchema } from "../types/ContactForm";
@@ -24,10 +24,9 @@ export default function ContactForm() {
       email: "",
       message: "",
     },
-  })
+  });
 
   async function onSubmit(values: z.infer<typeof contactFormSchema>) {
-    console.log(values)
     try {
       await fetch("/api/send", {
         method: "POST",
@@ -35,12 +34,12 @@ export default function ContactForm() {
         headers: {
           "Content-Type": "application/json",
         },
-      })
-      toast.success("Message sent")
+      });
+      toast.success("Message sent");
       // Reset form
-      form.reset()
+      form.reset();
     } catch (error) {
-      toast.error("Message not sent")
+      toast.error("Message not sent");
     }
   }
 
@@ -56,7 +55,11 @@ export default function ContactForm() {
               <FormItem>
                 <FormLabel className="dark:text-white">Name</FormLabel>
                 <FormControl>
-                  <Input placeholder="Enter your name" {...field} className="dark:text-white" />
+                  <Input
+                    placeholder="Enter your name"
+                    {...field}
+                    className="dark:text-white"
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -68,8 +71,12 @@ export default function ContactForm() {
             render={({ field }) => (
               <FormItem>
                 <FormLabel className="dark:text-white">Email</FormLabel>
-                <FormControl >
-                  <Input placeholder="Enter your email" {...field} className="dark:text-white" />
+                <FormControl>
+                  <Input
+                    placeholder="Enter your email"
+                    {...field}
+                    className="dark:text-white"
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -92,9 +99,11 @@ export default function ContactForm() {
               </FormItem>
             )}
           />
-          <Button className="bg-black text-white" type="submit">Submit</Button>
+          <Button className="bg-black text-white" type="submit">
+            Submit
+          </Button>
         </Form>
       </form>
     </div>
-  )
+  );
 }

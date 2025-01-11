@@ -1,11 +1,11 @@
-"use client"
+"use client";
 
-import { zodResolver } from "@hookform/resolvers/zod"
-import { membershipFormSchema } from "../types/Membership"
-import { useForm } from "react-hook-form"
-import { z } from "zod"
+import { zodResolver } from "@hookform/resolvers/zod";
+import { membershipFormSchema } from "../types/Membership";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
 import { useRouter } from "next/navigation";
-import { Button } from "./ui/button"
+import { Button } from "./ui/button";
 import {
   Form,
   FormControl,
@@ -14,33 +14,32 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "./ui/form"
-import { Input } from "./ui/input"
+} from "./ui/form";
+import { Input } from "./ui/input";
 import { useState } from "react";
 
 const formSchema = membershipFormSchema;
 
 export default function MembershipForm() {
-    const router = useRouter();
-    const [isLoading, setIsLoading] = useState(false);
+  const router = useRouter();
+  const [isLoading, setIsLoading] = useState(false);
 
-    const form = useForm<z.infer<typeof formSchema>>({
-        resolver: zodResolver(formSchema),
-        defaultValues: {
-            name: "",
-            email: "",
-            password: "",
-        },
-    });
+  const form = useForm<z.infer<typeof formSchema>>({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      name: "",
+      email: "",
+      password: "",
+    },
+  });
 
-    const onSubmit = async (data: z.infer<typeof formSchema>) => {
-        console.log(data);
-    };
+  const onSubmit = async (data: z.infer<typeof formSchema>) => {
+    setIsLoading(true);
+  };
 
   return (
-    
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-    <Form {...form}>
+    <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+      <Form {...form}>
         <FormField
           control={form.control}
           name="name"
@@ -81,7 +80,7 @@ export default function MembershipForm() {
           )}
         />
         <Button type="submit">Submit</Button>
-    </Form>
-      </form>
-  )
+      </Form>
+    </form>
+  );
 }

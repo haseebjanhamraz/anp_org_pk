@@ -33,6 +33,7 @@ const useDocument = (id: string) => {
                 const data = await response.json();
                 setDocument(data);
                 setLoading(false);
+                
             } catch (error) {
                 console.error(error);
             }

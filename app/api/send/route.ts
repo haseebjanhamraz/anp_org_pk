@@ -6,7 +6,6 @@ const resend = new Resend(process.env.RESEND_API_KEY);
 export async function POST(req: Request) {
   try {
     const body = await req.json();
-    console.log(JSON.stringify(body));
     const { name, email, message } = body;
 
     if (!name || !email || !message) {
