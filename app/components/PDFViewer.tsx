@@ -91,7 +91,7 @@ const PDFViewer = () => {
           <p className="px-3 py-1 bg-pink-400 w-fit dark:bg-pink-700 text-white rounded-lg text-sm font-bold">
             Downloadable: Yes
           </p>
-          <p className=" py-1 text-gray-300 text-sm">
+          <p className=" py-1 text-gray-600 dark:text-gray-100 text-sm">
             This document is officially published by the Awami National Party
             (ANP), reflecting its commitment to transparency and effective
             communication with its members and the public. As a progressive
@@ -112,10 +112,13 @@ const PDFViewer = () => {
               Related Documents
             </h2>
             {documents.map((doc, index) => (
-              <div key={index} className="bg-gray-100 dark:bg-gray-800 px-5">
-                <Link href={`/display-doc/${doc._id}`}>
-                  <h2 className="text-sm dark:text-white hover:text-lg hover:font-bold dark:hover:text-red-500 hover:text-red-800 cursor-pointer transition-all duration-500">
-                    {document.category !== doc.category ? doc.name : ""}
+              <div
+                key={index}
+                className="bg-gray-100 dark:bg-gray-800 px-1 mt-2"
+              >
+                <Link href={`/documents/${doc._id}`}>
+                  <h2 className="text-sm dark:text-white hover:text-xl p-2 hover:bg-red-500 transition-all duration-500">
+                    {document.category !== doc.category ? doc.name : null}
                   </h2>
                 </Link>
               </div>

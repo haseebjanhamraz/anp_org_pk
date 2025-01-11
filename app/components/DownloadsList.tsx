@@ -38,7 +38,7 @@ function CustomTabPanel(props: TabPanelProps) {
       aria-labelledby={`simple-tab-${index}`}
       {...other}
     >
-      {value === index && <Box sx={{ p: 3 }}>{children}</Box>}
+      {value === index && <Box>{children}</Box>}
     </div>
   );
 }
@@ -101,7 +101,7 @@ export default function DownloadsList({ documents }: DownloadsListProps) {
                     <div className="flex mb-4 items-center" key={doc._id}>
                       <ListItem>
                         <ListItemAvatar>
-                          <Avatar className=" dark:bg-red-800">
+                          <Avatar className="dark:bg-red-800">
                             <FileIcon className="text-red-500 dark:text-white" />
                           </Avatar>
                         </ListItemAvatar>

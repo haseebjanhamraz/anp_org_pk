@@ -21,3 +21,6 @@
 .special {
   column-count: 2;
 }
+.MuiTypography-body1{
+  line-height: 1.2rem
+}
