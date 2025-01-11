@@ -6,8 +6,49 @@ import useGetDocuments from "../hooks/useGetDocuments";
 import DescriptionIcon from "@mui/icons-material/Description";
 import Loader from "./Loader";
 import Link from "next/link";
-import { Worker, Viewer } from "@react-pdf-viewer/core";
+import {
+  Worker,
+  Viewer,
+  RenderPageProps,
+  ProgressBar,
+} from "@react-pdf-viewer/core";
 import "@react-pdf-viewer/core/lib/styles/index.css";
+
+const renderPage = (props: RenderPageProps) => {
+  return (
+    <>
+      {props.canvasLayer.children}
+      <div
+        style={{
+          userSelect: "none",
+          alignItems: "center",
+          display: "flex",
+          height: "100%",
+          justifyContent: "center",
+          left: 0,
+          position: "absolute",
+          top: 0,
+          width: "100%",
+        }}
+      >
+        <div
+          style={{
+            color: "rgba(0, 0, 0, 0.2)",
+            fontSize: `${5 * props.scale}rem`,
+            fontWeight: "bold",
+            textTransform: "uppercase",
+            transform: "rotate(-45deg)",
+            userSelect: "none",
+          }}
+        >
+          @ANPMarkaz
+        </div>
+      </div>
+      {props.textLayer.children}
+      {props.annotationLayer.children}
+    </>
+  );
+};
 
 const PDFViewer = () => {
   const params = useParams();
@@ -21,7 +62,7 @@ const PDFViewer = () => {
   }
 
   return (
-    <div className="flex gap-4 flex-col md:flex-row sm:flex-col w-full overflow-hidden shadow-lg rounded-lg">
+    <div className="flex h-screen gap-4 flex-col md:flex-row sm:flex-col w-full overflow-hidden shadow-lg rounded-lg">
       {/* Document Information Section */}
       <div className="top-30 p-5 md:p-8 md:w-1/3 space-y-3 bg-gray-100 dark:bg-gray-800">
         <div className="flex gap-1">
@@ -83,7 +124,16 @@ const PDFViewer = () => {
       <div className="flex-grow transition-all duration-200 mb-10">
         <div className="w-full h-full rounded-md overflow-hidden border dark:border-gray-700">
           <Worker workerUrl="https://unpkg.com/pdfjs-dist@3.11.174/build/pdf.worker.min.js">
-            <Viewer fileUrl={document.filepath} />;
+            <Viewer
+              fileUrl={document.filepath}
+              renderPage={renderPage}
+              renderLoader={(percentages: number) => (
+                <div style={{ width: "240px" }}>
+                  <ProgressBar progress={Math.round(percentages)} />
+                </div>
+              )}
+            />
+            ;
           </Worker>
         </div>
       </div>
