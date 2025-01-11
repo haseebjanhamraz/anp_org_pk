@@ -67,9 +67,16 @@ const PDFViewer = () => {
       <div className="top-30 p-5 md:p-8 md:w-1/3 space-y-3 bg-gray-100 dark:bg-gray-800">
         <div className="flex gap-1">
           <DescriptionIcon className="text-gray-300" fontSize="large" />
-          <h1 className="text-2xl md:text-5xl font-bold dark:text-white">
-            {document.name}
-          </h1>
+          <div className="flex flex-col gap-3">
+            <h1 className="text-2xl md:text-5xl font-bold dark:text-white">
+              {document.name}
+            </h1>
+            <div className="border-2 border-gray-300 w-fit px-2 py-1 rounded-lg">
+              <h5 className="text-lg font-medium text-gray-600 dark:text-gray-200">
+                {document.publishYear}
+              </h5>
+            </div>
+          </div>
         </div>
         <div className="flex flex-wrap gap-3 mt-5 p-4">
           <p className="px-3 py-1 bg-red-400 dark:bg-red-700 w-fit rounded-lg text-sm text-white font-bold">
@@ -78,16 +85,13 @@ const PDFViewer = () => {
           <p className="px-3 py-1 bg-yellow-400 dark:bg-yellow-700 dark:text-white w-fit rounded-lg text-sm font-bold">
             Language: {document.language.toUpperCase()}
           </p>
-          <p className="px-3 py-1 bg-purple-400 dark:bg-purple-700 w-fit text-white rounded-lg text-sm font-bold">
-            Publish Year: {document.publishYear}
-          </p>
           <p className="px-3 py-1 bg-orange-400 w-fit dark:bg-orange-700 text-white rounded-lg text-sm font-bold">
             Format: PDF
           </p>
           <p className="px-3 py-1 bg-pink-400 w-fit dark:bg-pink-700 text-white rounded-lg text-sm font-bold">
             Downloadable: Yes
           </p>
-          <p className="px-3 py-1 text-justify text-gray-500 text-sm">
+          <p className="text-gray-300 text-sm">
             This document is officially published by the Awami National Party
             (ANP), reflecting its commitment to transparency and effective
             communication with its members and the public. As a progressive
