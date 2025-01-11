@@ -105,7 +105,7 @@ export const generateMetadata = (path: string): Metadata => {
             description: "Learn about the Awami National Party's leadership and their contributions to peace, democracy, and development in Pakistan.",
             keywords: ["ANP Leadership", "ANP Cabinet Members", "ANP Provincial Leaders", "ANP President", "ANP Vice President"],
         },
-        "/display-doc" : {
+        "/documents" : {
             title:"ANP Official Documents | Awami National Party",
             description:"Here you can view detailed official documents for Awami National Party",
             keywords:[]

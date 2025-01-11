@@ -62,7 +62,7 @@ const PDFViewer = () => {
   }
 
   return (
-    <div className="flex h-screen gap-4 flex-col md:flex-row sm:flex-col w-full overflow-hidden shadow-lg rounded-lg">
+    <div className="flex gap-4 flex-col md:flex-row sm:flex-col w-full overflow-hidden shadow-lg rounded-lg">
       {/* Document Information Section */}
       <div className="top-30 p-5 md:p-8 md:w-1/3 space-y-3 bg-gray-100 dark:bg-gray-800">
         <div className="flex gap-1">
@@ -91,7 +91,7 @@ const PDFViewer = () => {
           <p className="px-3 py-1 bg-pink-400 w-fit dark:bg-pink-700 text-white rounded-lg text-sm font-bold">
             Downloadable: Yes
           </p>
-          <p className="text-gray-300 text-sm">
+          <p className=" py-1 text-gray-300 text-sm">
             This document is officially published by the Awami National Party
             (ANP), reflecting its commitment to transparency and effective
             communication with its members and the public. As a progressive
@@ -125,8 +125,8 @@ const PDFViewer = () => {
       </div>
 
       {/* PDF Viewer Section */}
-      <div className="flex-grow transition-all duration-200 mb-10">
-        <div className="w-full h-full rounded-md overflow-hidden border dark:border-gray-700">
+      <div className="flex-grow">
+        <div className="w-full h-screen rounded-md overflow-hidden border dark:border-gray-700">
           <Worker workerUrl="https://unpkg.com/pdfjs-dist@3.11.174/build/pdf.worker.min.js">
             <Viewer
               fileUrl={document.filepath}
@@ -137,7 +137,6 @@ const PDFViewer = () => {
                 </div>
               )}
             />
-            ;
           </Worker>
         </div>
       </div>

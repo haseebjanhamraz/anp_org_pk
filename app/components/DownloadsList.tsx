@@ -115,8 +115,7 @@ export default function DownloadsList({ documents }: DownloadsListProps) {
                         />
                       </ListItem>
                       <Link
-                        href={`/display-doc/${doc._id}`}
-                        target="_blank"
+                        href={`/documents/${doc._id}`}
                         rel="noopener noreferrer"
                       >
                         <Button variant="contained" color="error">
