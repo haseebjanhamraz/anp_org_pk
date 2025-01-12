@@ -1,6 +1,7 @@
 {
-  "name": "anp_org_pk",
-  "version": "0.1.0",
+  "name": "Awami National Party",
+  "version": "1.0.0",
+  "description": "An official website for Awami National Party in NextJS 15",
   "private": true,
   "scripts": {
     "dev": "next dev --turbo",
