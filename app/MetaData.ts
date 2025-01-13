@@ -111,9 +111,6 @@ export const generateMetadata = (path: string): Metadata => {
           alt: "Awami National Party Cover",
         },
       ],
-      fb: {
-        app_id: "278305793035062",
-      },
     },
 
     twitter: {

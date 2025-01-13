@@ -25,7 +25,11 @@ export default function DarkModeToggle(): JSX.Element {
   }, [isDark]);
 
   return (
-    <button onClick={() => setIsDark(!isDark)} className="p-2  rounded">
+    <button
+      onClick={() => setIsDark(!isDark)}
+      aria-label="Theme Toggle"
+      className="p-2  rounded"
+    >
       {isDark ? (
         <MdLightMode className="text-red-500 text-2xl" />
       ) : (
