@@ -1,8 +1,10 @@
 import { Metadata } from "next";
 
-const BASE_URL = "https://anp.org.pk";
+const BASE_URL = "https://awaminationalparty.org";
 const SITE_NAME = "Awami National Party | ANP";
 const DEFAULT_IMAGE = "./anp-cover.jpg";
+const FALLBACK_IMAGE =
+  "https://opengraph.b-cdn.net/production/images/ff8fb7d4-cec7-4ca7-b576-6da8251ff9f9.jpg?token=PTTCojAu2Ywv21ETIUeIK2Lr8b7BgZ8n20lwTjUGOe8&height=630&width=1200&expires=33272771511";
 
 const pageMetadata: Record<string, Metadata> = {
   "/": {
@@ -103,7 +105,7 @@ export const generateMetadata = (path: string): Metadata => {
       description: metadata.description ?? "",
       images: [
         {
-          url: DEFAULT_IMAGE,
+          url: DEFAULT_IMAGE || FALLBACK_IMAGE,
           width: 1200,
           height: 630,
           alt: "Awami National Party Cover",
@@ -114,7 +116,7 @@ export const generateMetadata = (path: string): Metadata => {
       card: "summary_large_image",
       title: metadata.title ?? "",
       description: metadata.description ?? "",
-      images: [DEFAULT_IMAGE],
+      images: [DEFAULT_IMAGE, FALLBACK_IMAGE],
       creator: "@ANPMarkaz",
       site: "@ANPMarkaz",
     },

@@ -3,49 +3,49 @@ import type { MetadataRoute } from "next";
 export default function sitemap(): MetadataRoute.Sitemap {
   return [
     {
-      url: "https://anp.org.pk",
+      url: "awaminationalparty.org",
       lastModified: new Date(),
       changeFrequency: "weekly",
       priority: 1,
     },
     {
-      url: "https://anp.org.pk/about",
+      url: "awaminationalparty.org/about",
       lastModified: new Date(),
       changeFrequency: "yearly",
       priority: 0.8,
     },
     {
-      url: "https://anp.org.pk/party",
+      url: "awaminationalparty.org/party",
       lastModified: new Date(),
       changeFrequency: "yearly",
       priority: 0.5,
     },
     {
-      url: "https://anp.org.pk/party/leadership/",
+      url: "awaminationalparty.org/party/leadership/",
       lastModified: new Date(),
       changeFrequency: "weekly",
       priority: 0.5,
     },
     {
-      url: "https://anp.org.pk/documents/",
+      url: "awaminationalparty.org/documents/",
       lastModified: new Date(),
       changeFrequency: "weekly",
       priority: 0.5,
     },
     {
-      url: "https://anp.org.pk/history",
+      url: "awaminationalparty.org/history",
       lastModified: new Date(),
       changeFrequency: "yearly",
       priority: 0.5,
     },
     {
-      url: "https://anp.org.pk/leadership-database",
+      url: "awaminationalparty.org/leadership-database",
       lastModified: new Date(),
       changeFrequency: "weekly",
       priority: 0.5,
     },
     {
-      url: "https://anp.org.pk/contact",
+      url: "awaminationalparty.org/contact",
       lastModified: new Date(),
       changeFrequency: "yearly",
       priority: 0.6,
