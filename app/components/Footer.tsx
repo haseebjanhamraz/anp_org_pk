@@ -1,4 +1,5 @@
 "use client";
+import { useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import ImportantLinks from "./ImportantLinks";
@@ -6,6 +7,16 @@ import ContactDetails from "./ContactDetails";
 import NewsletterForm from "./NewsletterForm";
 
 export default function Footer() {
+  useEffect(() => {
+    const handleContextmenu = (e) => {
+      e.preventDefault();
+    };
+    document.addEventListener("contextmenu", handleContextmenu);
+    return function cleanup() {
+      document.removeEventListener("contextmenu", handleContextmenu);
+    };
+  }, []);
+
   return (
     <>
       <div className="flex dark:bg-slate-800 pt-20 gap-4 flex-col lg:flex-row shadow-inner drop-shadow-2xl p-10 ">

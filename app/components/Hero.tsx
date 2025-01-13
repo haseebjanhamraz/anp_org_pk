@@ -40,7 +40,7 @@ export default function Hero() {
             alt="mockup"
             width={300}
             height={300}
-            className="z-100 rounded-lg"
+            className="z-100 rounded-lg hidden lg:block"
           />
           <div className="w-fit p-10">
             <Image
