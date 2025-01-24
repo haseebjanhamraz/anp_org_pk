@@ -5,10 +5,7 @@ import Downloads from "./components/Downloads";
 import { Metadata } from "next";
 import { generateMetadata } from "./MetaData";
 
-
-
 export const metadata: Metadata = generateMetadata("/");
-
 
 export default function Home() {
   return (

@@ -73,6 +73,19 @@ const pageMetadata: Record<string, Metadata> = {
       "ANP Provincial Leaders",
     ],
   },
+  "/news": {
+    title: "ANP Official Digital Newsletter | Awami National Party",
+    description:
+      "Official news about Awami National Party activities. The leadership political activities and press releases are issued here from ANP headquarters",
+    keywords: [
+      "ANP News",
+      "ANP Newsletter",
+      "Awami National Party News",
+      "Awami National Party Latest News",
+      "Aimal Wali Khan Latest News",
+      "Asfandyar Wali Khan News",
+    ],
+  },
   "/documents": {
     title: "ANP Official Documents | Awami National Party",
     description:

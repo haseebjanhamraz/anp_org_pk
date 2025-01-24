@@ -2,7 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-
 .dark {
   --background: #121212;
   --foreground: #ffffff;
@@ -21,6 +20,13 @@
 .special {
   column-count: 2;
 }
-.MuiTypography-body1{
-  line-height: 1.2rem
+.MuiTypography-body1 {
+  line-height: 1.2rem;
+}
+
+@font-face {
+  font-family: "Jameel Noori Nastaleeq";
+  src: url("/fonts/JameelNooriNastaleeq.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
 }

@@ -24,6 +24,10 @@ export const menu = [
     link: "/party",
   },
   {
+    name: "News",
+    link: "/news",
+  },
+  {
     name: "About",
     link: "/about",
   },
