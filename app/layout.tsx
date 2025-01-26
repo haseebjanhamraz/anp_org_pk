@@ -20,6 +20,11 @@ const nastaleeq = localFont({
   variable: "--font-geist-mono",
   weight: "100 900",
 });
+const teko = localFont({
+  src: "./fonts/Teko.ttf",
+  variable: "--font-tek",
+  weight: "300 400 500 600 700",
+});
 
 // Custom theme
 const theme = createTheme({
@@ -56,7 +61,7 @@ export default function RootLayout({
         <link rel="icon" type="image/png" sizes="16x16" href="./favicon.ico" />
       </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${nastaleeq.variable} min-h-screen antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} ${nastaleeq.variable} ${teko.variable} min-h-screen antialiased`}
       >
         <ToastProvider>
           <ClientLayout>{children}</ClientLayout>

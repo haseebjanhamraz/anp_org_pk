@@ -42,7 +42,6 @@ const pageMetadata: Record<string, Metadata> = {
       "Aimal Wali Khan",
       "ANP Party Structure",
     ],
-    viewport: "width=device-width, initial-scale=1",
   },
   "/history": {
     title:

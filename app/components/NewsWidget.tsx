@@ -5,6 +5,7 @@ import getPosts from "../hooks/useWordPress";
 import TruncateText from "../utils/Truncate";
 import NewsModal from "./NewsModal";
 import Loader from "./Loader";
+import Link from "next/link";
 
 export default function News() {
   const [data, setData] = useState([]);
@@ -60,12 +61,22 @@ export default function News() {
                   maxLength={250}
                 />
               </h2>
-              <p className="text-sm text-gray-500 mb-2">
-                {new Date(post.date).toLocaleDateString()}
+              <p className="text-xs mt-4 text-gray-500 mb-2">
+                Posted on {new Date(post.date).toLocaleDateString()} by Bacha
+                Khan Markaz - Central Media Cell | Source: Official Facebook
+                Page
               </p>
             </div>
           </div>
         ))}
+        <Link
+          className="
+        text-center bg-red-500 p-3 text-white rounded-lg shadow-md hover:bg-red-600 transition duration-300 w-fit text-lg font-semibold 
+        "
+          href={"/news"}
+        >
+          Read All News
+        </Link>
       </div>
     </>
   );

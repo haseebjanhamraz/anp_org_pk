@@ -29,11 +29,11 @@ export const Navbar = () => {
         <div className="text-center">
           {!isMobile ? (
             <>
-              <h4 className="text-xl font-extrabold uppercase text-red-500">
+              <h4 className="text-3xl font-extrabold uppercase text-red-500 font-[Teko]">
                 Awami National Party
               </h4>
               <Divider className="bg-red-100 dark:bg-red-900" />
-              <span className="lg:text-md md:text-sm text-gray-500 dark:text-gray-400 font-light">
+              <span className="lg:text-md md:text-md font-[Teko] text-gray-500 dark:text-gray-400 font-light">
                 PEACE - DEMOCRACY - DEVELOPMENT
               </span>
             </>

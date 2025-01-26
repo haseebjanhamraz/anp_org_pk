@@ -22,22 +22,28 @@ export const menu = [
   {
     name: "Party",
     link: "/party",
-  },
-  {
-    name: "News",
-    link: "/news",
+    subMenu: [
+      {
+        name: "History",
+        link: "/history",
+      },
+      {
+        name: "News & Updates",
+        link: "/news",
+      },
+      {
+        name: "Documents & Downloads",
+        link: "/documents",
+      },
+      {
+        name: "Leadership DB",
+        link: "/leadership-database",
+      },
+    ],
   },
   {
     name: "About",
     link: "/about",
-  },
-  {
-    name: "History",
-    link: "/history",
-  },
-  {
-    name: "Leadership DB",
-    link: "/leadership-database",
   },
   {
     name: "Contact",
