@@ -3,7 +3,7 @@ import "./globals.css";
 import ClientLayout from "./ClientLayout";
 import { ToastProvider } from "./components/ui/toast";
 import React from "react";
-import { ThemeProvider, createTheme, CssBaseline } from "@mui/material";
+import { createTheme } from "@mui/material";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -12,6 +12,11 @@ const geistSans = localFont({
 });
 const geistMono = localFont({
   src: "./fonts/GeistMonoVF.woff",
+  variable: "--font-geist-mono",
+  weight: "100 900",
+});
+const nastaleeq = localFont({
+  src: "./fonts/JameelNooriNastaleeq.ttf",
   variable: "--font-geist-mono",
   weight: "100 900",
 });
@@ -51,7 +56,7 @@ export default function RootLayout({
         <link rel="icon" type="image/png" sizes="16x16" href="./favicon.ico" />
       </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} min-h-screen antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} ${nastaleeq.variable} min-h-screen antialiased`}
       >
         <ToastProvider>
           <ClientLayout>{children}</ClientLayout>

@@ -1,10 +1,10 @@
 const API_URL = "https://anp.com.pk/wp-json/wp/v2/";
 const CATEGORY_NAME = "facebook-official-newsletter";
 
-export default async function getPosts(page = 1, perPage = 10) {
+export default async function getPosts() {
   try {
     const response = await fetch(
-      `${API_URL}posts?category_name=${CATEGORY_NAME}&page=${page}&per_page=${perPage}`
+      `${API_URL}posts?category_name=${CATEGORY_NAME}`
     );
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);

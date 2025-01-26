@@ -9,7 +9,7 @@ export default function NewsModal({ post, onClose }) {
         {/* Close button */}
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 text-gray-600 dark:text-white hover:text-gray-800"
+          className="absolute top-2 hover:text-red-700 right-4 text-gray-600 dark:text-white"
         >
           ✖
         </button>
@@ -17,7 +17,7 @@ export default function NewsModal({ post, onClose }) {
         {/* Modal content */}
         <div className="flex flex-col h-full">
           {/* Title */}
-          <h2 className="text-2xl text-red-700 font-bold mb-4 text-center font-nastaleeq">
+          <h2 className="text-2xl text-red-700 dark:text-red-500 font-bold mb-4 text-center font-[nastaleeq]">
             {post.title.replace("&#8230;", "")}
           </h2>
 
@@ -36,9 +36,9 @@ export default function NewsModal({ post, onClose }) {
               />
             )}
             <p
-              className="text-gray-700 dark:text-white text-right font-nastaleeq text-lg"
+              className="text-gray-700 dark:text-white text-right font-[nastaleeq] text-lg"
               dangerouslySetInnerHTML={{
-                __html: post.description.replace(regex, ""),
+                __html: post.description,
               }}
             ></p>
             <Link

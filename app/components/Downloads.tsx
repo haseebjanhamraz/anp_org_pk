@@ -7,7 +7,7 @@ import React from "react";
 const Downloads = () => {
   const { documents, loading } = useGetDocuments();
   return (
-    <div className="mt-20 dark:border-2 dark:border-solid dark:border-gray-600 rounded-md shadow-lg p-4">
+    <div className="w-full mt-20 dark:border-2 dark:border-solid dark:border-gray-600 rounded-md shadow-lg p-4">
       <h1 className="text-4xl dark:text-white font-semibold mb-4 text-center">
         Downloads & Documents{" "}
       </h1>
