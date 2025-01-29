@@ -20,7 +20,7 @@ export const menu = [
     link: "/",
   },
   {
-    name: "Party",
+    name: "Party Structure",
     link: "/party",
     subMenu: [
       {

@@ -5,7 +5,6 @@ import Downloads from "./components/Downloads";
 import { Metadata } from "next";
 import { generateMetadata } from "./MetaData";
 import NewsWidget from "./components/NewsWidget";
-
 export const metadata: Metadata = generateMetadata("/");
 
 export default function Home() {
