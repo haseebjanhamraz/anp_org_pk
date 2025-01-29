@@ -2,6 +2,7 @@
 
 import * as React from "react";
 import { useForm, Controller } from "react-hook-form";
+import Image from "next/image";
 import {
   TextField,
   Button,
@@ -13,7 +14,8 @@ import {
   FormControl,
   InputLabel,
 } from "@mui/material";
-import { Toast } from "../ui/toast";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { useDropzone } from "react-dropzone";
 import {
   positions,
@@ -22,7 +24,6 @@ import {
   cabinetPeriod,
   kpDistricts,
 } from "../../lib/Data";
-import { toast } from "sonner";
 
 interface LeadershipFormData {
   name: string;
@@ -170,7 +171,6 @@ export default function LeadershipForm() {
 
   return (
     <>
-      <Toast />
       <Paper sx={{ p: 4, maxWidth: 600, margin: "0 auto" }}>
         <form onSubmit={handleSubmit(onSubmit)}>
           <Stack spacing={3}>
@@ -353,7 +353,17 @@ export default function LeadershipForm() {
             </div>
 
             <h4 className="font-bold text-2xl text-gray-400 text-center">OR</h4>
-
+            <div className="flex items-center justify-center">
+              {uploadedImage && (
+                <Image
+                  src={uploadedImage || ""}
+                  width={200}
+                  height={200}
+                  alt="image"
+                  className="rounded-lg shadow-xl"
+                />
+              )}
+            </div>
             <Controller
               name="imageUrl"
               control={control}
@@ -451,6 +461,18 @@ export default function LeadershipForm() {
           </Stack>
         </form>
       </Paper>
+      <ToastContainer
+        position="top-right"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
     </>
   );
 }

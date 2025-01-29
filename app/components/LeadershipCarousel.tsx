@@ -92,7 +92,7 @@ export default function LeadershipCarousel() {
                     <span className="text-2xl font-semibold text-center leading-none">
                       <Link
                         href={`/party/leadership/${leader._id}`}
-                        className="hover:underline hover:text-red-600"
+                        className="hover:underline hover:text-red-600 font-[Teko] font-medium"
                       >
                         {leader.name.length > 20
                           ? leader.name.slice(0, 25) + "..."

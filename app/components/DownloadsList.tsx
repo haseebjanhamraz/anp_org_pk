@@ -106,9 +106,6 @@ export default function DownloadsList({ documents }: DownloadsListProps) {
                           </Avatar>
                         </ListItemAvatar>
                         <ListItemText
-                          sx={{
-                            color: "red",
-                          }}
                           className="dark:text-white"
                           primary={doc.name}
                           secondary={`Published in ${doc.publishYear}`}
