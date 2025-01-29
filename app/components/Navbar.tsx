@@ -33,8 +33,8 @@ export const Navbar = () => {
                 Awami National Party
               </h4>
               <Divider className="bg-red-100 dark:bg-red-900" />
-              <span className="lg:text-md md:text-md font-[Teko] text-gray-500 dark:text-gray-400 font-light">
-                PEACE - DEMOCRACY - DEVELOPMENT
+              <span className="lg:text-lg md:text-md font-[Teko] text-gray-500 dark:text-gray-400 font-light">
+                Peace - Democracy - Development
               </span>
             </>
           ) : null}

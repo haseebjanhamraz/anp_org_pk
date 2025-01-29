@@ -19,7 +19,7 @@ export default function Footer() {
 
   return (
     <>
-      <div className="flex dark:bg-slate-800 pt-20 gap-4 flex-col lg:flex-row shadow-inner drop-shadow-2xl p-10 ">
+      <div className="flex dark:bg-slate-800 pt-20 gap-4 flex-col font-[Teko] lg:flex-row shadow-inner drop-shadow-2xl p-10">
         <div className="w-full p-4 pt-6 dark:bg-slate-800 flex flex-col items-center justify-start">
           <Image
             src="/anp-logo.png"

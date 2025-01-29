@@ -57,7 +57,7 @@ export default function LeadershipCarousel() {
 
   return (
     <div className="p-10 mt-36">
-      <h1 className="text-4xl dark:text-white font-semibold mb-4 text-center">
+      <h1 className="text-4xl font-[Teko] dark:text-white font-semibold mb-4 text-center">
         Party Leadership
       </h1>
       <Carousel
@@ -90,8 +90,13 @@ export default function LeadershipCarousel() {
                       </div>
                     )}
                     <span className="text-2xl font-semibold text-center leading-none">
-                      <Link href={`/party/leadership/${leader._id}`} className="hover:underline">
-                        {leader.name.length > 20 ? leader.name.slice(0, 25) + "..." : leader.name}
+                      <Link
+                        href={`/party/leadership/${leader._id}`}
+                        className="hover:underline hover:text-red-600"
+                      >
+                        {leader.name.length > 20
+                          ? leader.name.slice(0, 25) + "..."
+                          : leader.name}
                       </Link>
                     </span>
                     {leader.position && (
@@ -113,7 +118,10 @@ export default function LeadershipCarousel() {
       </Carousel>
       <div className="flex justify-center">
         <Link href="/leadership-database">
-          <Button variant="destructive" className="mt-10 text-center hover:bg-red-600">
+          <Button
+            variant="destructive"
+            className="mt-10 text-center hover:bg-red-600"
+          >
             View Leadership Database
           </Button>
         </Link>

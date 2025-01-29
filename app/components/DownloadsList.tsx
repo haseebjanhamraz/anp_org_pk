@@ -102,7 +102,7 @@ export default function DownloadsList({ documents }: DownloadsListProps) {
                       <ListItem>
                         <ListItemAvatar>
                           <Avatar className="dark:bg-red-800">
-                            <FileIcon className="text-red-500 dark:text-white" />
+                            <FileIcon className="dark:text-white" />
                           </Avatar>
                         </ListItemAvatar>
                         <ListItemText
