@@ -8,7 +8,7 @@ import {
   colors,
 } from "@mui/material";
 import clsx from "clsx";
-
+import Image from "next/image";
 import FileIcon from "@mui/icons-material/FilePresent";
 import { Document } from "../types/Document";
 import * as React from "react";
@@ -61,7 +61,7 @@ export default function DownloadsList({ documents }: DownloadsListProps) {
   const categories = Array.from(new Set(documents.map((doc) => doc.category)));
 
   return (
-    <div>
+    <div className="relative">
       {documents.length > 0 ? (
         <Box sx={{ width: "100%", zIndex: -1 }}>
           <Box

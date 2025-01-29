@@ -69,14 +69,16 @@ export default function News() {
             </div>
           </div>
         ))}
-        <Link
-          className="
-        text-center bg-red-500 p-3 text-white rounded-lg shadow-md hover:bg-red-600 transition duration-300 w-fit text-lg font-semibold 
+        <div className="flex justify-center items-center">
+          <Link
+            className="
+        text-center bg-red-500 px-2 text-white rounded-lg shadow-md hover:bg-red-500 transition duration-300 w-fit text-lg font-semibold 
         "
-          href={"/news"}
-        >
-          Read All News
-        </Link>
+            href={"/news"}
+          >
+            Read All News
+          </Link>
+        </div>
       </div>
     </>
   );

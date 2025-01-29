@@ -10,7 +10,7 @@ export const metadata: Metadata = generateMetadata("/");
 
 export default function Home() {
   return (
-    <div>
+    <>
       <Hero />
       <BachaKhanQuotes />
       <LeadershipCarousel />
@@ -18,6 +18,6 @@ export default function Home() {
         <Downloads />
         <NewsWidget />
       </div>
-    </div>
+    </>
   );
 }
