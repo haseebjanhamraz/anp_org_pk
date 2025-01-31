@@ -44,6 +44,7 @@ export default function NewsletterForm() {
             <FormItem>
               <FormControl>
                 <Input
+                disabled
                   placeholder="Enter your email"
                   type="email"
                   className="bg-white dark:bg-slate-700"

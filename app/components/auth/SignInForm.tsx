@@ -51,6 +51,7 @@ export default function SignInForm() {
                     Email
                 </label>
                 <input
+                autoFocus
                     type="email"
                     id="email"
                     value={email}

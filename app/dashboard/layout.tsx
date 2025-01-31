@@ -9,8 +9,6 @@ import { useSession } from "next-auth/react"
 import { redirect } from "next/navigation"
 
 
-// Define Types
-
 
 export default function DashboardLayout(
     {
