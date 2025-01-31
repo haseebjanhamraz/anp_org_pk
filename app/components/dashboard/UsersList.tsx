@@ -1,166 +1,226 @@
 "use client";
 
 import * as React from "react";
-import { DataGrid, GridColDef } from "@mui/x-data-grid";
+import { DataGrid, GridColDef, GridRowModes, GridActionsCellItem } from "@mui/x-data-grid";
 import Paper from "@mui/material/Paper";
-import EditIcon from "@mui/icons-material/Edit";
-import DeleteIcon from "@mui/icons-material/Delete";
-import VisibilityIcon from "@mui/icons-material/Visibility";
-import Link from "next/link";
+import { Edit, Delete, Save, Cancel } from "@mui/icons-material";
+import { IconButton, Tooltip } from "@mui/material";
 import ConfirmDeleteAlert from "./ConfirmDeleteAlert";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useSession } from "next-auth/react";
 
-interface UserData {
-  uid: string;
-  id: number;
-  name: string;
-  email: string;
-  role: string;
-  createdAt: string;
-  updatedAt: string;
+interface User {
+    _id: string;
+    name: string;
+    email: string;
+    role: string;
 }
 
-const UsersList = () => {
-  const [open, setOpen] = React.useState(false);
-  const [selectedId, setSelectedId] = React.useState<string | null>(null);
-  const [rows, setRows] = React.useState<UserData[]>([]);
-  const [loading, setLoading] = React.useState(true);
+export default function UsersList() {
+    const { data: session } = useSession()
+    const [open, setOpen] = React.useState(false)
+    const [selectedId, setSelectedId] = React.useState<string | null>(null)
+    const [users, setUsers] = React.useState<User[]>([])
+    const [loading, setLoading] = React.useState(true)
+    const [rowModesModel, setRowModesModel] = React.useState({})
 
-  const handleDeleteClick = (id: string) => {
-    setSelectedId(id);
-    setOpen(true);
-  };
-
-  const handleConfirmDelete = async () => {
-    if (!selectedId) return;
-
-    try {
-      const response = await fetch(`/api/users/${selectedId}`, {
-        method: "DELETE",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${sessionStorage.getItem("token")}`,
-        },
-      });
-
-      if (!response.ok) {
-        throw new Error("Failed to delete user");
-        toast.error("Failed to delete user");
-      }
-      toast.success("User deleted successfully");
-      setRows(rows.filter((row) => row.uid !== selectedId));
-      setOpen(false);
-    } catch (error) {
-      console.error("Error deleting user:", error);
-    }
-  };
-
-  const columns: GridColDef[] = [
-    { field: "id", headerName: "ID", width: 70 },
-    {
-      field: "name",
-      headerName: "Name",
-      width: 160,
-    },
-    {
-      field: "email",
-      headerName: "Email",
-      width: 200,
-    },
-    {
-      field: "role",
-      headerName: "Role",
-      width: 120,
-    },
-    {
-      field: "actions",
-      headerName: "Actions",
-      width: 160,
-      renderCell: (params) => (
-        <>
-          <Link href={`/dashboard/users/${params.row.uid}/edit`}>
-            <EditIcon />
-          </Link>
-          <Link href={`/dashboard/users/${params.row.uid}/view`}>
-            <VisibilityIcon />
-          </Link>
-          <DeleteIcon
-            onClick={() => handleDeleteClick(params.row.uid)}
-            style={{ cursor: "pointer" }}
-          />
-        </>
-      ),
-    },
-  ];
-
-  React.useEffect(() => {
-    const fetchUsers = async () => {
-      try {
-        const response = await fetch("/api/users", {
-          headers: {
-            Authorization: `Bearer ${sessionStorage.getItem("token")}`,
-          },
-        });
-        if (!response.ok) {
-          throw new Error("Failed to fetch users");
-        }
-        const data = await response.json();
-        const transformedData = data.users.map(
-          (row: UserData, index: number) => ({
-            ...row,
-            id: index + 1,
-          })
-        );
-        setRows(transformedData);
-      } catch (error) {
-        console.error("Error fetching users:", error);
-      } finally {
-        setLoading(false);
-      }
+    const handleEditClick = (id: string) => () => {
+        setRowModesModel({ ...rowModesModel, [id]: { mode: GridRowModes.Edit } });
     };
 
-    fetchUsers();
-  }, []);
+    const handleSaveClick = (id: string) => () => {
+        const editedRow = users.find(user => user._id === id);
+        if (editedRow) {
+            processRowUpdate(editedRow)
+                .then(() => {
+                    setRowModesModel({ ...rowModesModel, [id]: { mode: GridRowModes.View } });
+                })
+                .catch((error) => {
+                    console.error('Save failed:', error);
+                    toast.error('Failed to update user');
+                });
+        }
+    };
 
-  return (
-    <>
-      <ConfirmDeleteAlert
-        open={open}
-        setOpen={setOpen}
-        onConfirm={handleConfirmDelete}
-      />
-      <Paper sx={{ height: "auto", width: "100%" }}>
-        <DataGrid
-          rows={rows}
-          columns={columns}
-          getRowId={(row) => row.id}
-          initialState={{
-            pagination: {
-              paginationModel: { pageSize: 5, page: 0 },
-            },
-          }}
-          pageSizeOptions={[5, 10]}
-          checkboxSelection
-          sx={{ boxShadow: "3px 3px 10px 0px rgba(0, 0, 0, 0.1)" }}
-          disableRowSelectionOnClick
-          loading={loading}
-        />
-      </Paper>
-      <ToastContainer
-        position="top-right"
-        autoClose={3000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        theme="light"
-      />
-    </>
-  );
-};
+    const handleCancelClick = (id: string) => () => {
+        setRowModesModel({
+            ...rowModesModel,
+            [id]: { mode: GridRowModes.View, ignoreModifications: true },
+        });
+    };
 
-export default UsersList;
+    const processRowUpdate = async (newRow: User) => {
+        try {
+            const response = await fetch(`/api/users/${newRow._id}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    name: newRow.name,
+                    email: newRow.email,
+                    role: newRow.role
+                }),
+            });
+            
+            if (!response.ok) throw new Error('Failed to update user');
+            
+            const updatedUser = await response.json();
+            setUsers(users => 
+                users.map(user => (user._id === newRow._id ? { ...user, ...updatedUser } : user))
+            );
+            toast.success('User updated successfully');
+            return updatedUser;
+        } catch (error) {
+            console.error('Error updating user:', error);
+            throw error;
+        }
+    };
+
+    const handleDeleteClick = (id: string) => {
+        setSelectedId(id)
+        setOpen(true)
+    }
+
+    const handleConfirmDelete = async () => {
+        if (!selectedId) return;
+
+        try {
+            const response = await fetch(`/api/users/${selectedId}`, {
+                method: "DELETE",
+            })
+
+            if (!response.ok) {
+                throw new Error("Failed to delete user")
+            }
+
+            setUsers(users.filter((user) => user._id !== selectedId))
+            toast.success("User deleted successfully")
+            setOpen(false)
+        } catch (error) {
+            console.error("Error deleting user:", error)
+            toast.error("Failed to delete user")
+        }
+    }
+
+    const columns: GridColDef[] = [
+        {
+            field: "name",
+            headerName: "Name",
+            width: 200,
+            editable: true
+        },
+        {
+            field: "email",
+            headerName: "Email",
+            width: 250,
+            editable: true
+        },
+        {
+            field: "role",
+            headerName: "Role",
+            width: 120,
+            editable: true,
+            type: 'singleSelect',
+            valueOptions: ['user', 'editor', 'admin']
+        },
+        
+        {
+            field: "actions",
+            headerName: "Actions",
+            width: 150,
+            type: 'actions',
+            getActions: ({ id }) => {
+                const isInEditMode = rowModesModel[id]?.mode === GridRowModes.Edit;
+
+                if (isInEditMode) {
+                    return [
+                        <GridActionsCellItem
+                            key="save"
+                            icon={<Save />}
+                            label="Save"
+                            onClick={handleSaveClick(id as string)}
+                        />,
+                        <GridActionsCellItem
+                            key="cancel"
+                            icon={<Cancel />}
+                            label="Cancel"
+                            onClick={handleCancelClick(id as string)}
+                        />
+                    ];
+                }
+
+                return [
+                    <GridActionsCellItem
+                        key="edit"
+                        icon={<Edit />}
+                        label="Edit"
+                        onClick={handleEditClick(id as string)}
+                        disabled={session?.user.role !== 'admin'}
+                    />,
+                    <GridActionsCellItem
+                        key="delete"
+                        icon={<Delete />}
+                        label="Delete"
+                        onClick={() => handleDeleteClick(id as string)}
+                        disabled={session?.user.role !== 'admin'}
+                    />
+                ];
+            }
+        }
+    ]
+
+    React.useEffect(() => {
+        const fetchUsers = async () => {
+            try {
+                const response = await fetch("/api/users")
+                if (!response.ok) {
+                    throw new Error("Failed to fetch users")
+                }
+                const data = await response.json()
+                setUsers(data)
+            } catch (error) {
+                console.error("Error fetching users:", error)
+                toast.error("Failed to fetch users")
+            } finally {
+                setLoading(false)
+            }
+        }
+
+        fetchUsers()
+    }, [])
+
+    return (
+        <>
+            <ConfirmDeleteAlert
+                open={open}
+                setOpen={setOpen}
+                onConfirm={handleConfirmDelete}
+            />
+            <Paper className="p-4">
+                <DataGrid
+                    rows={users}
+                    columns={columns}
+                    getRowId={(row) => row._id}
+                    initialState={{
+                        pagination: {
+                            paginationModel: { pageSize: 10, page: 0 },
+                        },
+                    }}
+                    pageSizeOptions={[5, 10, 25]}
+                    loading={loading}
+                    editMode="row"
+                    rowModesModel={rowModesModel}
+                    onProcessRowUpdateError={(error) => {
+                        console.error('Error processing row update:', error);
+                        toast.error('Failed to update user');
+                    }}
+                    processRowUpdate={processRowUpdate}
+                    disableRowSelectionOnClick
+                    autoHeight
+                />
+            </Paper>
+        </>
+    )
+}

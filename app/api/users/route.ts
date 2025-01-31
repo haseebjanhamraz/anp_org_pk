@@ -1,42 +1,31 @@
 import { NextResponse } from "next/server";
-import { verifyAuth } from "../../middleware/auth";
 import { connectToDatabase } from "../../lib/mongodb";
 import User from "../../models/User";
+import { getServerSession } from "next-auth";
+import { authOptions } from "../auth/[...nextauth]/route";
 
-export async function GET(req: Request) {
+export async function GET() {
   try {
-    // Verify that the user is an admin
-    const authResult = await verifyAuth(req, ["admin"]);
-    if ("error" in authResult) {
+    const session = await getServerSession(authOptions);
+    
+    if (!session || !['admin'].includes(session.user.role)) {
       return NextResponse.json(
-        { error: authResult.error },
-        { status: authResult.status }
+        { message: "Unauthorized" },
+        { status: 401 }
       );
     }
 
     await connectToDatabase();
+    
+    const users = await User.find({}, {
+      password: 0, // Exclude password field
+    }).sort({ createdAt: -1 });
 
-    // Fetch all users from the database
-    const users = await User.find(
-      {},
-      {
-        password: 0, // Exclude password field
-      }
-    );
-
-    return NextResponse.json({
-      users: users.map((user) => ({
-        uid: user._id,
-        name: user.name,
-        email: user.email,
-        role: user.role,
-        createdAt: user.createdAt,
-      })),
-    });
+    return NextResponse.json(users);
   } catch (error) {
-    console.error("Get users error:", error);
+    console.error('Error fetching users:', error);
     return NextResponse.json(
-      { error: "Internal server error" },
+      { message: "Error fetching users" },
       { status: 500 }
     );
   }
