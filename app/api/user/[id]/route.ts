@@ -12,7 +12,6 @@ export async function PUT(
     try {
         const session = await getServerSession(authOptions)
         
-        // Check if user is authenticated and updating their own profile
         if (!session || session.user.id !== params.id) {
             return NextResponse.json(
                 { message: "Unauthorized" },
@@ -20,7 +19,7 @@ export async function PUT(
             )
         }
 
-        const { name, email, currentPassword, newPassword } = await request.json()
+        const { updateField, ...data } = await request.json()
         
         await connectToDatabase()
         
@@ -32,8 +31,8 @@ export async function PUT(
             )
         }
 
-        // If password change is requested
-        if (currentPassword && newPassword) {
+        if (updateField === 'password') {
+            const { currentPassword, newPassword } = data
             const isPasswordValid = await bcrypt.compare(currentPassword, user.password)
             if (!isPasswordValid) {
                 return NextResponse.json(
@@ -41,13 +40,11 @@ export async function PUT(
                     { status: 400 }
                 )
             }
-            
-            const hashedPassword = await bcrypt.hash(newPassword, 12)
-            user.password = hashedPassword
+            user.password = await bcrypt.hash(newPassword, 12)
+        } else {
+            user[updateField] = data[updateField]
         }
 
-        user.name = name
-        user.email = email
         await user.save()
 
         return NextResponse.json({
