@@ -38,7 +38,16 @@ export default function DocumentsList() {
     }
 
     const handleSaveClick = (id: string) => () => {
-        setRowModesModel({ ...rowModesModel, [id]: { mode: GridRowModes.View } })
+        const editedRow = documents.find(doc => doc._id === id);
+        if (editedRow) {
+            processRowUpdate(editedRow)
+                .then(() => {
+                    setRowModesModel({ ...rowModesModel, [id]: { mode: GridRowModes.View } });
+                })
+                .catch((error) => {
+                    console.error('Save failed:', error);
+                });
+        }
     }
 
     const handleCancelClick = (id: string) => () => {
@@ -198,6 +207,7 @@ export default function DocumentsList() {
                     slotProps={{
                         toolbar: {},
                     }}
+                    disableRowSelectionOnClick
                 />
             </div>
         </>

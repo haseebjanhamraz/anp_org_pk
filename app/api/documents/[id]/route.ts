@@ -78,10 +78,10 @@ export async function PUT(
     { params }: { params: { id: string } }
 ) {
     try {
-        const { id } = params
-        const body = await request.json()
+        const { id } = params;
+        const body = await request.json();
         
-        await connectToDatabase()
+        await connectToDatabase();
         
         const updatedDoc = await Document.findByIdAndUpdate(
             id,
@@ -91,21 +91,22 @@ export async function PUT(
                 filepath: body.filepath,
                 publishYear: body.publishYear
             },
-            { new: true }
-        )
+            { new: true, runValidators: true }
+        );
 
         if (!updatedDoc) {
             return NextResponse.json(
                 { message: "Document not found" },
                 { status: 404 }
-            )
+            );
         }
 
-        return NextResponse.json(updatedDoc)
+        return NextResponse.json(updatedDoc);
     } catch (error) {
+        console.error('Update error:', error);
         return NextResponse.json(
             { message: "Error updating document" },
             { status: 500 }
-        )
+        );
     }
 }
