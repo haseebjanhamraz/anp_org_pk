@@ -31,17 +31,15 @@ export async function POST(req: Request) {
         // Hash password
         const hashedPassword = await bcrypt.hash(password, 12);
 
-        // Create user with explicit role
+        // Create user without username
         const userData = {
             name,
             email,
             password: hashedPassword,
-            role: role || 'subscriber' // Explicitly set role
+            role: role || 'subscriber'
         };
 
-
         const user = await User.create(userData);
-
 
         // Generate JWT token
         const token = jwt.sign(

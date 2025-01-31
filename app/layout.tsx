@@ -4,6 +4,7 @@ import ClientLayout from "./ClientLayout";
 import { ToastProvider } from "./components/ui/toast";
 import React from "react";
 import { createTheme } from "@mui/material";
+import SessionProvider from "./components/providers/SessionProvider";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -63,9 +64,11 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${nastaleeq.variable} ${teko.variable} min-h-screen antialiased`}
       >
-        <ToastProvider>
-          <ClientLayout>{children}</ClientLayout>
-        </ToastProvider>
+        <SessionProvider>
+          <ToastProvider>
+            <ClientLayout>{children}</ClientLayout>
+          </ToastProvider>
+        </SessionProvider>
       </body>
     </html>
   );

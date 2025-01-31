@@ -1,8 +1,10 @@
 "use client"
 import { useState } from 'react';
+import { signIn } from "next-auth/react"
 import { useRouter } from 'next/navigation';
 import React from 'react';
 import Link from 'next/link';
+
 export default function SignInForm() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -16,28 +18,21 @@ export default function SignInForm() {
         setLoading(true);
 
         try {
-            const response = await fetch('/api/auth/login', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ email, password }),
+            const result = await signIn('credentials', {
+                email,
+                password,
+                redirect: false
             });
 
-            const data = await response.json();
-
-            if (!response.ok) {
-                throw new Error(data.error || 'Something went wrong');
+            if (result?.error) {
+                setError(result.error);
+                return;
             }
 
-            // Store user data in sessionStorage instead of localStorage
-            sessionStorage.setItem('token', data.token);
-            sessionStorage.setItem('user', JSON.stringify(data.user));
-
-            // Redirect to dashboard
             router.push('/dashboard');
+            router.refresh();
         } catch (err) {
-            setError(err instanceof Error ? err.message : 'An error occurred');
+            setError('An error occurred during sign in');
         } finally {
             setLoading(false);
         }
