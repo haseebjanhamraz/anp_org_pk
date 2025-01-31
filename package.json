@@ -1,5 +1,5 @@
 {
-  "name": "Awami National Party",
+  "name": "awami-national-party",
   "version": "1.0.0",
   "description": "An official website for Awami National Party in NextJS 15",
   "private": true,
@@ -42,6 +42,7 @@
     "lucide-react": "^0.456.0",
     "material-ui-popup-state": "^5.3.1",
     "mongoose": "^8.8.0",
+    "motion": "^12.0.6",
     "next": "15.0.1",
     "next-auth": "^4.24.11",
     "next-cloudinary": "^6.16.0",
