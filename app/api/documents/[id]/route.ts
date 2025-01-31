@@ -72,3 +72,40 @@ export async function DELETE(
         return NextResponse.json({ error: 'Failed to delete document' }, { status: 500 })
     }
 }
+
+export async function PUT(
+    request: Request,
+    { params }: { params: { id: string } }
+) {
+    try {
+        const { id } = params
+        const body = await request.json()
+        
+        await connectToDatabase()
+        
+        const updatedDoc = await Document.findByIdAndUpdate(
+            id,
+            { 
+                name: body.name,
+                category: body.category,
+                filepath: body.filepath,
+                publishYear: body.publishYear
+            },
+            { new: true }
+        )
+
+        if (!updatedDoc) {
+            return NextResponse.json(
+                { message: "Document not found" },
+                { status: 404 }
+            )
+        }
+
+        return NextResponse.json(updatedDoc)
+    } catch (error) {
+        return NextResponse.json(
+            { message: "Error updating document" },
+            { status: 500 }
+        )
+    }
+}
