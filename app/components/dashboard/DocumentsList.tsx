@@ -2,7 +2,6 @@
 
 import React, { useEffect, useState } from "react"
 import { DataGrid, GridColDef, GridRenderEditCellParams, GridRowModes, GridActionsCellItem } from "@mui/x-data-grid"
-import { IconButton } from "@mui/material"
 import { Delete, Edit, Save, Cancel, Visibility } from "@mui/icons-material"
 import Link from "next/link"
 import ConfirmDeleteAlert from "./ConfirmDeleteAlert"
@@ -155,7 +154,7 @@ export default function DocumentsList() {
                 }
 
                 return [
-                    <GridActionsCellItem
+                    <GridActionsCellItem    
                         key="edit"
                         icon={<Edit />}
                         label="Edit"
@@ -181,7 +180,7 @@ export default function DocumentsList() {
     return (
         <>
             <ConfirmDeleteAlert open={open} setOpen={setOpen} onConfirm={handleDelete} />
-            <div style={{ height: 400, width: '100%' }}>
+            <div style={{ height: 400, width: '100%'  }}>
                 <DataGrid
                     rows={documents}
                     columns={columns}
