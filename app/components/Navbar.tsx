@@ -8,12 +8,12 @@ import Link from "next/link";
 import DarkModeToggle from "./DarkModeToggle";
 import DesktopMenu from "./DesktopMenu";
 import MobileMenu from "./MobileMenu";
-import useUser from "../hooks/useUser";
+import { useSession } from "next-auth/react";
+import AccountMenu from "./dashboard/AccountMenu";
 
 export const Navbar = () => {
   const [isMobile, setIsMobile] = useState(false);
-  const user = useUser();
-
+  const userAuthenticated = useSession().status === 'authenticated'
   useEffect(() => {
     const handleResize = () => setIsMobile(window.innerWidth < 1020);
     handleResize();
@@ -60,6 +60,7 @@ export const Navbar = () => {
           </Box>
         )}
         <DarkModeToggle />
+        {userAuthenticated &&  <AccountMenu/>}
       </div>
     </nav>
   );

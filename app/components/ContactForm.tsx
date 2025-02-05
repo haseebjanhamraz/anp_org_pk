@@ -99,8 +99,12 @@ export default function ContactForm() {
               </FormItem>
             )}
           />
-          <Button className="bg-black text-white" type="submit">
-            Submit
+          <Button 
+            className="bg-black text-white" 
+            type="submit"
+            disabled={form.formState.isSubmitting}
+          >
+            {form.formState.isSubmitting ? "Sending..." : "Submit"}
           </Button>
         </Form>
       </form>

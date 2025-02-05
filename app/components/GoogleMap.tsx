@@ -20,7 +20,7 @@ interface GoogleMapProps {
 
 const GoogleMap = ({
   center = { lat: 34.0316886, lng: 71.5577608 },
-  zoom = 20,
+  zoom = 17,
   mapId = googleMapId
 }: GoogleMapProps) => {
   const mapRef = useRef<HTMLDivElement>(null);

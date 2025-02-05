@@ -13,7 +13,6 @@ export default function News() {
   const [openModal, setOpenModal] = useState(false);
   const [selectedPost, setSelectedPost] = useState(null);
 
-  const perPage = 5;
 
   useEffect(() => {
     loadPosts();
