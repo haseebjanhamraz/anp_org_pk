@@ -15,7 +15,7 @@ export default function ClientLayout({
             <main className="p-10 dark:bg-slate-900">
                 {children}
             </main>
-            {pathname.startsWith("/dashboard") ? "" : <Footer />}
+            {pathname.startsWith("/dashboard") || pathname.startsWith("/login") || pathname.startsWith("/signup") ? "" : <Footer />}
         </>
     );
 } 

@@ -47,7 +47,7 @@ export default function SignInForm() {
             )}
 
             <div>
-                <label htmlFor="email" className="block text-sm font-medium text-gray-700 dark:text-white">
+                <label htmlFor="email" className="block text-xl font-[Teko] font-medium text-white">
                     Email
                 </label>
                 <input
@@ -62,7 +62,7 @@ export default function SignInForm() {
             </div>
 
             <div>
-                <label htmlFor="password" className="block text-sm font-medium text-gray-700 dark:text-white">
+                <label htmlFor="password" className="block text-xl font-[Teko] font-medium text-white">
                     Password
                 </label>
                 <input

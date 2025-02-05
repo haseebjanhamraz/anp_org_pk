@@ -240,7 +240,6 @@ export default function OverviewPashtunNationalism() {
                             <li className="dark:text-white font-normal dark:bg-slate-900 bg-slate-100 p-3 rounded-md m-3">
                                 The Khudai Khidmatgar’s opposition to partition made Bacha Khan and his movement controversial figures in the newly formed Pakistan, where they faced political suppression and alienation. However, their legacy endured, shaping the ideals of future Pashtun political movements, including the Awami National Party (ANP). The ANP has since upheld Bacha Khan’s values of Pashtun autonomy, social justice, and secularism, advocating for Pashtun rights within Pakistan’s political framework.
                                 In summary, the Khudai Khidmatgar movement’s influence on Pashtun identity and its opposition to partition reflected Bacha Khan’s vision of a united, peaceful South Asia. His efforts laid the foundation for a strong, cohesive Pashtun identity that endures today, inspiring continued political advocacy and a commitment to social justice within Pakistan. The movement’s resistance to partition remains a symbol of its dedication to secularism, unity, and nonviolent resistance.
-
                             </li>
                         </ul>
                     </ul>

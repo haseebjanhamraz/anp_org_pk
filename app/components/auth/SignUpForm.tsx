@@ -63,7 +63,7 @@ export default function SignUpForm() {
         <div>
           <label
             htmlFor="name"
-            className="block text-sm font-medium text-gray-700 dark:text-white"
+            className="block text-xl font-[Teko] font-medium text-white"
           >
             Name
           </label>
@@ -80,7 +80,7 @@ export default function SignUpForm() {
         <div>
           <label
             htmlFor="email"
-            className="block text-sm font-medium text-gray-700 dark:text-white"
+            className="block text-xl font-[Teko] font-medium text-white"
           >
             Email
           </label>
@@ -97,7 +97,7 @@ export default function SignUpForm() {
         <div>
           <label
             htmlFor="password"
-            className="block text-sm font-medium text-gray-700 dark:text-white"
+            className="block text-xl text-white font-[Teko]"
           >
             Password
           </label>

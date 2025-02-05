@@ -435,6 +435,18 @@ export default function LeadershipEditForm() {
                         )}
                     />
 
+                    {(uploadedImage || watch('imageUrl')) && (
+                        <div className="mt-4 flex justify-center">
+                            <Image 
+                                src={uploadedImage || watch('imageUrl')} 
+                                alt="Preview" 
+                                className="max-w-xs h-auto rounded-lg shadow-lg"
+                                width={300}
+                                height={300}
+                            />
+                        </div>
+                    )}
+
                     <Controller
                         name="socialMedia"
                         control={control}

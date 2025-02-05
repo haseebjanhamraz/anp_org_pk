@@ -230,19 +230,15 @@ export const languages = ["English", "Urdu", "Pashto"];
 export const importantLinks = [
   {
     name: "Copyright Policy",
-    link: "/copyright",
+    link: "/copyright-policy",
   },
   {
     name: "Privacy Policy",
-    link: "/privacy",
+    link: "/privacy-policy",
   },
   {
-    name: "Terms of Service",
-    link: "/terms",
-  },
-  {
-    name: "Disclaimer",
-    link: "/disclaimer",
+    name: "Terms of Use",
+    link: "/terms-of-use",
   },
 ];
 

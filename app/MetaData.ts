@@ -89,13 +89,87 @@ const pageMetadata: Record<string, Metadata> = {
     title: "ANP Official Documents | Awami National Party",
     description:
       "Here you can view detailed official documents for Awami National Party.",
-    keywords: [],
+    keywords: [
+      "ANP Documents",
+      "ANP Official Documents",
+      "Party Documents",
+      "ANP Constitution",
+      "ANP Manifesto",
+      "ANP Policy Papers"
+    ],
   },
   "/not-found": {
     title: "404 | Page not found",
     description:
       "We're sorry this page is not found. But here are links from our website you may want to explore.",
     keywords: ["404 Not Found", "404", "Not found"],
+  },
+  "/login": {
+    title: "Login | Awami National Party",
+    description:
+      "Awami National Party has dashboard access for all members who are registered with Awami Natinal Party Official website",
+      keywords:[
+      "ANP Login",
+      "Member Login",
+      "ANP Dashboard",
+      "ANP Member Portal",
+      "ANP Account Access",
+      "Party Member Login"
+      ]
+  },
+  "/signup": {
+    title: "SignUp | Awami National Party",
+    description:
+      "Awami National Party has dashboard access for all members who are registered with Awami Natinal Party Official website",
+      keywords:[
+      "ANP SignUp",
+      "Create ANP Account", 
+      "Join ANP Online",
+      "ANP Membership",
+      "Register with ANP",
+      "New Member Registration"
+      ]
+  },
+  "/copyright-policy": {
+    title: "Copyright Policy © | Awami National Party",
+    description:
+      "Awami National Party copyright policies are visible and understandable for every user of this website. This website is copyright registered with Baacha Khan Trust",
+      keywords:[
+      "ANP Copyright Policy",
+      "Copyright Notice",
+      "Intellectual Property Rights",
+      "Content Usage Rights",
+      "ANP Website Copyright",
+      "Bacha Khan Trust Copyright"
+      ]
+  },
+  "/privacy-policy": {
+    title: "Privacy Policy | Awami National Party",
+    description:
+      "Awami National Party always make sure to take care of user privacy and does not share any data with third party applications or websites",
+      keywords:[
+      "ANP Privacy Policy",
+      "Data Protection Policy",
+      "User Privacy Rights",
+      "Information Security",
+      "Personal Data Protection",
+      "Privacy Guidelines ANP",
+      "Data Collection Policy"
+      ]
+  },
+  "/terms-of-use": {
+    title: "Terms Of Use | Awami National Party",
+    description:
+      "By accessing and using the Awami National Party (ANP) website, you agree to comply with and be bound by these Terms of Use. If you do not agree with any part of these terms, please refrain from using our website.",
+      keywords:[
+      "ANP Terms of Use",
+      "Website Usage Terms",
+      "User Agreement ANP",
+      "Legal Terms ANP",
+      "Website Rules",
+      "Usage Guidelines",
+      "Terms and Conditions"
+      ]
   },
 };
 
