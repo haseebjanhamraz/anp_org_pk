@@ -5,6 +5,7 @@ import { ToastProvider } from "./components/ui/toast";
 import React from "react";
 import { createTheme } from "@mui/material";
 import SessionProvider from "./components/providers/SessionProvider";
+import { Analytics } from '@vercel/analytics/next';
 
 const nastaleeq = localFont({
   src: "./fonts/JameelNooriNastaleeq.ttf",
@@ -57,6 +58,7 @@ export default function RootLayout({
         <SessionProvider>
           <ToastProvider>
             <ClientLayout>{children}</ClientLayout>
+            <Analytics />
           </ToastProvider>
         </SessionProvider>
       </body>
