@@ -57,7 +57,7 @@ export default function Profile() {
                 }
                 : { [field]: formData[field as keyof FormData] }
 
-            const response = await fetch(`/api/user/${session?.user.id}`, {
+            const response = await fetch(`/api/users/${session?.user.id}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json'
