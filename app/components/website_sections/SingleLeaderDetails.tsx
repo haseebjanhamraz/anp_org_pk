@@ -1,6 +1,6 @@
 // LeaderCard Component
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useMemo } from "react";
 import useGetLeaderData from "../../hooks/useGetSingleLeader";
 import Card from "@mui/material/Card";
 import CardHeader from "@mui/material/CardHeader";
@@ -40,10 +40,7 @@ function SingleLeaderDetails() {
   const [color, setColor] = useState("#fff");
   const [expanded, setExpanded] = useState(false);
 
-  const handleExpandClick = () => setExpanded(!expanded);
-
-  // 26 dark Colors arrays
-  const avatarColors = [
+  const avatarColors = useMemo(() => [
     "#FF0000", // Red
     "#FF4D4D", // Light Red
     "#FF6666", // Medium Red
@@ -69,13 +66,14 @@ function SingleLeaderDetails() {
     "#FF5500", // Cherry Red
     "#FF6659", // Blood Red
     "#FF0000", // Deep Red (Duplicate for emphasis)
-  ];
+  ], []);
 
   useEffect(() => {
     const rang = avatarColors[Math.floor(Math.random() * avatarColors.length)];
     setColor(rang);
-    console.log(rang);
-  }, []);
+  }, [avatarColors]);
+
+  const handleExpandClick = () => setExpanded(!expanded);
 
   if (loading) return <LeaderCardSkeleton />;
   if (!leader) return <div>No leader data available.</div>;

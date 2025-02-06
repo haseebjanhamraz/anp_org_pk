@@ -1,19 +1,19 @@
-import { NextResponse } from "next/server";
-import bcrypt from "bcryptjs";
+import { NextResponse, NextRequest } from "next/server";
 import { connectToDatabase } from "../../../lib/mongodb";
 import User from "../../../models/User";
 import { verifyAuth } from "../../../middleware/auth";
 import { getServerSession } from "next-auth";
-import { authOptions } from "../../auth/[...nextauth]/route";
+import { authOptions } from "../../auth/[...nextauth]/authOptions";
 
 // Get Individual User
 export async function GET(
-  req: Request,
-  { params }: { params: Promise<{ id: string }> }
+  request: Request,
+  // context: { params: { id: string } }
+  { params } : { params: Promise<{ id: string }> }
+
 ) {
-  const { id } = await params;
   try {
-    const authResult = await verifyAuth(req, ["admin", "editor", "subscriber"]);
+    const authResult = await verifyAuth(request, ["admin", "editor", "subscriber"]);
     if ("error" in authResult) {
       return NextResponse.json(
         { error: authResult.error },
@@ -26,7 +26,7 @@ export async function GET(
     // Only allow users to view their own profile unless they're an admin
     if (
       authenticatedUser.role !== "admin" &&
-      authenticatedUser._id.toString() !== id
+      authenticatedUser._id.toString() !== (await params).id
     ) {
       return NextResponse.json(
         { error: "Unauthorized - Cannot view other users' profiles" },
@@ -36,7 +36,7 @@ export async function GET(
 
     await connectToDatabase();
 
-    const user = await User.findById(id, {
+    const user = await User.findById((await params).id, {
       password: 0, // Exclude password field
     });
 
@@ -65,7 +65,7 @@ export async function GET(
 // Update user profile
 export async function PUT(
   request: Request,
-  { params }: { params: { id: string } }
+  { params } : { params: Promise<{ id: string }> }
 ) {
   try {
     const session = await getServerSession(authOptions);
@@ -77,12 +77,11 @@ export async function PUT(
       );
     }
 
-    const { id } = params;
     const updates = await request.json();
     
     await connectToDatabase();
     
-    const user = await User.findById(id);
+    const user = await User.findById((await params).id);
     if (!user) {
       return NextResponse.json(
         { message: "User not found" },
@@ -112,8 +111,8 @@ export async function PUT(
 
 // Delete user account
 export async function DELETE(
-  req: Request,
-  { params }: { params: { id: string } }
+  request: Request,
+  { params } : { params: Promise<{ id: string }> }
 ) {
   try {
     const session = await getServerSession(authOptions);
@@ -124,12 +123,10 @@ export async function DELETE(
         { status: 401 }
       );
     }
-
-    const { id } = params;
     
     await connectToDatabase();
     
-    const user = await User.findByIdAndDelete(id);
+    const user = await User.findByIdAndDelete((await params).id);
     
     if (!user) {
       return NextResponse.json(

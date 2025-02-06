@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import {
   ChevronLeft,
   ChevronRight,
@@ -16,24 +16,19 @@ const HeroSlider = () => {
   const [isPlaying, setIsPlaying] = useState(true);
   const [isHovered, setIsHovered] = useState(false);
 
-  useEffect(() => {
-    let slideTimer;
-    if (isPlaying && !isHovered) {
-      slideTimer = setInterval(() => {
-        nextSlide();
-      }, 5000);
-    }
-    return () => clearInterval(slideTimer);
-  }, [isPlaying, currentSlide, isHovered]);
-
-  const nextSlide = () => {
-    if (!isAnimating) {
+  const nextSlide = useCallback(() => {
+    if (!isAnimating && isPlaying && !isHovered) {
       setIsAnimating(true);
       setCurrentSlide((prev) =>
         prev === historyData.length - 1 ? 0 : prev + 1
       );
     }
-  };
+  }, [isAnimating, isPlaying, isHovered]);
+
+  useEffect(() => {
+    const timer = setInterval(nextSlide, 5000);
+    return () => clearInterval(timer);
+  }, [nextSlide]);
 
   const prevSlide = () => {
     if (!isAnimating) {
