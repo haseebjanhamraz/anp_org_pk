@@ -1,4 +1,4 @@
-import type { MetadataRoute } from "next";
+import { MetadataRoute } from "next";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const BASE_URL = "https://anp.org.pk"; // Use absolute URL
@@ -16,7 +16,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   ];
 
   return pages.map((page) => ({
-    loc: `${BASE_URL}${page.path}`, // Ensure absolute URL
+    url: `${BASE_URL}${page.path}`,
     lastModified,
     changefreq: page.changeFrequency,
     priority: page.priority,
