@@ -1,6 +1,6 @@
 import { Metadata } from "next";
 
-const BASE_URL = "https://awaminationalparty.org";
+const BASE_URL = "https://anp.org.pk";
 const SITE_NAME = "Awami National Party | ANP";
 const DEFAULT_IMAGE = "./anp-cover.jpg";
 const FALLBACK_IMAGE =

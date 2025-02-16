@@ -36,7 +36,7 @@ export async function sendMail({
     console.log("SMTP configuration verified.");
 
     const info = await transporter.sendMail({
-      from: `"Awami National Party | ANP" <noreply@awaminationalparty.org>`,
+      from: `"Awami National Party | ANP" <noreply@anp.org.pk>`,
       replyTo: email, // Optional: Include the original sender's email as the reply-to
       to: email || SITE_MAIL_RECIEVER,
       subject: subject,
