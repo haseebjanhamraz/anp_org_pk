@@ -9,7 +9,7 @@ const config = {
       fontFamily: {
         sans: ["Roboto", "sans-serif"],
         nastaleeq: ["Jameel Noori Nastaleeq", "serif"],
-        teko: ["Teko", "sans-serif"],
+        opensans: ["opensans", "sans-serif"],
       },
       dropShadow: {
         "3xl": "0 35px 35px rgba(0, 0, 0, 0.25)",

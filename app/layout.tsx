@@ -5,17 +5,17 @@ import { ToastProvider } from "./components/ui/toast";
 import React from "react";
 import { createTheme } from "@mui/material";
 import SessionProvider from "./components/providers/SessionProvider";
-import { Analytics } from '@vercel/analytics/next';
+import { Analytics } from "@vercel/analytics/next";
 
 const nastaleeq = localFont({
   src: "./fonts/JameelNooriNastaleeq.ttf",
   variable: "--font-geist-mono",
   weight: "100 900",
 });
-const teko = localFont({
-  src: "./fonts/Teko.ttf",
-  variable: "--font-tek",
-  weight: "300 400 500 600 700",
+const opensans = localFont({
+  src: "./fonts/OpenSans-Variable.ttf",
+  variable: "--font-open-sans",
+  weight: "100 900",
 });
 
 // Custom theme
@@ -53,7 +53,7 @@ export default function RootLayout({
         <link rel="icon" type="image/png" sizes="16x16" href="./favicon.ico" />
       </head>
       <body
-        className={`${nastaleeq.variable} ${teko.variable} min-h-screen antialiased`}
+        className={`${nastaleeq.variable} ${opensans.variable} min-h-screen antialiased`}
       >
         <SessionProvider>
           <ToastProvider>

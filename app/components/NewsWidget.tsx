@@ -45,7 +45,7 @@ export default function News() {
         <NewsModal post={selectedPost} onClose={() => setOpenModal(false)} />
       )}
       <div className="flex flex-col gap-4 w-full mt-20 dark:border-2 dark:border-solid dark:border-gray-600 rounded-md shadow-lg p-4">
-        <h1 className="text-4xl dark:text-white font-semibold mb-4 text-center font-[Teko]">
+        <h1 className="text-4xl dark:text-white font-semibold mb-4 text-center font-[opensans]">
           News & Updates{" "}
         </h1>
         {data.slice(0, perPage).map((post, index) => (

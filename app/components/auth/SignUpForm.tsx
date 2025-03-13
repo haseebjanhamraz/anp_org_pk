@@ -40,10 +40,9 @@ export default function SignUpForm() {
       toast.success("You have successfully signed up");
 
       // Set input state to null
-    setName("");
-    setEmail("");
-    setPassword("");
-
+      setName("");
+      setEmail("");
+      setPassword("");
     } catch (err) {
       setError(err instanceof Error ? err.message : "An error occurred");
     } finally {
@@ -63,7 +62,7 @@ export default function SignUpForm() {
         <div>
           <label
             htmlFor="name"
-            className="block text-xl font-[Teko] font-medium text-white"
+            className="block text-xl font-[opensans] font-medium text-white"
           >
             Name
           </label>
@@ -80,7 +79,7 @@ export default function SignUpForm() {
         <div>
           <label
             htmlFor="email"
-            className="block text-xl font-[Teko] font-medium text-white"
+            className="block text-xl font-[opensans] font-medium text-white"
           >
             Email
           </label>
@@ -97,7 +96,7 @@ export default function SignUpForm() {
         <div>
           <label
             htmlFor="password"
-            className="block text-xl text-white font-[Teko]"
+            className="block text-xl text-white font-[opensans]"
           >
             Password
           </label>

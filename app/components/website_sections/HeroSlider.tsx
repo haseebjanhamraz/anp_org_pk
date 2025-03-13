@@ -93,11 +93,11 @@ const HeroSlider = () => {
             <div className="relative h-full flex items-center justify-center px-4">
               <div className="max-w-5xl text-center text-white">
                 <div className="mb-4">
-                  <span className="inline-block font-[Teko] bg-red-600 text-white px-6 py-2 rounded-full text-3xl transform hover:scale-105 transition-transform duration-300">
+                  <span className="inline-block font-[opensans] bg-red-600 text-white px-6 py-2 rounded-full text-3xl transform hover:scale-105 transition-transform duration-300">
                     {slide.year}
                   </span>
                 </div>
-                <h2 className="text-6xl font-medium mb-6 tracking-tight font-[Teko] shadow-xl py-5">
+                <h2 className="text-6xl font-medium mb-6 tracking-tight font-[opensans] shadow-xl py-5">
                   {slide.title}
                 </h2>
                 <p className="text-xl mb-8 max-w-3xl mx-auto leading-relaxed">

@@ -8,7 +8,7 @@ export default function DesktopMenu() {
 
   return (
     <div>
-      <ul className="flex gap-6 uppercase font-[Teko] text-2xl font-normal text-red-600 relative">
+      <ul className="flex gap-6 uppercase font-[opensans] text-2xl font-normal text-red-600 relative">
         {menu.map((item, index) => {
           // Check if the current path matches the parent or any child
           const isActive =

@@ -60,10 +60,10 @@ export default function LeadershipCarousel() {
 
   return (
     <div className="p-10 mt-36">
-      <h1 className="text-4xl font-[Teko] dark:text-white font-semibold mb-4 text-center">
+      <h1 className="text-4xl font-[opensans] dark:text-white font-semibold mb-4 text-center">
         Party Leadership
       </h1>
-      <div 
+      <div
         onMouseEnter={() => setIsPaused(true)}
         onMouseLeave={() => setIsPaused(false)}
       >
@@ -99,7 +99,7 @@ export default function LeadershipCarousel() {
                       <span className="text-2xl font-semibold text-center leading-none">
                         <Link
                           href={`/party/leadership/${leader._id}`}
-                          className="hover:underline hover:text-red-600 font-[Teko] font-medium"
+                          className="hover:underline hover:text-red-600 font-[opensans] font-medium"
                         >
                           {leader.name.length > 20
                             ? leader.name.slice(0, 25) + "..."

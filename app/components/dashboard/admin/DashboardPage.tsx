@@ -1,5 +1,5 @@
-import React from 'react'
-import Image from 'next/image'
+import React from "react";
+import Image from "next/image";
 
 export default function DashboardPage() {
   return (
@@ -17,21 +17,21 @@ export default function DashboardPage() {
               height={50}
               alt="icon"
             />
-            <h4 className="text-xl font-medium font-[Teko]">400 Leaders</h4>
+            <h4 className="text-xl font-medium font-[opensans]">400 Leaders</h4>
             <div className="flex justify-center items-center leading-3 gap-2 flex-wrap">
-              <p className="font-[Teko]">
+              <p className="font-[opensans]">
                 Central: <span>500</span>
               </p>
-              <p className="font-[Teko]">
+              <p className="font-[opensans]">
                 Pakhtunkhwa: <span>500</span>
               </p>
-              <p className="font-[Teko]">
+              <p className="font-[opensans]">
                 Punjab: <span>500</span>
               </p>
-              <p className="font-[Teko]">
+              <p className="font-[opensans]">
                 Sindh: <span>500</span>
               </p>
-              <p className="font-[Teko]">
+              <p className="font-[opensans]">
                 Balochistan: <span>500</span>
               </p>
             </div>
@@ -43,15 +43,17 @@ export default function DashboardPage() {
               height={50}
               alt="icon"
             />
-            <h4 className="text-xl font-medium font-[Teko]">30 Documents</h4>
+            <h4 className="text-xl font-medium font-[opensans]">
+              30 Documents
+            </h4>
             <div className="flex justify-center items-center leading-3 gap-2 flex-wrap">
-              <p className="font-[Teko]">
+              <p className="font-[opensans]">
                 Constitution: <span>5</span>
               </p>
-              <p className="font-[Teko]">
+              <p className="font-[opensans]">
                 Manifesto: <span>500</span>
               </p>
-              <p className="font-[Teko]">
+              <p className="font-[opensans]">
                 Publication: <span>500</span>
               </p>
             </div>
@@ -59,5 +61,5 @@ export default function DashboardPage() {
         </div>
       </main>
     </div>
-  )
+  );
 }
