@@ -20,7 +20,7 @@ export const menu = [
     link: "/",
   },
   {
-    name: "Party Structure",
+    name: "Party",
     link: "/party",
     subMenu: [
       {
@@ -36,7 +36,7 @@ export const menu = [
         link: "/documents",
       },
       {
-        name: "Leadership DB",
+        name: "Leadership",
         link: "/leadership-database",
       },
     ],

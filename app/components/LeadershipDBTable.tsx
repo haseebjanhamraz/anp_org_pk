@@ -41,7 +41,7 @@ export default function LeadershipDatabase() {
     <div className="flex flex-col items-center justify-center p-4">
       {loading && <Loader />}
       <h1 className="text-4xl mb-10 dark:text-white font-semibold text-center">
-        Leadership Database
+        ANP Leadership
       </h1>
       <Paper sx={{ height: "auto", width: "100%", maxWidth: "100%" }}>
         <DataGrid

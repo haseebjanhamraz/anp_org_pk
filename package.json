@@ -4,7 +4,7 @@
   "description": "An official website for Awami National Party in NextJS 15",
   "private": true,
   "scripts": {
-    "dev": "next dev --turbo",
+    "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
@@ -32,6 +32,7 @@
     "@vercel/analytics": "^1.4.1",
     "axios": "^1.7.7",
     "bcryptjs": "^2.4.3",
+    "canvas": "^3.1.0",
     "class-variance-authority": "^0.7.0",
     "cloudinary": "^2.5.1",
     "clsx": "^2.1.1",
@@ -44,7 +45,7 @@
     "material-ui-popup-state": "^5.3.1",
     "mongoose": "^8.8.0",
     "motion": "^12.0.6",
-    "next": "15.0.1",
+    "next": "^15.3.0",
     "next-auth": "^4.24.11",
     "next-cloudinary": "^6.16.0",
     "nodemailer": "^6.9.16",

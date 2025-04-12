@@ -53,7 +53,6 @@ const renderPage = (props: RenderPageProps) => {
 const PDFViewer = () => {
   const params = useParams();
   const { document, loading } = useDocument(params.id as string);
-
   // Related documents
   const { documents, loading: loadingDocuments } = useGetDocuments();
 

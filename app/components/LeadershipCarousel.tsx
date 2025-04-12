@@ -130,7 +130,7 @@ export default function LeadershipCarousel() {
             variant="destructive"
             className="mt-10 text-center hover:bg-red-600"
           >
-            View Leadership Database
+            View All Leadership
           </Button>
         </Link>
       </div>
