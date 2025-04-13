@@ -1,4 +1,16 @@
-import mongoose from 'mongoose';
+import mongoose, { Document as MongoDocument } from 'mongoose';
+
+// Define Document interface
+export interface IDocument extends MongoDocument {
+    name: string;
+    publishYear: number;
+    lastModifiedYear?: number;
+    category: string;
+    language: string;
+    filepath: string;
+    createdAt: Date;
+    updatedAt: Date;
+}
 
 // Define Document Schema
 const DocumentSchema = new mongoose.Schema({
@@ -13,4 +25,5 @@ const DocumentSchema = new mongoose.Schema({
 });
 
 // Get or create model
-export const Document = mongoose.models.Document || mongoose.model('Document', DocumentSchema);
+export const Document = (mongoose.models.Document as mongoose.Model<IDocument>) || 
+    mongoose.model<IDocument>('Document', DocumentSchema);

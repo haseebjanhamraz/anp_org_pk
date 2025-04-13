@@ -3,6 +3,7 @@ import { connectToDatabase } from "../../../lib/mongodb";
 import { Document } from "../../../models/Downloads";
 import { getSignedUrl, listFiles } from "../../../hooks/getBucket";
 import { deleteBucketItem } from "../../../hooks/deleteBucketItem";
+import { Types } from "mongoose";
 
 export async function GET(
   req: Request,
@@ -11,7 +12,7 @@ export async function GET(
   const { id } = await params;
   try {
     await connectToDatabase();
-    const document = await Document.findById(id);
+    const document = await Document.findById(new Types.ObjectId(id));
 
     if (!document) {
       return NextResponse.json(
@@ -51,7 +52,7 @@ export async function DELETE(
   try {
     await connectToDatabase();
     // First fetch the document to get the filepath
-    const document = await Document.findById(id);
+    const document = await Document.findById(new Types.ObjectId(id));
     if (!document) {
       return NextResponse.json(
         { error: "Document not found" },
@@ -59,7 +60,7 @@ export async function DELETE(
       );
     }
     // Delete from database
-    await Document.findByIdAndDelete(id);
+    await Document.findByIdAndDelete(new Types.ObjectId(id));
     // Delete from bucket using the correct filepath
     await deleteBucketItem(process.env.BUCKET_NAME || "", document.filepath);
     return NextResponse.json({ message: "Document deleted" }, { status: 200 });
@@ -83,7 +84,7 @@ export async function PUT(
     await connectToDatabase();
 
     const updatedDoc = await Document.findByIdAndUpdate(
-      id,
+      new Types.ObjectId(id),
       {
         name: body.name,
         category: body.category,
