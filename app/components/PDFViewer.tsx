@@ -6,56 +6,77 @@ import DescriptionIcon from "@mui/icons-material/Description";
 import Loader from "./Loader";
 import dynamic from "next/dynamic";
 import { useEffect, useState } from "react";
-import type { RenderPageProps } from "@react-pdf-viewer/core";
-import "@react-pdf-viewer/core/lib/styles/index.css";
+import { pdfjs } from 'react-pdf';
 
-// Dynamically import PDF viewer components
+// Initialize pdfjs worker
+pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.js`;
+
+// Dynamically import PDF viewer to avoid SSR issues
 const PDFViewer = dynamic(
-  () => import("@react-pdf-viewer/core").then((mod) => {
-    const { Worker, Viewer } = mod;
+  () => import("react-pdf").then(mod => {
+    const { Document: PDFDocument, Page } = mod;
     return function PDFViewerComponent({ url }: { url: string }) {
-      const renderPage = (props: RenderPageProps) => {
-        return (
-          <>
-            {props.canvasLayer.children}
-            <div
-              style={{
-                userSelect: "none",
-                alignItems: "center",
-                display: "flex",
-                height: "100%",
-                justifyContent: "center",
-                left: 0,
-                position: "absolute",
-                top: 0,
-                width: "100%",
-              }}
-            >
-              <div
-                style={{
-                  color: "rgba(0, 0, 0, 0.2)",
-                  fontSize: `${5 * props.scale}rem`,
-                  fontWeight: "bold",
-                  textTransform: "uppercase",
-                  transform: "rotate(-45deg)",
-                  userSelect: "none",
-                }}
-              >
-                @ANPMarkaz
-              </div>
-            </div>
-            {props.textLayer.children}
-            {props.annotationLayer.children}
-          </>
-        );
-      };
+      const [numPages, setNumPages] = useState<number>(1);
+      const [pageNumber, setPageNumber] = useState<number>(1);
+
+      function onDocumentLoadSuccess({ numPages }: { numPages: number }): void {
+        setNumPages(numPages);
+      }
 
       return (
-        <Worker workerUrl="https://unpkg.com/pdfjs-dist@3.4.120/build/pdf.worker.min.js">
-          <div style={{ height: "750px" }}>
-            <Viewer fileUrl={url} renderPage={renderPage} />
+        <div className="pdf-container">
+          <PDFDocument
+            file={url}
+            onLoadSuccess={onDocumentLoadSuccess}
+            loading={<Loader />}
+            error={<div>Failed to load PDF</div>}
+          >
+            <Page
+              pageNumber={pageNumber}
+              renderTextLayer={false}
+              renderAnnotationLayer={false}
+              className="pdf-page"
+            />
+          </PDFDocument>
+          <div className="pdf-controls">
+            <button
+              onClick={() => setPageNumber(page => Math.max(page - 1, 1))}
+              disabled={pageNumber <= 1}
+              className="px-4 py-2 bg-red-500 text-white rounded disabled:opacity-50"
+            >
+              Previous
+            </button>
+            <p className="mx-4">
+              Page {pageNumber} of {numPages}
+            </p>
+            <button
+              onClick={() => setPageNumber(page => Math.min(page + 1, numPages))}
+              disabled={pageNumber >= numPages}
+              className="px-4 py-2 bg-red-500 text-white rounded disabled:opacity-50"
+            >
+              Next
+            </button>
           </div>
-        </Worker>
+          <style jsx>{`
+            .pdf-container {
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+              gap: 1rem;
+              padding: 1rem;
+            }
+            .pdf-controls {
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              margin-top: 1rem;
+            }
+            .pdf-page {
+              max-width: 100%;
+              height: auto;
+            }
+          `}</style>
+        </div>
       );
     };
   }),
