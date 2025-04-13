@@ -1,48 +1,46 @@
 import { useState, useEffect } from 'react';
+import { IDocument } from '../models/Downloads';
 
-interface Document {
-    name: string;
-    publishYear: number;
-    category: string;
-    language: string;
-    filepath: string;
-    createdAt: Date;
-    updatedAt: Date;
-    loading: boolean;
+interface DocumentResponse extends Omit<IDocument, '_id'> {
+    _id?: string;
+    publicUrl?: string;
 }
 
-const useDocument = (id: string) => {
+interface UseDocumentReturn {
+    document: DocumentResponse | null;
+    loading: boolean;
+    error: Error | null;
+}
+
+const useDocument = (id: string): UseDocumentReturn => {
+    const [document, setDocument] = useState<DocumentResponse | null>(null);
     const [loading, setLoading] = useState(true);
-    const [document, setDocument] = useState<Document>({
-        name: '',
-        publishYear: 0,
-        category: '',
-        language: '',
-        filepath: '',
-        createdAt: new Date(),
-        updatedAt: new Date(),
-        loading: false,
-    });
+    const [error, setError] = useState<Error | null>(null);
 
     useEffect(() => {
-
-        setLoading(true);
         const fetchDocument = async () => {
             try {
                 const response = await fetch(`/api/documents/${id}`);
+                if (!response.ok) {
+                    throw new Error('Failed to fetch document');
+                }
                 const data = await response.json();
                 setDocument(data);
+                setError(null);
+            } catch (err) {
+                setError(err instanceof Error ? err : new Error('Failed to fetch document'));
+                setDocument(null);
+            } finally {
                 setLoading(false);
-                
-            } catch (error) {
-                console.error(error);
             }
         };
-        fetchDocument();
-    }, [id])
 
+        if (id) {
+            fetchDocument();
+        }
+    }, [id]);
 
-    return { document, loading };
+    return { document, loading, error };
 };
 
-export default useDocument; 
+export default useDocument;
