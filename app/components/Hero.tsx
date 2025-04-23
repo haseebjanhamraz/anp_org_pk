@@ -1,8 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
-
+import {motion} from "framer-motion";
 export default function Hero() {
   return (
     <section className="bg-gray-100 dark:bg-gray-900">
@@ -26,7 +25,7 @@ export default function Hero() {
           </p>
         </div>
         <div className="w-full items-center gap-2 flex-col lg:mt-0 lg:col-span-5 lg:flex animate-in slide-in-from-right-96 duration-500">
-          <div className="w-fit p-10">
+          <div className="w-[300px] p-10">
             <Image
               src="/yawa-lara.png"
               alt="mockup"
@@ -42,7 +41,8 @@ export default function Hero() {
             height={300}
             className="z-100 rounded-lg hidden lg:block"
           />
-          <div className="w-fit p-10">
+
+          <motion.div className="w-[300px] w-fit p-10">
             <Image
               src="/yaw-manzal.png"
               alt="mockup"
@@ -50,7 +50,7 @@ export default function Hero() {
               height={120}
               className="object-contain w-full h-full rounded-lg hidden lg:block"
             />
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>

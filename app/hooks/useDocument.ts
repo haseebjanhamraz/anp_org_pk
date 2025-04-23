@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { IDocument } from '../models/Downloads';
+import { IDocument } from '@/models/Downloads';
 
 interface DocumentResponse extends Omit<IDocument, '_id'> {
     _id?: string;

@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import { v2 as cloudinary } from 'cloudinary';
-import { verifyAuth } from '../../middleware/auth';
-import { cloudinaryConfig } from '../../utils/cloudinary';
+import { verifyAuth } from '@/middleware/auth';
+import { cloudinaryConfig } from '@/utils/cloudinary';
 
 cloudinary.config(cloudinaryConfig);
 

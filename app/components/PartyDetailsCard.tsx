@@ -1,5 +1,5 @@
 import { Card, CardContent, CardMedia, Typography } from '@mui/material';
-import { partyDetails } from "../../app/lib/Data";
+import { partyDetails } from "../../lib/Data";
 
 export default function PartyDetailsCard() {
     return (

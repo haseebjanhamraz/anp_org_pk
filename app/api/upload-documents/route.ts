@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { connectToDatabase } from '../../lib/mongodb';
-import { Document } from '../../models/Downloads';
-import { uploadToGCS } from '../../hooks/uploadBucket';
+import { connectToDatabase } from '@/lib/mongodb';
+import { Document } from '@/models/Downloads';
+import { uploadToGCS } from '@/hooks/uploadBucket';
 
 export async function POST(request: NextRequest) {
     try {

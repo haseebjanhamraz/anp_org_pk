@@ -1,5 +1,5 @@
 import Link from "next/link"
-import { socialMedia } from "../lib/Data"
+import { socialMedia } from "../../lib/Data"
 
 export default function SocialIcons() {
     return (

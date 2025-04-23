@@ -17,7 +17,7 @@ import {
 import useGetLeadership from "../hooks/useGetLeadership";
 import Image from "next/image";
 import Loader from "./Loader";
-import { cabinets, positions } from "../lib/Data";
+import { cabinets, positions } from "../../lib/Data";
 
 export default function LeadershipCarousel() {
   const { leaders, loading } = useGetLeadership();

@@ -1,5 +1,5 @@
 import Link from "next/link"
-import { importantLinks } from "../lib/Data"
+import { importantLinks } from "../../lib/Data"
 import { FiLink } from "react-icons/fi";
 import { Divider } from "@mui/material";
 

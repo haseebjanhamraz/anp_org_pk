@@ -21,14 +21,14 @@ export async function downloadBucket() {
 
     for (const file of files) {
       const [content] = await file.download();
-      console.log(`File ${file.name} downloaded.`);
+      // console.log(`File ${file.name} downloaded.`);
 
       // Save PDF file contents into browser cache
       const blob : Blob = new Blob([content], { type: 'application/pdf' });
 
       // Save BLOB to local storage
       localStorage.setItem("blob", 'Blob')
-      console.log(blob)
+      // console.log(blob)
 
     }
 

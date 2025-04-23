@@ -97,6 +97,7 @@ export default function DownloadsList({ documents }: DownloadsListProps) {
               <List className="dark:text-white">
                 {documents
                   .filter((doc) => doc.category === category)
+                  .sort((a, b) => new Date(b.publishYear).getTime() - new Date(a.publishYear).getTime())
                   .map((doc) => (
                     <div className="flex mb-4 items-center" key={doc._id}>
                       <ListItem>

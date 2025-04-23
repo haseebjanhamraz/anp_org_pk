@@ -2,7 +2,7 @@ import styles from "./style.module.css";
 import GoogleMap from "../../components/GoogleMap";
 import { Divider } from "@mui/material";
 import Link from "next/link";
-import { contactDetails } from "../../lib/Data";
+import { contactDetails } from "../../../lib/Data";
 import ContactForm from "../../components/ContactForm";
 import { Metadata } from 'next'
 import { generateMetadata } from "../../MetaData";

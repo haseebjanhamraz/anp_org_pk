@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { leadershipMessages } from "../../lib/Data"
+import { leadershipMessages } from "../../../lib/Data"
 
 
 // Change message to two columns on smaller screens

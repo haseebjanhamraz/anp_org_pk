@@ -5,7 +5,7 @@ import { Input } from "./ui/input";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Textarea } from "./ui/textarea";
-import { sendMail } from "../lib/send-mail";
+import { sendMail } from "../../lib/send-mail";
 import { toast } from "sonner";
 import { Button } from "./ui/button";
 const contactFormSchema = z.object({

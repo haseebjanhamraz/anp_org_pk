@@ -23,7 +23,7 @@ import {
   cabinets,
   cabinetPeriod,
   kpDistricts,
-} from "../../lib/Data";
+} from "../../../lib/Data";
 
 interface LeadershipFormData {
   name: string;

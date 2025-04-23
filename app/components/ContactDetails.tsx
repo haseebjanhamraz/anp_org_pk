@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { contactDetails } from "../lib/Data";
+import { contactDetails } from "../../lib/Data";
 import GoogleMap from "./GoogleMap";
 import SocialIcons from "./SocialIcons";
 

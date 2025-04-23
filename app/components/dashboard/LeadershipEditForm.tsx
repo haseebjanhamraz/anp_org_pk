@@ -5,7 +5,7 @@ import { useForm, Controller } from 'react-hook-form';
 import { useParams, useRouter } from 'next/navigation';
 import { TextField, Button, Paper, Stack, Alert, MenuItem, Select, FormControl, InputLabel } from '@mui/material';
 import { useDropzone } from 'react-dropzone';
-import { positions, provinces, cabinets, cabinetPeriod, kpDistricts } from '../../lib/Data';
+import { positions, provinces, cabinets, cabinetPeriod, kpDistricts } from '../../../lib/Data';
 import Image from 'next/image';
 
 interface LeadershipFormData {

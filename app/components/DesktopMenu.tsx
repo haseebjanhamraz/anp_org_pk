@@ -1,6 +1,6 @@
 import React from "react";
 import Link from "next/link";
-import { menu } from "../lib/Data";
+import { menu } from "../../lib/Data";
 import { usePathname } from "next/navigation";
 
 export default function DesktopMenu() {
@@ -8,7 +8,7 @@ export default function DesktopMenu() {
 
   return (
     <div>
-      <ul className="flex gap-6 uppercase font-[opensans] text-2xl font-normal text-red-600 relative">
+      <ul className="flex gap-6 font-[opensans] text-md font-normal text-red-600 relative">
         {menu.map((item, index) => {
           // Check if the current path matches the parent or any child
           const isActive =
@@ -21,7 +21,7 @@ export default function DesktopMenu() {
               <Link
                 className={`${
                   isActive
-                    ? "bg-gray-100 dark:bg-slate-700 dark:text-red-600 py-4 shadow-xl p-2 rounded-lg transition-all duration-300"
+                    ? "bg-gray-100 dark:bg-slate-700 font-bold dark:text-red-600 py-4 shadow-xl p-2 rounded-lg transition-all duration-300"
                     : "text-slate-800 rounded-lg p-2 hover:bg-slate-200 hover:text-slate-800 dark:hover:bg-red-500 dark:hover:text-white dark:text-red-800 transition-all duration-500"
                 }`}
                 href={item.link}
@@ -31,7 +31,7 @@ export default function DesktopMenu() {
 
               {/* Submenu */}
               {item.subMenu && (
-                <ul className="hidden group-hover:block text-lg w-60 absolute top-full left-0 bg-white dark:bg-slate-800 p-2 shadow-lg rounded-lg">
+                <ul className="hidden group-hover:block text-md w-48 absolute top-full left-0 bg-white dark:bg-slate-800 p-2 shadow-lg rounded-lg">
                   {item.subMenu.map((subItem, subIndex) => {
                     const isSubActive = pathname === subItem.link;
 

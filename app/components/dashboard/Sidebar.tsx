@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { dashboardMenu } from '../../lib/Data';
+import { dashboardMenu } from '../../../lib/Data';
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Menu, X } from 'lucide-react';

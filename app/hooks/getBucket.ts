@@ -44,7 +44,7 @@ export const listFiles = async (bucketName: string) => {
   try {
     const [files] = await storage.bucket(bucketName).getFiles();
     console.log(`File: ${files}`);
-    files.forEach((file) => console.log(file.name));
+    // files.forEach((file) => console.log(file.name));
   } catch (error) {
     console.error("Error listing files:", error);
     throw error;

@@ -1,6 +1,6 @@
 "use client"
 
-import Loader from '../Loader';
+import Loader from '@/components/dashboard/Loader';
 import * as React from 'react';
 import { DataGrid, GridColDef } from '@mui/x-data-grid';
 import Paper from '@mui/material/Paper';
@@ -8,10 +8,10 @@ import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import Link from 'next/link';
-import ConfirmDeleteAlert from './ConfirmDeleteAlert';
-import { cabinets } from '../../lib/Data';
-import { toast } from '../../hooks/use-toast';
-import useLeadership from '../../hooks/useLeadership';
+import ConfirmDeleteAlert from '@/components/dashboard/ConfirmDeleteAlert';
+import { cabinets } from '@/lib/Data';
+import { toast } from '@/hooks/use-toast';
+import useLeadership from '@/hooks/useLeadership';
 
 // Define the interface for your leadership data
 interface LeadershipData {

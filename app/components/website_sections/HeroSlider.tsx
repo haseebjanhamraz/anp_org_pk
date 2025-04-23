@@ -8,7 +8,7 @@ import {
   PauseCircle,
 } from "lucide-react";
 import Image from "next/image";
-import { historyData } from "../../lib/SliderData";
+import { historyData } from "../../../lib/SliderData";
 
 const HeroSlider = () => {
   const [currentSlide, setCurrentSlide] = useState(0);

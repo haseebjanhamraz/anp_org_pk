@@ -1,6 +1,5 @@
 import { NextResponse } from 'next/server';
 import { connectToDatabase } from '@/lib/mongodb';
-import Leadership from '@/models/Leadership';
 import { verifyAuth } from '@/middleware/auth';
 import { uploadImageToCloudinary } from '@/utils/cloudinary';
 

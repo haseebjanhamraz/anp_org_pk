@@ -1,5 +1,6 @@
 /*************  ✨ Codeium Command 🌟  *************/
 import type { NextConfig } from "next";
+import path from "path";
 
 const nextConfig: NextConfig = {
   productionBrowserSourceMaps: true, // Enable source maps
@@ -20,6 +21,7 @@ const nextConfig: NextConfig = {
       ...config.resolve.alias,
       canvas: false,
     };
+    
     config.resolve.fallback = {
       ...config.resolve.fallback,
       crypto: false,
@@ -32,6 +34,7 @@ const nextConfig: NextConfig = {
         "process.env.NODE_OPTIONS": JSON.stringify("--openssl-legacy-provider"),
       })
     );
+    config.resolve.alias['@'] = path.resolve(__dirname);
     return config;
   },
 };
