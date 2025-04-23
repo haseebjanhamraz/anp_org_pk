@@ -4,7 +4,7 @@
   "description": "An official website for Awami National Party in NextJS 15",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "NODE_OPTIONS=--openssl-legacy-provider next dev --experimental-https",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"

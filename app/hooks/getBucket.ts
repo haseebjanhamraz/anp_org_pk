@@ -24,11 +24,13 @@ export const getSignedUrl = async (bucketName: string, fileName: string) => {
     const bucket = storage.bucket(bucketName);
     const file = bucket.file(cleanFileName);
 
-    // Generate a signed URL that expires in 15 minutes (900 seconds)
+    // Generate a signed URL that expires in 15 minutes
     const [url] = await file.getSignedUrl({
       version: "v4",
       action: "read",
-      expires: Date.now() + 15 * 60 * 1000, // 15 minutes
+      // Corrected: expires must be a Date object in the future
+      expires: new Date(Date.now() + 15 * 60 * 1000),
+      queryParams: { 'response-content-disposition': 'inline' }
     });
 
     return url;
@@ -48,3 +50,6 @@ export const listFiles = async (bucketName: string) => {
     throw error;
   }
 };
+
+// NOTE: If you encounter OpenSSL errors (ERR_OSSL_UNSUPPORTED), ensure your GOOGLE_PRIVATE_KEY is not encrypted and formatted correctly.
+// If using Node.js 17+ with OpenSSL 3.x, you may need to set NODE_OPTIONS=--openssl-legacy-provider in your environment.

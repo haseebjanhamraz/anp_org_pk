@@ -4,27 +4,27 @@ import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
   productionBrowserSourceMaps: true, // Enable source maps
   images: {
-    domains: [
-      "localhost",
-      "example.com",
-      "upload.wikimedia.org",
-      "gstatic.com",
-      "res.cloudinary.com",
-    ],
     remotePatterns: [
       {
         protocol: "https",
         hostname: "**",
-      },
+      }
     ],
   },
   eslint: {
     dirs: ["app", "components", "lib", "pages", "utils"],
   },
   webpack: (config) => {
+    // Combine webpack configurations from both files
+    config.resolve.alias = {
+      ...config.resolve.alias,
+      canvas: false,
+    };
     config.resolve.fallback = {
       ...config.resolve.fallback,
-      crypto: false, // Add fallbacks if necessary
+      crypto: false,
+      canvas: false,
+      encoding: false,
     };
     config.plugins.push(
       // eslint-disable-next-line @typescript-eslint/no-require-imports
