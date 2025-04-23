@@ -2,32 +2,46 @@ import { NextResponse } from 'next/server';
 import { connectToDatabase } from '@/lib/mongodb';
 import { verifyAuth } from '@/middleware/auth';
 import { uploadImageToCloudinary } from '@/utils/cloudinary';
+import Achievement from '@/models/Achievements';
 
 if (!process.env.JWT_SECRET) {
     throw new Error('Please add your JWT_SECRET to .env.local');
 }
 
-interface SocialMediaLink {
-    platform: string;
-    url: string;
+export async function GET(req: Request) {
+    try {
+        await connectToDatabase();
+        const achievements = await Achievement.find();
+        return NextResponse.json(achievements);
+    } catch (error) {
+        console.error('Error fetching achievements:', error);
+        return NextResponse.json(
+            { error: 'Failed to fetch achievements' },
+            { status: 500 }
+        );
+    }
 }
+
 
 export async function POST(req: Request) {
     try {
         // Use the verifyAuth middleware instead of manual token check
-        const authResult = await verifyAuth(req, ['admin', 'editor']);
-        if ('error' in authResult) {
-            return NextResponse.json(
-                { error: authResult.error },
-                { status: authResult.status }
-            );
-        }
+
+        // Removing auth temporarily
+
+        // const authResult = await verifyAuth(req, ['admin', 'editor']);
+        // if ('error' in authResult) {
+        //     return NextResponse.json(
+        //         { error: authResult.error },
+        //         { status: authResult.status }
+        //     );
+        // }
 
         // Get request body
-        const body = await req.json();
+        const body = await req.json();    
 
         // Validate required fields
-        if (!body.name || !body.province || !body.position || !body.cabinet || !body.period) {
+        if (!body.project || !body.sector || !body.province || !body.tenure || !body.budget ) {
             return NextResponse.json(
                 { error: 'Missing required fields' },
                 { status: 400 }
@@ -51,37 +65,31 @@ export async function POST(req: Request) {
         }
 
         // Prepare the document with explicit social media handling
-        const leadershipData = {
-            name: body.name,
-            email: body.email || '',
-            phone: body.phone || '',
+        const achievementData = {
+            project: body.project,
+            sector: body.sector,
             province: body.province,
-            position: body.position,
-            cabinet: body.cabinet || '',
-            period: body.period,
+            tenure: body.tenure,
             imageUrl: imageUrl,
-            socialMedia: Array.isArray(body.socialMedia) ? body.socialMedia.map((social: SocialMediaLink) => ({
-                platform: social.platform,
-                url: social.url
-            })) : []
+            budget: body.budget
         };
 
-        // Create leadership record
-        const leadership = await Leadership.create(leadershipData);
+        // Create achievement record
+        const achievement = await Achievement.create(achievementData);
 
         // Fetch the created record to verify
-        const createdLeadership = await Leadership.findById(leadership._id);
+        const createdAchievement = await Achievement.findById(achievement._id);
 
         return NextResponse.json(
             {
-                message: 'Leadership record created successfully',
-                leadership: createdLeadership
+                message: 'Achievement record created successfully',
+                achievement: createdAchievement
             },
             { status: 201 }
         );
 
     } catch (error: any) {
-        console.error('Create leadership error:', error);
+        console.error('Create achievement error:', error);
         return NextResponse.json(
             { error: 'Internal server error' },
             { status: 500 }

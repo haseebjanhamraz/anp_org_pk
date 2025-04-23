@@ -1,11 +1,11 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import getPosts from "../hooks/useWordPress";
+import getPosts from "@/hooks/useWordPress";
 import Image from "next/image";
 import NewsModal from "./NewsModal";
 import Loader from "./Loader";
-import TruncateText from "../utils/Truncate";
+import TruncateText from "../../utils/Truncate";
 export default function News() {
   const [data, setData] = useState([]);
   const [error, setError] = useState(null);

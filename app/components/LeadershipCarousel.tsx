@@ -14,7 +14,7 @@ import {
   CarouselPrevious,
   CarouselApi,
 } from "./ui/carousel";
-import useGetLeadership from "../hooks/useGetLeadership";
+import useGetLeadership from "@/hooks/useGetLeadership";
 import Image from "next/image";
 import Loader from "./Loader";
 import { cabinets, positions } from "../../lib/Data";

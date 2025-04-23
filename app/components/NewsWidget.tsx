@@ -1,8 +1,8 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import getPosts from "../hooks/useWordPress";
-import TruncateText from "../utils/Truncate";
+import getPosts from "@/hooks/useWordPress";
+import TruncateText from "@/utils/Truncate";
 import NewsModal from "./NewsModal";
 import Loader from "./Loader";
 import Link from "next/link";

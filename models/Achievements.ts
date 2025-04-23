@@ -4,7 +4,7 @@ import mongoose, { Schema } from 'mongoose';
 
 // Then use it in the leadership schema
 const achievementSchema = new Schema({
-    name: {
+    project: {
         type: String,
         required: true,
     },

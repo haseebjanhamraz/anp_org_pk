@@ -1,10 +1,10 @@
 {
   "name": "awami-national-party",
-  "version": "1.0.0",
+  "version": "1.5.0",
   "description": "An official website for Awami National Party in NextJS 15",
   "private": true,
   "scripts": {
-    "dev": "NODE_OPTIONS=--openssl-legacy-provider next dev --experimental-https",
+    "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
