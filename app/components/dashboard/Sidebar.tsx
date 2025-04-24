@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { dashboardMenu } from '../../../lib/Data';
+import { dashboardMenu } from '@/lib/Data';
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Menu, X } from 'lucide-react';
@@ -22,7 +22,7 @@ export default function Sidebar() {
 
             {/* Sidebar */}
             <div className={`
-                fixed lg:static inset-y-0 left-0 z-10
+                fixed lg:static inset-y-0 left-0
                 transform ${isOpen ? 'translate-x-0' : '-translate-x-full'} 
                 lg:translate-x-0 transition duration-200 ease-in-out
                 flex flex-col gap-4 p-4 w-64 min-h-screen

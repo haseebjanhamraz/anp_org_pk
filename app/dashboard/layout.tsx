@@ -6,6 +6,7 @@ import SubscriberSidebar from "../components/subscriber/SubscriberSidebar";
 import { useSession } from "next-auth/react"
 import { redirect } from "next/navigation"
 import Header from "../components/dashboard/Header";
+import Loader from "../components/Loader";
 
 export default function DashboardLayout(
     {
@@ -21,7 +22,7 @@ export default function DashboardLayout(
     })
 
     if (status === "loading") {
-        return <div>Loading...</div>
+        return <Loader />
     }
 
     return (

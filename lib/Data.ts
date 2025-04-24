@@ -61,6 +61,10 @@ export const dashboardMenu = [
     link: "/dashboard/leadership",
   },
   {
+    name: "Achievements",
+    link: "/dashboard/achievements",
+  },
+  {
     name: "Documents",
     link: "/dashboard/documents",
   },

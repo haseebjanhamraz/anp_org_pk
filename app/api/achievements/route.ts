@@ -3,6 +3,7 @@ import { connectToDatabase } from '@/lib/mongodb';
 import { verifyAuth } from '@/middleware/auth';
 import { uploadImageToCloudinary } from '@/utils/cloudinary';
 import Achievement from '@/models/Achievements';
+import { paginate } from '@/utils/paginate';
 
 if (!process.env.JWT_SECRET) {
     throw new Error('Please add your JWT_SECRET to .env.local');
@@ -12,7 +13,10 @@ export async function GET(req: Request) {
     try {
         await connectToDatabase();
         const achievements = await Achievement.find();
-        return NextResponse.json(achievements);
+        const url = new URL(req.url);
+        const page = Number(url.searchParams.get('page')) || 1;
+        const pageSize = Number(url.searchParams.get('pageSize')) || 10;
+        return NextResponse.json(paginate(achievements, page, pageSize));
     } catch (error) {
         console.error('Error fetching achievements:', error);
         return NextResponse.json(
@@ -27,21 +31,19 @@ export async function POST(req: Request) {
     try {
         // Use the verifyAuth middleware instead of manual token check
 
-        // Removing auth temporarily
-
-        // const authResult = await verifyAuth(req, ['admin', 'editor']);
-        // if ('error' in authResult) {
-        //     return NextResponse.json(
-        //         { error: authResult.error },
-        //         { status: authResult.status }
-        //     );
-        // }
+        const authResult = await verifyAuth(req, ['admin', 'editor']);
+        if ('error' in authResult) {
+            return NextResponse.json(
+                { error: authResult.error },
+                { status: authResult.status }
+            );
+        }
 
         // Get request body
         const body = await req.json();    
 
         // Validate required fields
-        if (!body.project || !body.sector || !body.province || !body.tenure || !body.budget ) {
+        if (!body.project || !body.sector || !body.district || !body.province || !body.tenure || !body.budget ) {
             return NextResponse.json(
                 { error: 'Missing required fields' },
                 { status: 400 }
@@ -68,6 +70,7 @@ export async function POST(req: Request) {
         const achievementData = {
             project: body.project,
             sector: body.sector,
+            district: body.district,
             province: body.province,
             tenure: body.tenure,
             imageUrl: imageUrl,
@@ -82,7 +85,7 @@ export async function POST(req: Request) {
 
         return NextResponse.json(
             {
-                message: 'Achievement record created successfully',
+                message: `Achievement for ${body.project} created successfully`,
                 achievement: createdAchievement
             },
             { status: 201 }
